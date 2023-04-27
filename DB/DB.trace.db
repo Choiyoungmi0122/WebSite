@@ -1,0 +1,3 @@
+2023-04-25 03:54:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CALENDER" already exists; SQL statement:
+CREATE TABLE Calender ( Calender_Id Int PRIMARY KEY, Student_Id Int NOT NULL, Calender_Register DATE NULL, Calender_Text Text NULL, Calender_Deadline DATE NULL, Calender_Entry CHAR NOT NULL, Calender_Category CHAR NULL, Calender_Replay CHAR NULL ) [42101-214]
