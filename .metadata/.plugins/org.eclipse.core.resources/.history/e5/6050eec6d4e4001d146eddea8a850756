@@ -51,7 +51,7 @@
           <a href="home.html"><h1>insight</h1></a>
         </div>
         <ul class="menu">
-             <!--매핑 : 공지사항 insight/Importantmain , 게시판 : insight/Notice , 캘린더 : insight/Calendermain-->
+             <!--매핑 : 공지사항 insigth/Importantmain , 게시판 : insight/Notice , 캘린더 : insight/Calendermain-->
           <li><a href="Importantmain.html">공지사항</a></li>
           <li><a href="Notice.html">게시판</a></li>
           <li><a href="Calendarmain.html">캘린더</a></li>

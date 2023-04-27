@@ -24,7 +24,6 @@
         </div>
                 <!--기본 상단 요소 건들지 말것 수정필요시 '최영미'한테 연락하여 같이 고칠 것!!! -->
         <div class="sigin-input">
-			 <!--매핑 : 공지사항 insight/Importantmain , 게시판 : insight/Notice , 캘린더 : insight/Calendermain-->
             <form>
                 <fieldset>
                     <ul>
