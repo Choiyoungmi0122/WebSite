@@ -78,6 +78,7 @@ CREATE TABLE LikeLanguage(
 	Langu Char 
 );
 
+
  ALTER TABLE Calender ADD FOREIGN KEY (Student_Id) REFERENCES UserInfo(Student_Id);
  ALTER TABLE Notice ADD FOREIGN KEY (Student_Id) REFERENCES UserInfo(Student_Id);
  ALTER TABLE Important ADD FOREIGN KEY (Student_Id) REFERENCES UserInfo(Student_Id);
