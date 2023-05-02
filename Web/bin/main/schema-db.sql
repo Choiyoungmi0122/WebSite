@@ -80,9 +80,8 @@ CREATE TABLE LikeLanguage(
 
 CREATE TABLE Schedule(
 	Calender_Id Int NOT NULL,
-	Student_Id Int NOT NULL
+	Student_Id INT NOT NULL
 );
-
 
  ALTER TABLE Calender ADD FOREIGN KEY (Student_Id) REFERENCES UserInfo(Student_Id);
  ALTER TABLE Notice ADD FOREIGN KEY (Student_Id) REFERENCES UserInfo(Student_Id);
@@ -93,4 +92,5 @@ CREATE TABLE Schedule(
  ALTER TABLE Reference ADD FOREIGN KEY (Notice_Id) REFERENCES Notice(Notice_Id);
  ALTER TABLE LikeLanguage ADD FOREIGN KEY (Student_Id) REFERENCES UserInfo(Student_Id);
  ALTER TABLE Schedule ADD FOREIGN KEY (Calender_Id) REFERENCES Calender(Calender_Id);
- ALTER TABLE Schedule ADD FOREIGN KEY (Student_Id) REFERENCES UserInfo(Student_Id);	
+ ALTER TABLE Schedule ADD FOREIGN KEY (Student_Id) REFERENCES UserInfo(Student_Id);
+
