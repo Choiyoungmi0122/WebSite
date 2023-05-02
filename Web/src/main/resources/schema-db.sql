@@ -1,6 +1,6 @@
 
 
-CREATE TABLE IF NOT EXISTS UserInfo (
+CREATE TABLE UserInfo (
 	Student_Id	Int	PRIMARY KEY,
 	Student_Name	CHAR	NULL,
 	PW	CHAR	NULL,

@@ -1,6 +1,6 @@
 
 
-CREATE TABLE IF NOT EXISTS UserInfo (
+CREATE TABLE UserInfo (
 	Student_Id	Int	PRIMARY KEY,
 	Student_Name	CHAR	NULL,
 	PW	CHAR	NULL,
@@ -93,3 +93,4 @@ CREATE TABLE Schedule(
  ALTER TABLE LikeLanguage ADD FOREIGN KEY (Student_Id) REFERENCES UserInfo(Student_Id);
  ALTER TABLE Schedule ADD FOREIGN KEY (Calender_Id) REFERENCES Calender(Calender_Id);
  ALTER TABLE Schedule ADD FOREIGN KEY (Student_Id) REFERENCES UserInfo(Student_Id);
+
