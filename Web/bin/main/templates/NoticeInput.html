@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>자유게시판</title>
+</head>
+<body>
+    <h1>글쓰기</h1>
+    <form method="POST">
+        제목<br>
+        <input type="text" name="postname"><br>
+        <label for="category">카테고리:</label>
+		<select name="category" id="category" required>
+			<option value="">-- 선택하세요 --</option>
+			<option value="whole">전체글</option>
+			<option value="coding">코딩</option>
+			<option value="free">자유</option>
+			<option value="contest">공모전</option>
+			<option value="gallery">갤러리</option>
+		</select><br><br>
+        내용<br>
+        <textarea rows="50" cols="100" name="contents"></textarea><br>
+        <input type="file" name="mainphoto"><br>
+        <input type="submit" value="글쓰기">
+    </form>
+</body>
+</html>
+<!-- 공지사항 필독 공지-->
