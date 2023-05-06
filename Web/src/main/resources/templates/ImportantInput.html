@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>공지사항</title>
+</head>
+<body>
+    <h1>글쓰기</h1>
+    <form method="POST">
+        제목<br>
+        <input type="text" name="postname"><br> 
+<!--위 체크박스 밑 카테고리 칸 선택해서 지우기 -->
+        <label for="MustRead">공지 구분:</label>
+		<select name="MustRead" id="MustRead" required>
+			<option value="0">공지</option>
+			<option value="1">필독</option>
+		</select><br><br>
+        내용<br>
+        <textarea rows="50" cols="100" name="contents"></textarea><br>
+        <div class="form-check"> 
+        	<input type="file" name="mainphoto">
+ 			<input type="checkbox" id="open"  name="open" class="form-check-input" value="1">
+ 			<label for="open" class="form-check-label">필독</label> 
+        	<input type="submit" value="글쓰기" >
+	</div> 
+    </form>
+</body>
+</html>
