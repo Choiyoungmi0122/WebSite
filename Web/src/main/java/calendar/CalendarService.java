@@ -1,4 +1,4 @@
-package calendar;
+package Calendar;
 
 import org.springframework.stereotype.Service;
 
