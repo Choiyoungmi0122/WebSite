@@ -1,5 +1,6 @@
 package com.example.demo.table;
 
+
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;

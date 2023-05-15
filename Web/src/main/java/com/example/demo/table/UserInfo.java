@@ -17,4 +17,5 @@ public class UserInfo {
 	@ManyToMany(mappedBy="UserInfo")
 	private Schedule schedule;
 	*/
+
 }
