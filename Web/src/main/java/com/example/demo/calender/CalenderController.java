@@ -1,4 +1,4 @@
-package com.Calender;
+package com.example.demo.calender;
 
 import jakarta.validation.Valid;
 
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.demo.Table.UserInfo;
+import com.example.demo.table.UserInfo;
 
 import lombok.RequiredArgsConstructor;
 

@@ -1,4 +1,4 @@
-package com.example.demo.Table;
+package com.example.demo.table;
 
 public class NoticeComment {
 

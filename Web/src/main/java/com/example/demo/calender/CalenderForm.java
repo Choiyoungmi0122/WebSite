@@ -1,4 +1,4 @@
-package com.Calender;
+package com.example.demo.calender;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
