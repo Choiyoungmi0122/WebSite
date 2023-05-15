@@ -1,10 +1,11 @@
-package Calender;
+package com.Calender;
 
-import Table.UserInfo;
-import Table.Calender;
 import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
+
+import com.example.demo.Table.Calender;
+import com.example.demo.Table.UserInfo;
 
 import lombok.RequiredArgsConstructor;
 

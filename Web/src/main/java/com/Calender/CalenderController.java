@@ -1,6 +1,5 @@
-package Calender;
+package com.Calender;
 
-import Table.UserInfo;
 import jakarta.validation.Valid;
 
 import java.time.LocalDateTime;
@@ -13,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.demo.Table.UserInfo;
 
 import lombok.RequiredArgsConstructor;
 
