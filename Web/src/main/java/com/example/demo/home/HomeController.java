@@ -2,13 +2,11 @@ package com.example.demo.home;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HomeController {
-    @GetMapping("/hello")
-    @ResponseBody
-    public String hello() {
-        return "Hello World";
+    @GetMapping("/insight")
+    public String list() {
+        return "Home";
     }
 }
