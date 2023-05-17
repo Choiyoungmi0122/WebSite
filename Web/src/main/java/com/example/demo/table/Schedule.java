@@ -6,7 +6,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 
 public class Schedule {
-/*
+
 	@OneToOne
 	@JoinColumn(name="Calender_Id")
 	private Calender calender;
@@ -14,5 +14,5 @@ public class Schedule {
 	@ManyToMany
 	@JoinColumn(name="Student_Id")
 	private UserInfo userinfo;
-	*/
+	
 }

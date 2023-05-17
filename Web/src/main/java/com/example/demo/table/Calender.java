@@ -20,19 +20,23 @@ public class Calender {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Calender_Id;
-	/*
+	
 	@ManyToOne
 	@JoinColumn(name="Student_Id")
 	private UserInfo userinfo;
-	*/
+	
 	
 	private LocalDateTime Calender_Register;
 	private String Calender_Text;
 	private LocalDateTime Calender_Deadline;
 	private String Calender_Category;
 	private String Calender_Replay;
-	/*
+	
 	@OneToOne(mappedBy = "Calender")
 	private Schedule schedule;
-	*/
+	
+	public Object getUserInfo() {
+		// TODO Auto-generated method stub
+		return userinfo;
+	}
 }
