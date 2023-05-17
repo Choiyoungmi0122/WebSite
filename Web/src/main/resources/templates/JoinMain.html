@@ -28,8 +28,12 @@
             <form>
                 <fieldset>
                     <ul>
+                    	<li>
+                    		<label for="sname">이름</label>
+                    		<input type="text" id="sname">
+                    	</li>
                         <li>
-                            <label for="sid">학번</label>
+                            <label for="sid">학번(ID)</label>
                             <input type="text" id="sid" placeholder="ex) 20212252">
                         </li>
                         <li>
@@ -46,7 +50,35 @@
                         </li>
                     </ul>
                 </fieldset>
-                <div id="siginbtn">
+                <!-- 이용약관 -->
+                <span class="input_chk">
+                	<input type="checkbox" id="termsService" name="termsService" class="chk" required>
+                	<label for="termsService">
+                		이용약관 동의<span class="terms_necessary">(필수)</span>
+                	</label>
+                </span>      
+                <button type="button" id="terms-toggle" onclick="toggleTerms()">더 보기</button>
+                <!-- 더 보기 버튼 누를 시 어떻게 바뀌는지 -->
+                <script>
+					function toggleTerms(){
+						var content = document.getElementById("terms-content");
+						var button = document.getElementById("terms-toggle");				
+						if (content.style.display == "none"){
+							content.style.display="block";
+							button.innerText = "간략히 보기";
+						}else{
+							content.style.display = "none";
+							button.innerText = "더 보기";
+						}
+					}
+				</script>
+				<!-- 이용약관 세부내용 -->
+				<div id="terms-content" class="toggle-content">
+					본 동아리는 개인정보(이름, 연락처, 동아리 활동을 위해 활용하며 이 외 용도로는 사용하지 않습니다(노션, 백준, 구글드라이브, 개별 연락 등). 또한 동아리 탈퇴시 개인정보는 삭제 됩니다.
+				</div>
+				
+				<!-- 가입버튼 -->
+                <div id="siginbtn">      
                     <input type="submit" value="가입신청하기">
                     <input type="reset" value="취소">
                 </div>
