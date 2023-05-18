@@ -17,25 +17,30 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 	private final UserService userService;
 	
+	@GetMapping("/login")
+	public String login() {
+		return "LoginMain";
+	}
+	
 	@GetMapping("/join")
-	public String join(UserCreateForm userCreateForm) {
+	public String JoinMain(UserCreateForm userCreateForm) {
 		return "JoinMain";
 	}
 	
 	@PostMapping("/join")
-	public String join(@Valid UserCreateForm userCreateForm, BindingResult bindingResult) {
+	public String JoinMain(@Valid UserCreateForm userCreateForm, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			return "JoinMain";
 		}
 		if (!userCreateForm.getPwd1().equals(userCreateForm.getPwd2())) {
-			bindingResult.rejectValue("pwd2", "passwordInCorrect",
+			bindingResult.rejectValue("Pwd2", "passwordInCorrect",
 					"2개의 패스워드가 일치하지 않습니다.");
 			return "JoinMain";
 		}
 		
 		try{
-			userService.create(userCreateForm.getSid(), userCreateForm.getSemail(),
-					userCreateForm.getSname(), userCreateForm.getPwd1());
+			userService.create(userCreateForm.getStudent_Id(), userCreateForm.getEmail(),
+					userCreateForm.getStudent_Name(), userCreateForm.getPwd1());
 		}catch(DataIntegrityViolationException e) {
 			e.printStackTrace();
 			bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
@@ -45,12 +50,9 @@ public class UserController {
 			bindingResult.reject("signupFailed", e.getMessage());
 			return "JoinMain";
 		}
-		return "join_complete";
+		return "JoinComplete";
 	}
 	
-	@GetMapping("/login")
-	public String login() {
-		return "LoginMain";
-	}
+	
 
 }
