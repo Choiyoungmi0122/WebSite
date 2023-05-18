@@ -19,14 +19,12 @@ public class SiteUser {
 	private Long id;
 	
 	@Column(unique = true)
-	private String sid;
+	private Integer Student_Id;
 	
-	private String sname;
+	private String Student_Name;
 	
-	private String password;
+	private String Pwd;
 	
 	@Column(unique = true)
-	private String semail;
-	
-
+	private String Email;
 }
