@@ -27,8 +27,8 @@ import lombok.RequiredArgsConstructor;
 
 public class CalenderController {
 	//@RequiredArgsConstructor 사용으로 생성자 주입
-	private final CalenderRepository calenderRepository;
-	private final CalenderService calenderService;
+	private final CalenderRepository calenderRepository=null;
+	private final CalenderService calenderService=null;
 	//private final UserInfoRepository userInfoRepository;
 	
 	//http://8080/calender/create
