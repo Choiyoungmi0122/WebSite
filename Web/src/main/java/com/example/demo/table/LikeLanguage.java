@@ -1,5 +1,5 @@
 package com.example.demo.table;
 
-public class NoticeComment {
+public class LikeLanguage {
 
 }
