@@ -27,9 +27,9 @@ public class Notice {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Notice_Id;
 	
-//	@ManyToOne
-//	@JoinColumn(name="STUNDENT_ID")
-//	private Userinfo userinfo;
+	@ManyToOne
+	@JoinColumn(name="STUNDENT_ID")
+	private Userinfo userinfo;
 
 	@Column(length = 200)
 	private String Notice_Title;
