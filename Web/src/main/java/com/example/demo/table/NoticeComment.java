@@ -25,9 +25,9 @@ public class NoticeComment {
 	@JoinColumn(name="NOTICE_ID")
 	private Notice notice;
 	
-	@ManyToOne
-	@JoinColumn(name = "STUDENT_ID")
-	private UserInfo userinfo;
+//	@ManyToOne
+//	@JoinColumn(name = "STUDENT_ID")
+//	private UserInfo userinfo;
 	
 	@Column(columnDefinition = "TEXT")
 	private String Com_Text;
