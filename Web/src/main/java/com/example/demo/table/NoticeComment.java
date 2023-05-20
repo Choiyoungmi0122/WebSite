@@ -26,12 +26,12 @@ public class NoticeComment {
 	@JoinColumn(name="NOTICE_ID")
 	private Notice notice;
 	
-	// @ManyToOne (mappedBy = "UserInfo")
-	// private Integer Student_Id;
+	@ManyToOne
+	@JoinColumn(name = "STUDENT_ID")
+	private UserInfo userinfo;
 	
 	@Column(columnDefinition = "TEXT")
 	private String Com_Text;
 	
 	private LocalDateTime Com_Register;
-
 }

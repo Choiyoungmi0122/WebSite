@@ -1,7 +1,5 @@
 package com.example.demo.table;
 
-
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -29,10 +27,10 @@ public class Notice {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Notice_Id;
 	
-	// @ManyToOne
-	// @JoinColumn(name="Student_Id")
-	// private Integer Student_Id;
-	
+	@ManyToOne
+	@JoinColumn(name="STUNDENT_ID")
+	private Userinfo userinfo;
+
 	@Column(length = 200)
 	private String Notice_Title;
 	
