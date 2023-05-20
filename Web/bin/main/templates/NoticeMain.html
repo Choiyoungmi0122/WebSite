@@ -76,28 +76,31 @@
          <!--기본 상단 요소 건들지 말것 수정필요시 '최영미'한테 연락하여 같이 고칠 것!!! -->
         <h1>게시판</h1>
        <div id="wrap">
-    	<h2>게시글 리스트</h2>
-    	<table>
-    		<tr>
-    			<th>글번호</th>
-    			<th>글제목</th>
-    			<th>작성자</th>
-    			<th>작성날짜</th>
-    			<th>조회수</th>
-    		</tr>
-			<c:forEach var="posting" items="${list }">
-				<tr>
-					<td>${posting.num }</td>
-					<td>${posting.title }</td>
-					<td>${posting.name }</td>
-					<td>${posting.writeDate }</td>
-					<td>${posting.readCount }</td>
-				</tr>
-			</c:forEach>
-    	</table>
+	   <!-- wikidocs -->
+       <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+       <table class="table">
+          <thead class="table-dark">
+              <tr>
+                 <th>번호</th>
+                  <th>제목</th>
+                  <th>작성일시</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr th:each="question, loop : ${questionList}">
+              <td th:text="${loop.count}"></td>
+            <td>
+                <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
+            </td>
+                  <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+              </tr>
+          </tbody>
+      </table>
+      <!-- wikidocs -->
+      	</div>
          <div class="submit-button">
             <input class="btn" type="submit" value="글쓰기" onclick="location.href='NoticeInput.html' ">
-        </div>
+      	</div>
       </body>
 </html>
     
