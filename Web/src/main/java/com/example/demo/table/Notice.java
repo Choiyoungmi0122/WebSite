@@ -30,11 +30,7 @@ public class Notice {
 //	@ManyToOne
 //	@JoinColumn(name="STUNDENT_ID")
 //	private Userinfo userinfo;
-<<<<<<< HEAD
-	
-=======
-//	
->>>>>>> branch 'Notice_Test' of https://github.com/Choiyoungmi0122/WebSite.git
+
 	@Column(length = 200)
 	private String Notice_Title;
 	
