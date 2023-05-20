@@ -11,6 +11,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
@@ -20,15 +21,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@Table(name="notice")
 public class Notice {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@OneToMany
 	private Integer Notice_Id;
 	
-	// @ManyToOne
-	// @JoinColumn(name="Student_Id")
-	// private Integer Student_Id;
+	@ManyToOne
+	@JoinColumn(name="STUNDENT_ID")
+	private Userinfo userinfo;
 	
 	@Column(length = 200)
 	private String Notice_Title;
