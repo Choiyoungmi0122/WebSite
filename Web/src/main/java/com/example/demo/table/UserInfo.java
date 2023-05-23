@@ -11,14 +11,14 @@ import jakarta.persistence.OneToMany;
 public class UserInfo {
 	@Id
 	@Column(unique = true)
-	private String sid;
+	private String id;
 	
-	private String sname;
+	private String name;
 	
 	private String password;
 	
 	@Column(unique = true)
-	private String semail;
+	private String email;
 	
 	//Calender에 PK 쓰기위해 선언
 	@OneToMany(mappedBy="UserInfo")
