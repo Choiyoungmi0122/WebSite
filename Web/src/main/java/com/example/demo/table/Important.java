@@ -27,6 +27,8 @@ public class Important {
     private String Impor_Text;
     
     private LocalDateTime Impor_Register;	//작성일시 
-    private Boolean Important;		//필독 여부 
+    private Boolean Important;		//필독 여부
+    
+    //충돌나버림  
 	
 }
