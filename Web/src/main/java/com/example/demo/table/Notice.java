@@ -29,7 +29,7 @@ public class Notice {
 	
 	@ManyToOne
 	@JoinColumn(name="STUNDENT_ID")
-	private UserInfo userinfo;
+	private Userinfo userinfo;
 
 	@Column(length = 200)
 	private String Notice_Title;
