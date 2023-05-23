@@ -6,9 +6,13 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 public class Important {
-	private Long Student_Id;		//작성자 pk
+	@ManyToOne
+	@JoinColumn(name="Student_Id")
+	private UserInfo userinfo;		//작성자 pk
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
