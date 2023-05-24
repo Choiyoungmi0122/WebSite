@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <html lang = 'kr'>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="calender" content="로그인버튼클릭시">
+        <title>로그인</title>
+        <style>
+          #logo {
+            text-align: center;
+            margin-top: 50px;
+          }
+      
+          #logo h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+          }
+        </style>
+    </head>
+    <body>
+        <div id="logo">
+                    <!--매핑 : 홈  insight-->
+                   <!--매핑 : 공지사항 insight/Importantmain , 게시판 : insight/Notice , 캘린더 : insight/Calendermain-->
+          <a href="home.html"><h1>insight</h1></a>
+        </div>
+                <!--기본 상단 요소 건들지 말것 수정필요시 '최영미'한테 연락하여 같이 고칠 것!!! -->
+        <div class="login-input">
+            <form>
+                <fieldset>
+                    <label>학번<input type="text" id = "Student_Id" size="8" placeholder="ex) 20212252"></label>
+                    <label>비밀번호<input type="password" id ="Pwd"></label>
+                    <input type="submit" value="로그인">
+                </fieldset>
+            </form>
+          </div>
+    </body>
+</html>
