@@ -1,11 +1,11 @@
 package com.example.demo.notice;
 
-import com.example.demo.table.Notice;
-
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+
+import com.example.demo.table.Notice;
 
 import lombok.RequiredArgsConstructor;
 

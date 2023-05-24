@@ -1,9 +1,11 @@
 package com.example.demo.notice;
 
-import com.example.demo.table.Notice;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.PathVariable;
+
+import com.example.demo.table.Notice;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +21,8 @@ public class NoticeController {
 	
 	@GetMapping("/NoticeMain/list")
 	public String list(Model model) {
-		List<Notice> noticeList = this.noticeservice.getList();
-		model.addAttribute("noticeList", noticeList);
+		List<Notice> noticeMain = this.noticeservice.getList();
+		model.addAttribute("noticeMain", noticeMain);
 		return "NoticeMain";
 	}
 	
@@ -30,6 +32,6 @@ public class NoticeController {
 		model.addAttribute("notice", notice);
 		// Model addAttribute(String name, Object value)
 		// value 객체를 name 이름으로 추가한다.
-		return "Notice_detail";
+		return "NoticeMain_detail";
 	}
 }

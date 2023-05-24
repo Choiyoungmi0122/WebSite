@@ -1,7 +1,7 @@
 package com.example.demo.notice;
-import com.example.demo.table.NoticeComment;
-
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.demo.table.NoticeComment;
 
 public interface NoticeCommentRepository extends JpaRepository<NoticeComment, Integer> {
 		
