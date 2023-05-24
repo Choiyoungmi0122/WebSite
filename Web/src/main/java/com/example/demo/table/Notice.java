@@ -1,6 +1,7 @@
 package com.example.demo.table;
 
 import java.time.LocalDateTime;
+
 import java.util.List;
 
 import jakarta.persistence.Id;
@@ -29,7 +30,7 @@ public class Notice {
 	
 	@ManyToOne
 	@JoinColumn(name="STUNDENT_ID")
-	private Userinfo userinfo;
+	private UserInfo userinfo;
 
 	@Column(length = 200)
 	private String Notice_Title;
