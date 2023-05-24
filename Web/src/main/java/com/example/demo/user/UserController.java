@@ -13,36 +13,36 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/userinfo")
+@RequestMapping("/UserInfo")
 public class UserController{
 	private final UserService userService;
 
-	@GetMapping("/signup")
+	@GetMapping("/join")
 	public String signup(UserCreateForm userCreateForm){
-		return "signup_form";
+		return "JoinMain";
 	}
 
-	@PostMapping("/signup")
+	@PostMapping("/join")
 	public String signup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult){
 		if (bindingResult.hasErrors()){
-			return "signup_form";
+			return "JoinMain";
 		}
 
 		if (!userCreateForm.getPwd1().equals(userCreateForm.getPwd2())){
 			bindingResult.rejectValue("password2", "passwordInCorrect", "2개의 패스워드가 일치하지 않습니다.");
-			return "signup_form";
+			return "JoinMain";
 		}
 		try{
 			userService.create(userCreateForm.getStudent_Id(),userCreateForm.getStudent_Name(),
 				userCreateForm.getEmail(), userCreateForm.getPwd1());
 		}catch(DataIntegrityViolationException e){
 			e.printStackTrace();
-			bindingResult.reject("signupFailed", "이미 등록된 동아리 인원입니다.");
-			return "signup_form";
+			bindingResult.reject("signupFailed", "이미 등록된 동아리 부원입니다.");
+			return "JoinMain";
 		}catch(Exception e){
 			e.printStackTrace();
 			bindingResult.reject("signupFailed", e.getMessage());
-			return "signup_form";
+			return "JoinMain";
 		}
 		return "redirect:/";
 	}
