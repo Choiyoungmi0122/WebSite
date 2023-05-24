@@ -1,27 +1,30 @@
 package com.example.demo.table;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+@Entity
+@Table(name="userinfo")
 public class UserInfo {
    @Id
-   @Column(unique = true)
-   private Integer Student_Id;
+   @Column(name="Student_Id", unique = true)
+   private Integer id;
    
-   private String Student_Name;
+   @Column(name="Student_Name")
+   private String name;
    
-   private String Pwd;
+   @Column(name="Pwd")
+   private String pwd;
    
-   @Column(unique = true)
-   private String Email;
-   
-   //Calender에 PK 쓰기위해 선언
-   @OneToMany(mappedBy="UserInfo")
-   private Calender calender;
-   
-   //Schedule에 PK 쓰기위해 선언
-   @ManyToMany(mappedBy="UserInfo")
-   private Schedule schedule;
+   @Column(name="Email", unique = true)
+   private String email;
+  
 }
