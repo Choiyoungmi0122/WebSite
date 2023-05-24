@@ -3,12 +3,18 @@ package com.example.demo.table;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+@Entity
 public class Important {
 	@ManyToOne
 	@JoinColumn(name="Student_Id")
@@ -16,14 +22,17 @@ public class Important {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Impor_Id;
+	@Column(name="Impor_Id")
+    private Integer id;
 	
-    @Column(length = 200)	//제목 
-    private String Impor_Title;
+    @Column(name="Impor_Title", length = 200)	//제목 
+    private String title;
     
-    @Column(columnDefinition = "TEXT")   //내용 
-    private String Impor_Text;
-    private LocalDateTime Impor_Register;	//작성일시 
-    private Boolean Important;		//필독 여부 
+    @Column(name="Impor_Text", columnDefinition = "TEXT")   //내용 
+    private String text;
+    @Column(name="Impor_Register")
+    private LocalDateTime register;	//작성일시
+    @Column(name="Important")
+    private Boolean important;		//필독 여부 
 	
 }

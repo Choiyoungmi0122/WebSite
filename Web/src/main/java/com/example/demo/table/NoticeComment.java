@@ -20,7 +20,8 @@ import lombok.Setter;
 public class NoticeComment {
 	@Id
 	@GeneratedValue(strategy =  GenerationType.IDENTITY)
-	private Integer Com_Id;
+	@Column(name="Com_Id")
+	private Integer id;
 	
 	@ManyToOne
 	@JoinColumn(name="NOTICE_ID")
@@ -30,8 +31,9 @@ public class NoticeComment {
 	@JoinColumn(name = "STUDENT_ID")
 	private UserInfo userinfo;
 	
-	@Column(columnDefinition = "TEXT")
-	private String Com_Text;
+	@Column(name="Com_Text", columnDefinition = "TEXT")
+	private String text;
 	
-	private LocalDateTime Com_Register;
+	@Column(name="Com_Register")
+	private LocalDateTime register;
 }

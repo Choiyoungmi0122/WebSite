@@ -21,25 +21,27 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="notice")
 public class Notice {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer Notice_Id;
+	@Column(name="Notice_Id")
+	private Integer id;
 	
 	@ManyToOne
 	@JoinColumn(name="STUNDENT_ID")
 	private UserInfo userinfo;
 
-	@Column(length = 200)
-	private String Notice_Title;
+	@Column(name="Notice_Title", length = 200)
+	private String title;
 	
-	private String Notice_Number;
+	@Column(name="Notice_Number")
+	private String number;
 	
-	@Column(columnDefinition = "TEXT")
-	private String Notice_Text;
+	@Column(name="Notice_Text", columnDefinition = "TEXT")
+	private String text;
 	
-	private LocalDateTime Notice_Register;
+	@Column(name="Notice_Register")
+	private LocalDateTime register;
 	
 	@OneToMany(mappedBy = "notice", cascade = CascadeType.REMOVE)
 	private List<NoticeComment> commentList;
