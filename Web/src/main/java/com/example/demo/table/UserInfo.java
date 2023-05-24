@@ -12,7 +12,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="userinfo")
 public class UserInfo {
    @Id
    @Column(name="Student_Id", unique = true)
