@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang = 'kr'>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="notice" content="게시판 처음 들어갔을때 페이지">
+        <title>게시판</title>
+        <style>
+	        .btn {
+	            display: inline-block;
+	            padding: 8px 16px;
+	            background-color: #0054FF;
+	            color: white;
+	            text-align: center;
+	            text-decoration: none;
+	            font-size: 14px;
+	            border: none;
+	            cursor: pointer;
+	            border-radius: 4px;
+	        }
+
+          #logo {
+            text-align: center;
+            margin-top: 50px;
+          }
+      
+          #logo h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+          }
+      
+          .menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+          }
+      
+          .menu li {
+            list-style: none;
+            margin-right: 10px;
+          }
+      
+          .menu li:last-child {
+            margin-right: 0;
+          }
+      
+          .join-login-btn {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 50px;
+          }
+      
+          .join-login-btn a {
+            display: inline-block;
+            margin-left: 10px;
+            font-size: 20px;
+          }
+        </style>
+      </head>
+      <body>
+        <div id="logo">
+                    <!--매핑 : 홈  insight-->
+          <a href="home.html" style="text-decoration: blink;"><h1>insight</h1></a>
+        </div>
+        <ul class="menu">
+             <!--매핑 : 공지사항 insight/Importantmain , 게시판 : insight/Notice , 캘린더 : insight/Calendermain-->
+          <li><a href="ImportantMain.html" style="text-decoration: blink;">공지사항</a></li>
+          <li><a href="NoticeMain.html" style="text-decoration: blink;">게시판</a></li>
+          <li><a href="CalenderMain.html" style="text-decoration: blink;">캘린더</a></li>
+        </ul>
+        <div class="join-login-btn">
+          <a href="LoginMain.html" style="text-decoration: blink;">로그인</a>
+          <a href="JoinMain.html" style="text-decoration: blink;">회원가입</a>
+        </div>
+         <!--기본 상단 요소 건들지 말것 수정필요시 '최영미'한테 연락하여 같이 고칠 것!!! -->
+        <h1>게시판</h1>
+       <div id="wrap">
+       <!-- wikidocs -->
+       <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+    	<table class="table">
+		    <thead class="table-dark">
+		        <tr>
+		        	<th>번호</th>
+		            <th>제목</th>
+		            <th>작성일시</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		        <tr th:each="question, loop : ${questionList}">
+		        <td th:text="${loop.count}"></td>
+            <td>
+                <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
+            </td>
+		            <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+		        </tr>
+		    </tbody>
+		</table>
+		<!-- wikidocs -->
+		</div>
+         <div class="submit-button">
+            <input class="btn" type="submit" value="글쓰기" onclick="location.href='NoticeInput.html' ">
+         </div>
+      </body>
+</html>
+    
