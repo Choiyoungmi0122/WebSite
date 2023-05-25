@@ -13,14 +13,14 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/UserInfo")
+@RequestMapping("/user")
 public class UserController{
 	private final UserService userService;
 
-	@GetMapping("/join")
-	public String signup(UserCreateForm userCreateForm){
-		return "JoinMain";
-	}
+    @GetMapping("/signup")
+    public String signup(UserCreateForm userCreateForm) {
+        return "signup_form";
+    }
 
 	@PostMapping("/join")
 	public String signup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult){

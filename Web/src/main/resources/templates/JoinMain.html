@@ -1,21 +1,72 @@
 <!DOCTYPE html>
 <html>
-    <html lang = 'kr'>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="calender" content="회원가입 페이지">
-        <title>회원가입</title>
-        <style>
-          #logo {
-            text-align: center;
-            margin-top: 50px;
-          }
-      
-          #logo h1 {
-            font-size: 50px;
-            margin-bottom: 20px;
-          }
-        </style>
+	<html lang = 'kr'>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="calender" content="회원가입 페이지">
+		<title>동아리가입</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<style>
+			.form-control {
+			margin:auto;
+            max-width: 400px;
+			width: 100%;
+			}
+            .form-label-group {
+            margin:auto;
+            position: relative;
+            margin-bottom: 1rem;
+            }
+            .form-label-group > input {
+            margin:auto;
+            height: auto;
+            padding: 20px;
+            font-size: 16px;
+            }
+            .form-label-group > label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            padding: 20px;
+            width: 100%;
+            font-size: 16px;
+            color: #999;
+            pointer-events: none;
+            cursor: text;
+            transition: all 0.2s;
+            }
+            .form-label-group:not(:empty) > input {
+            margin:auto;
+            padding-top: 28px;
+            padding-bottom: 8px;
+            }
+            .form-label-group:not(:empty) > label {
+            margin:auto;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            font-size: 12px;
+            color: #0054FF;
+            }
+            .terms_bx{
+            margin:auto;
+            max-width: 400px;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            font-size: 12px;
+            }
+            .toggle-content{
+            	display: none;
+            }
+            #logo{
+            	text-align: center;
+                margin-top: 50px;
+            }
+            #logo h1 {
+            	font-size: 50px;
+                margin-bottom: 20px;
+            }
+		</style>
         <script>
 					function toggleTerms(){
 						var content = document.getElementById("terms-content");
@@ -37,57 +88,51 @@
           <a href="Home.html"><h1>insight</h1></a>
         </div>
                 <!--기본 상단 요소 건들지 말것 수정필요시 '최영미'한테 연락하여 같이 고칠 것!!! -->
-        <div class="sigin-input">
-            <form>
-                <fieldset>
-                    <ul>
-                    	<li>
-                    		<label for="sname">이름</label>
-                    		<input type="text" id="sname">
-                    	</li>
-                        <li>
-                            <label for="sid">학번(ID)</label>
-                            <input type="text" id="sid" placeholder="ex) 20212252">
-                        </li>
-                        <li>
-                            <label for="semail">이메일</label>
-                            <input type="email"  id="semail">
-                        </li>
-                        <li>
-                            <label for="pwd1">비밀번호</label>
-                            <input type="password" id="pwd1">
-                        </li>
-                        <li>
-                            <label for="pwd2">비밀번호확인</label>
-                            <input type="password" id="pwd2">
-                        </li>
-                    </ul>
-                </fieldset>
-                <!-- 이용약관 -->
-                <!-- 이용약관 start -->
+        <div class="container">
+			<h2 class="my-5 text-center">동아리 가입</h2>
+			<form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post">
+				<!-- 회원가입 기입 Start -->
+				<div th:replace="~{form_errors :: formErrorsFragment}"></div>
+				<div class="form-label-group">
+					<input type="text" id="name" name="name" class="form-control" placeholder="이름" th:field="*{name}"required>
+					
+				</div>
+				<div class="form-label-group">
+					<input type="text" id="id" name="id" class="form-control" placeholder="아이디" th:field="*{username}"required autofocus>
+					
+				</div>
+				<div class="form-label-group">
+					<input type="password" id="password" name="password" class="form-control" placeholder="비밀번호" th:field="*{password1}"required>
+					
+				</div>
+				<div class="form-label-group">
+					<input type="password" id="password-confirm" name="password-confirm" class="form-control" placeholder="비밀번호 확인" th:field="*{password2}"required>
+					
+				</div>
+				<div class="form-label-group">
+					<input type="email" id="email" name="email" class="form-control" placeholder="이메일" th:field="*{email}"required>
+					
+				</div>	
+				<!-- 회원가입 기입 End -->
+				<!-- 이용약관 start -->
 				<div class = "terms_bx">
 					<span class="input_chk">
 						<input type="checkbox" id="termsService" name="termsService" class="chk" required>
-						<label for="termsService">
-							이용약관 동의
-							<span class="terms_necessary">
-								(필수)
-							</span>
-						</label>
+						<label for="termsService">이용약관 동의<span class="terms_necessary">(필수)</span></label>
 					</span>					
-					<button type="button" id = "terms-toggle" onclick="toggleTerms()">더 보기</button>
+					<button type = "button" id = "terms-toggle" onclick="toggleTerms()">더 보기</button>
 					<div id="terms-content" class ="toggle-content">
-						본 동아리는 개인정보(이름, 연락처, 동아리 활동을 위해 활용하며 이 외 용도로는 사용하지 않습니다(노션, 백준, 구글드라이브, 개별 연락 등). 또한 동아리 탈퇴시 개인정보는 삭제 됩니다.
+						본 동아리는 개인정보(이름, 연락처, 동아리 활동을 위해 활용하며 이 외 용도로는 사용하지 않습니다(노션, 백준, 구글드라이브, 개별 연락 등). 또한 동아리 탈퇴 시 개인정보는 삭제 됩니다.
 					</div>
 				</div>
 				<!-- 이용약관 End -->
-				
-				<!-- 가입버튼 -->
-                <div id="siginbtn">
-                    <input type="submit" value="가입신청하기">
-                    <input type="reset" value="취소">
-                </div>
-            </form>
-          </div>
-    </body>
+				<!-- 가입 버튼 Start-->
+				<div id="signinbtn" class="text-center">
+					<button type="submit" class="btn btn-primary">가입하기</button>
+					<button type="reset" class="btn btn-primary">처음으로</button>
+				</div>
+				<!-- 가입 버튼 End -->
+			</form>
+		</div>
+	</body>
 </html>
