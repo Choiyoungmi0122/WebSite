@@ -24,15 +24,14 @@ import lombok.Setter;
 public class Notice {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="Notice_Id")
-	private Integer id;
+	private Integer noticeId;
 	
 	@ManyToOne
 	@JoinColumn(name="STUNDENT_ID")
 	private UserInfo userinfo;
 
 	@Column(name="Notice_Title", length = 200)
-	private String title;
+	private String noticeTitle;
 	
 	@Column(name="Notice_Number")
 	private String number;
@@ -45,4 +44,5 @@ public class Notice {
 	
 	@OneToMany(mappedBy = "notice", cascade = CascadeType.REMOVE)
 	private List<NoticeComment> commentList;
+
 }
