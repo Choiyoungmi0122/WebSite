@@ -19,7 +19,7 @@ public class UserController{
 
     @GetMapping("/signup")
     public String signup(UserCreateForm userCreateForm) {
-        return "signup_form";
+        return "JoinMain";
     }
 
 	@PostMapping("/join")
@@ -46,4 +46,8 @@ public class UserController{
 		}
 		return "redirect:/";
 	}
+	@GetMapping("/login")
+    public String login() {
+        return "LoginMain";
+    }
 }
