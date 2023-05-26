@@ -25,7 +25,7 @@
         </div>
                 <!--기본 상단 요소 건들지 말것 수정필요시 '최영미'한테 연락하여 같이 고칠 것!!! -->
         <div class="login-input">
-            <form>
+            <form th:action="@{/user/login}" method = "post">
                 <fieldset>
                     <label>학번<input type="text" id = "Student_Id" size="8" placeholder="ex) 20212252"></label>
                     <label>비밀번호<input type="password" id ="Pwd"></label>

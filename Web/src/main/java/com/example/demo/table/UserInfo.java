@@ -3,6 +3,8 @@ package com.example.demo.table;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -14,6 +16,7 @@ import lombok.Setter;
 @Entity
 public class UserInfo {
    @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
    @Column(name="Student_Id", unique = true)
    private Integer id;
    

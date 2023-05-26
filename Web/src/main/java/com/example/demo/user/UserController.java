@@ -17,12 +17,12 @@ import lombok.RequiredArgsConstructor;
 public class UserController{
 	private final UserService userService;
 
-	@GetMapping("/join")
+	@GetMapping("/JoinMain")
 	public String signup(UserCreateForm userCreateForm){
 		return "JoinMain";
 	}
 
-	@PostMapping("/join")
+	@PostMapping("/JoinMain")
 	public String signup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult){
 		if (bindingResult.hasErrors()){
 			return "JoinMain";
