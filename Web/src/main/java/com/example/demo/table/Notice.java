@@ -23,14 +23,15 @@ import lombok.Setter;
 public class Notice {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer noticeId;
+	@Column(name="Notice_Id")
+	private Integer id;
 	
 	@ManyToOne
 	@JoinColumn(name="STUNDENT_ID")
 	private UserInfo userinfo;
 
 	@Column(name="Notice_Title", length = 200)
-	private String noticeTitle;
+	private String title;
 	
 	@Column(name="Notice_Number")
 	private String number;

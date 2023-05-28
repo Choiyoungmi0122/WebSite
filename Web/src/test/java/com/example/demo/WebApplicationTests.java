@@ -22,8 +22,8 @@ class WebApplicationTests {
 	
 	@Test
 	void testJpa() {
-		Notice N = this.noticeRepository.findByNoticeTitle("1번글 제목");
-		assertEquals(2, N.getnoticeId());
+		Notice N = this.noticeRepository.findBytitle("1번글 제목");
+		assertEquals(2, N.getId());
 		}
 }
 
