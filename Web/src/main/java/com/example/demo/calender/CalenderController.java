@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.demo.table.Calender;
@@ -30,6 +31,11 @@ public class CalenderController {
 	private final CalenderRepository calenderRepository;
 	private final CalenderService calenderService;
 	//private final UserInfoRepository userInfoRepository;
+	
+	@GetMapping("/calender")
+    public String index() {
+        return "CalenderMain";
+    }
 	
 	//http://8080/calender/create
 	//일정 등록 페이지에서 입력하고 등록 버튼 누르면 작동하는 함수
