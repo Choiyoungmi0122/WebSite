@@ -2,24 +2,26 @@ package com.example.demo.calender;
 
 import java.time.LocalDateTime;
 
+import com.example.demo.table.UserInfo;
+
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-//Calender 등록창에서 경고 메세지
-//여기있는 변수 이름으로 html 입력칸 이름 적기
+//달력 출력되는 창에서 날짜 선택하면 선택한 날짜의 일정 출력하는 부분 변수명
 //스프링 부트 2-15
 public class CalenderForm {
 	
+	private UserInfo userinfo;
+	// html에서 등록자의 변수
 	private LocalDateTime Calender_Register;
+	// html에서 시작 일정의 변수 
 	private LocalDateTime Calender_Deadline;
-	private String Calender_Category;
-	private String Calender_Replay;
-	//제목을 안적었을 경우
-	@NotEmpty(message = "내용은 필수항목입니다.")
+	// html에서 종료 일정의 변수 
 	private String Calender_Text;
+	// html에서 입력창의 변수
 	
 	
 }
