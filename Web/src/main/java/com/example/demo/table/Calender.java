@@ -19,6 +19,7 @@ import lombok.Setter;
 @Setter
 @Entity
 
+@Table(name="calender")
 public class Calender {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
