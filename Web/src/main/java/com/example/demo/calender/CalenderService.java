@@ -47,12 +47,4 @@ public class CalenderService {
 		else
 			return null;
 	}
-	
-	public Calender getCalender(LocalDateTime register) {
-		Optional<Calender>  calender = this.calenderRepository.findByRegister(register);
-		if(calender.isPresent())
-			return calender.get();
-		else
-			return null;
-	}
 }

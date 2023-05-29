@@ -10,5 +10,4 @@ import com.example.demo.table.Calender;
 
 @Repository
 public interface CalenderRepository extends JpaRepository<Calender, Integer>{
-	Optional<Calender> findByRegister(LocalDateTime Calender_Register);
 }
