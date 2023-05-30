@@ -14,6 +14,7 @@ import lombok.Setter;
 @Entity
 @Table(name="userinfo")
 public class UserInfo {
+
    @Id
    @Column(name="Student_Id", unique = true)
    private Integer id;
@@ -27,4 +28,9 @@ public class UserInfo {
    @Column(name="Email", unique = true)
    private String email;
   
+<<<<<<< HEAD
 }
+=======
+
+}
+>>>>>>> branch 'Calender' of https://github.com/Choiyoungmi0122/WebSite.git
