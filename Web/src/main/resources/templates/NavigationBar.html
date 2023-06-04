@@ -1,37 +1,6 @@
-<!DOCTYPE html>
-<html lang = 'kr'>
-<head>
-<meta charset="UTF-8">
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-	<style>
-		* {
-            box-sizing: border-box;
-        }
-        
-		body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 100%;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 4px;
-            
-        }
-	</style>
-</head>
-<body>
+<div th:fragment="NaviBar" style="width: 25%;display: inline-block;">
 
-    <div class=" flex-column  p-3 " style="width: 25%; display: inline-block; background-color:#fff;">
-    </a>
+    <div class=" flex-column  p-3 " style="width:100%;  background-color:#fff;">
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
@@ -41,31 +10,31 @@
         </a>
       </li>
       <li>
-        <a href="자유게시판.html" class="nav-link text-dark">
+        <a href="Calendar" class="nav-link text-dark">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="자유게시판.html"></use></svg>
           캘린더
         </a>
       </li>
       <li>
-        <a href="NoticeMain.html" class="nav-link text-dark">
+        <a href="NoticeMain" class="nav-link text-dark">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="공모전.html"></use></svg>
           자유게시판
         </a>
       </li>
       <li>
-        <a href="갤러리.html" class="nav-link text-dark">
+        <a href="NoticeMain_coding" class="nav-link text-dark">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
           코딩
         </a>
       </li>
       <li>
-        <a href="공지사항.html" class="nav-link text-dark">
+        <a href="Noticemain_" class="nav-link text-dark">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
           공모전
         </a>
       </li>
       <li>
-        <a href="자유게시판.html" class="nav-link text-dark">
+        <a href="Noticemain_gallery" class="nav-link text-dark">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="자유게시판.html"></use></svg>
           갤러리
         </a>
@@ -73,6 +42,4 @@
       <hr>
      </ul>
      </div> 
-
-</body>
-</html>
+</div>

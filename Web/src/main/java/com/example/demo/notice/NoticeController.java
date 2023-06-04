@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.data.domain.Page;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,11 +24,11 @@ public class NoticeController {
 	private final NoticeService noticeService;
 
 	@GetMapping("/NoticeMain")
-	public String noticemain(Model model) {
-		List<Notice> noticeMain = this.noticeService.getList();
+	public String list(Model model, @RequestParam(value="page", defaultValue="0") int page) {
+		Page<Notice> noticeMain = this.noticeService.getList(page);
 		model.addAttribute("noticeMain", noticeMain);
 
-		return "NoticeMain";
+		return "notice/NoticeMain";
 	}
 
 	@GetMapping(value = "/NoticeMain/detail/{id}")
@@ -36,12 +37,12 @@ public class NoticeController {
 		model.addAttribute("notice", notice);
 		// Model addAttribute(String name, Object value)
 		// value 객체를 name 이름으로 추가한다.
-		return "NoticeMain_Detail";
+		return "notice/NoticeMain_Detail";
 	}
 
 	@GetMapping("/NoticeInput")
 	public String noticeinput() {
-		return "NoticeInput";
+		return "notice/NoticeInput";
 	}
 
 
@@ -53,7 +54,8 @@ public class NoticeController {
 			 )
 	 {
 		 this.noticeService.noticeinput(title, number, text);
-		 return "redirect:/NoticeMain"; // 질문 저장후 질문목록으로이동
+		 return "redirect:notice/NoticeMain"; // 질문 저장후 질문목록으로이동
 	 }
 
+	 
 }
