@@ -1,6 +1,6 @@
 package com.example.demo.notice;
 
-import com.example.demo.share.*;
+import com.example.demo.share.DataNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.time.LocalDateTime;
