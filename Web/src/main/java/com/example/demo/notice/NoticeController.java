@@ -46,15 +46,11 @@ public class NoticeController {
 	}
 
 
-	 @PostMapping("/NoticeInput") public String noticeinput(
-//			 @RequestParam Userinfo userinfo,
-			 @RequestParam String title,
-			 @RequestParam String number,
-			 @RequestParam String text
-			 )
+	 @PostMapping("/NoticeInput")
+	 public String noticeinput(@RequestParam String title, @RequestParam String number, @RequestParam String text)
 	 {
 		 this.noticeService.noticeinput(title, number, text);
-		 return "redirect:notice/NoticeMain"; // 질문 저장후 질문목록으로이동
+		 return "redirect:/NoticeMain"; // 질문 저장후 질문목록으로이동
 	 }
 
 	 

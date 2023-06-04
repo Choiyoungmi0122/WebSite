@@ -9,20 +9,20 @@
         <h2>게시판</h2>
         <form th:action="@{/NoticeInput}" method="post">
             <div class="form-group">
-                <input type="text" placeholder ="제목" name="postname" id="postname" required  style="display:inline-block; width:100%; height:40px;">
+                <input type="text" placeholder ="제목" name="title" id="title" required  style="display:inline-block; width:100%; height:40px;">
             </div>
             <div class="form-group">
                 <label for="category" style="display: inline-block">카테고리:</label>
-                <select name="category" id="category" required style="width:12%; display:inline-block;">
-                    <option value="1">코딩</option>
-                    <option value="2">자유</option>
-                    <option value="3">공모전</option>
-                    <option value="4">갤러리</option>
+                <select name="number" id="number" required style="width:12%; display:inline-block;">
+                    <option value="free">자유</option>
+                    <option value="coding">코딩</option>
+                    <option value="contest">공모전</option>
+                    <option value="gallery">갤러리</option>
                 </select>
             </div>
 
             <div class="form-group">
-                	<textarea type="text" placeholder ="내용을 입력해 주세요." name="contents" id="contents" rows="15%" required style="resize: none;"></textarea>
+                	<textarea type="text" placeholder ="내용을 입력해 주세요." name="text" id="text" rows="15%" required style="resize: none;"></textarea>
             	</div>
             	
             <div class="form-group">

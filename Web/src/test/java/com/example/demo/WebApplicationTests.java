@@ -23,10 +23,10 @@ class WebApplicationTests {
     @Test
     void testJpa() {
         for (int i = 1; i <= 300; i++) {
-            String subject = String.format("테스트 데이터입니다:[%03d]", i);
+            String title = String.format("테스트 데이터입니다:[%03d]", i);
             String number = "coding";
-            String content = "내용무";
-            this.noticeService.noticeinput(subject, number, content);
+            String text = "내용무";
+            this.noticeService.noticeinput(title, number, text);
         }
     }
 	
