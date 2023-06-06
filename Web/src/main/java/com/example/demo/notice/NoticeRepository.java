@@ -7,7 +7,8 @@ import org.springframework.data.domain.Pageable;
 
 
 public interface NoticeRepository extends JpaRepository<Notice, Integer> {
-	Notice findBytitle(String Notice_Title);
-	Notice findBytitleAndText(String Notice_Title, String Notice_Text);
+	Notice findByTitle(String Notice_Title);
+	Notice findByNumber(String Notice_Number);
+	Notice findByTitleAndText(String Notice_Title, String Notice_Text);
 	Page<Notice> findAll(Pageable pageable);
 }

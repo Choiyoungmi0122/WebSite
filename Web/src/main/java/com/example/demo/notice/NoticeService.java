@@ -39,6 +39,7 @@ public class NoticeService {
 		}
 	}
 	
+	
 	public void noticeinput(String title, String number, String text) {
 		Notice n = new Notice();
 		n.setTitle(title);

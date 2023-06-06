@@ -1,13 +1,13 @@
 package com.example.demo.notice;
 
 import java.util.List;
-
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.table.Notice;
+import com.example.demo.notice.comment.NoticeCommentForm;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,12 +31,11 @@ public class NoticeController {
 	public String list(Model model, @RequestParam(value="page", defaultValue="0") int page) {
 		Page<Notice> noticeMain = this.noticeService.getList(page);
 		model.addAttribute("noticeMain", noticeMain);
-
 		return "notice/NoticeMain";
 	}
-
+	
 	@GetMapping(value = "/detail/{id}")
-	public String detail(Model model, @PathVariable("id") Integer id) {
+	public String detail(Model model, @PathVariable("id") Integer id, NoticeCommentForm noticecommentForm) {
 		Notice notice = this.noticeService.getNotice(id);
 		model.addAttribute("notice", notice);
 		// Model addAttribute(String name, Object value)
@@ -45,7 +44,7 @@ public class NoticeController {
 	}
 
 	@GetMapping("/input")
-	public String noticeinput() {
+	public String noticeinput(NoticeForm noticeForm) {
 		return "notice/NoticeInput";
 	}
 
@@ -58,5 +57,6 @@ public class NoticeController {
 		 this.noticeService.noticeinput(noticeForm.getTitle(), noticeForm.getNumber(), noticeForm.getText());
 		 return "redirect:/Notice/main"; // 질문 저장후 질문목록으로이동
 	 }
+	 
 
 }
