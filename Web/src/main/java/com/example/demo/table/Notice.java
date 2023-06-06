@@ -45,4 +45,5 @@ public class Notice {
 	@OneToMany(mappedBy = "notice", cascade = CascadeType.REMOVE)
 	private List<NoticeComment> commentList;
 
+	private LocalDateTime modifyDate;
 }
