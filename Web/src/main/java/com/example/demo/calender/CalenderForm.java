@@ -19,10 +19,22 @@ public class CalenderForm {
 	// html에서 등록자의 변수
 	private LocalDateTime register;
 	// html에서 시작 일정의 변수 
-	private LocalDateTime deadline;
-	// html에서 종료 일정의 변수 
 	private String text;
 	// html에서 입력창의 변수
 	
-	
+	public LocalDateTime getRegister() {
+		return register;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setRegister(LocalDateTime register) {
+		this.register=register;
+	}
+
+	public void setText(String text) {
+		this.text=text;
+	}
 }
