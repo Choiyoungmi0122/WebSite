@@ -47,79 +47,7 @@
           }
           
           
-          td {
-            width: 80px;
-            height: 80px;
-            text-align: center;
-        }
-        .Calendar {
-            text-align: center;
-            width: 90%;
-            height: 90%;
-            margin-left: 10%;
-            margin-top: 5%;
-            
-        }
-        .Calendar>thead>tr:first-child>td {
-            font-family: 'Questrial', sans-serif;
-            font-size: 1.8em;
-            font-weight: bold;
-        }
-        .Calendar>thead>tr:last-child>td {
-            font-family: 'Questrial', sans-serif;
-            font-size: 1.2em;
-            font-weight: 600;  
-            text-align: center;   
-        }
-        Calendar>tbody>tr>td>p {
-            font-family: 'Montserrat', sans-serif;
-            height: 45px;
-            width: 45px;
-            transition-duration: .2s;
-            margin: 2.5px;
-        }   
-        .today {
-            background-color: #429EF5; 
-            color: #fff;
-            font-weight: 600;
-            cursor: pointer;
-            border-radius: 50%;
-                        
-        }
-        .futureDay.choiceDay,
-        .today.choiceDay, .pastDay.choiceDay {
-            background: #0C58D2;
-            color: #fff;
-            font-weight: 800;
-            cursor: pointer;
-         }
-         div.container1{
-			 width: auto;
-			 height: auto;
-			 float: left;
-		 }
-         div.container2{
-			 border: 1px solid black; 
-			 width: 40%; 
-			 height: 80vh;
-			 float: left;
-			 border-radius: 5%;
-			 margin-left: 10%;
-			 margin-top: 5%;
-		   }
-		 div.day{
-			 float: left;
-			 margin-left: 8%;
-		 }
-		 div.detail{
-			 float: left;
-			 margin-left: 32%;
-		 }
-		div.participate{
-			float: left;
-			margin-left: 30%;
-		}
-		 
+          
         
         </style>
       </head>
@@ -141,38 +69,7 @@
 
         <!--기본 상단 요소 건들지 말것 수정필요시 '최영미'한테 연락하여 같이 고칠 것!!! -->
         
-        <div class="container1">
-        <table class="Calendar">
-            <thead>
-                <tr>
-                    <td onClick="prevCalendar();" style="cursor: pointer; ">&#60;</td>
-                    <td colspan="5">
-                        <span id="calYear"></span>년
-                        <span id="calMonth"></span>월
-                    </td>
-                    <td onClick="nextCalendar();" style="cursor:pointer;">&#62;</td>
-                </tr>
-                <tr>
-                    <td>일</td>
-                    <td>월</td>
-                    <td>화</td>
-                    <td>수</td>
-                    <td>목</td>
-                    <td>금</td>
-                    <td>토</td>
-                </tr>
-            </thead>
-
-          <tbody>
-          </tbody>
-        </table>
-      </div>
-      <form id="eventForm">
-        <button onclick="location.href='CalenderCreate.html'" id="add-event-btn">등록</button>
-        <button onclick="location.href='CalenderEdit.html'" id="update-event-btn" disabled>수정</button>
-        <button id="delete-event-btn" disabled>삭제</button>
-      </form>
-
+        
 
   
 	<script>

@@ -87,7 +87,7 @@
                         
         }
         .futureDay.choiceDay,
-        .today.choiceDay, .today.choiceDay {
+        .today.choiceDay, .pastDay.choiceDay {
             background: #0C58D2;
             color: #fff;
             font-weight: 800;
@@ -140,11 +140,45 @@
         </div>
 
         <!--기본 상단 요소 건들지 말것 수정필요시 '최영미'한테 연락하여 같이 고칠 것!!! -->
-
         
-	<script>
-        window.onload = function () { buildCalendar(); }    // 웹 페이지가 로드되면 buildCalendar 실행
+        <div class="container1">
+        <table class="Calendar">
+            <thead>
+                <tr>
+                    <td onClick="prevCalendar();" style="cursor: pointer; ">&#60;</td>
+                    <td colspan="5">
+                        <span id="calYear"></span>년
+                        <span id="calMonth"></span>월
+                    </td>
+                    <td onClick="nextCalendar();" style="cursor:pointer;">&#62;</td>
+                </tr>
+                <tr>
+                    <td>일</td>
+                    <td>월</td>
+                    <td>화</td>
+                    <td>수</td>
+                    <td>목</td>
+                    <td>금</td>
+                    <td>토</td>
+                </tr>
+            </thead>
 
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+      <form id="eventForm">
+        <button onclick="location.href='CalenderCreate.html'" id="add-event-btn">등록</button>
+        <button onclick="location.href='CalenderEdit.html'" id="update-event-btn" disabled>수정</button>
+        <button id="delete-event-btn" disabled>삭제</button>
+      </form>
+
+
+  
+	<script>
+
+        window.onload = function () { buildCalendar(); }    // 웹 페이지가 로드되면 buildCalendar 실행
+		let selectedDate;  // 선택한 날짜를 저장하는 변수
         let nowMonth = new Date();  // 현재 달을 페이지를 로드한 날의 달로 초기화
         let today = new Date();     // 페이지를 로드한 날짜를 저장
         today.setHours(0, 0, 0, 0);    // 비교 편의를 위해 today의 시간을 초기화
@@ -184,6 +218,7 @@
 
                 if (nowDay < today) {                       // 지난날인 경우
                     newDIV.className = "pastDay";
+                    newDIV.onclick = function () { choiceDate(this); }
                 }
                 else if (nowDay.getFullYear() == today.getFullYear() && nowDay.getMonth() == today.getMonth() && nowDay.getDate() == today.getDate()) { // 오늘인 경우           
                     newDIV.className = "today";
@@ -195,6 +230,13 @@
                 }
             }
         }
+            function CalenderCreate() {
+            // 새 페이지의 경로를 설정합니다.
+            var create = "/CalenderCreate";
+
+            // 새 페이지로 이동합니다.
+            window.location.href = create;
+            }
 
         // 날짜 선택
         function choiceDate(newDIV) {
@@ -203,6 +245,8 @@
             }
             newDIV.classList.add("choiceDay");           // 선택된 날짜에 "choiceDay" class 추가
         }
+        
+        
 
         // 이전달 버튼 클릭
         function prevCalendar() {
@@ -223,45 +267,11 @@
             }
             return value;
         }
-    </script>
     
-     <div class="container1">
-        <table class="Calendar">
-            <thead>
-                <tr>
-                    <td onClick="prevCalendar();" style="cursor: pointer; ">&#60;</td>
-                    <td colspan="5">
-                        <span id="calYear"></span>년
-                        <span id="calMonth"></span>월
-                    </td>
-                    <td onClick="nextCalendar();" style="cursor:pointer;">&#62;</td>
-                </tr>
-                <tr>
-                    <td>일</td>
-                    <td>월</td>
-                    <td>화</td>
-                    <td>수</td>
-                    <td>목</td>
-                    <td>금</td>
-                    <td>토</td>
-                </tr>
-            </thead>
+        
+        
+    </script>
 
-          <tbody>
-          </tbody>
-        </table>
-      </div>
-      <div class="container2">
-		  <div class="day">
-			  <h3>날짜</h3>
-		  </div>
-		  <div class="detail">
-			  <h3>내용</h3>
-		  </div>
-		  <div class="participate">
-			  <h3>참여자</h3>
-		  </div>
-	  </div>
     </body>
 </html>
 
