@@ -14,14 +14,27 @@ import lombok.Setter;
 //스프링 부트 2-15
 public class CalenderForm {
 	
+	private Integer id;
 	private UserInfo userinfo;
 	// html에서 등록자의 변수
-	private LocalDateTime Calender_Register;
+	private LocalDateTime register;
 	// html에서 시작 일정의 변수 
-	private LocalDateTime Calender_Deadline;
-	// html에서 종료 일정의 변수 
-	private String Calender_Text;
+	private String text;
 	// html에서 입력창의 변수
 	
-	
+	public LocalDateTime getRegister() {
+		return register;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setRegister(LocalDateTime register) {
+		this.register=register;
+	}
+
+	public void setText(String text) {
+		this.text=text;
+	}
 }
