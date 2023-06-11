@@ -44,4 +44,34 @@ public class Calender {
 		// TODO Auto-generated method stub
 		return userinfo;
 	}
+
+	public void setuserinfo(UserInfo userInfo) {
+		// TODO Auto-generated method stub
+		this.userinfo=userInfo;
+	}
+
+	public void setRegister(LocalDateTime register) {
+		// TODO Auto-generated method stub
+		this.register=register;
+	}
+
+	public void setText(String text) {
+		// TODO Auto-generated method stub
+		this.text=text;
+	}
+
+	public void setDeadline(LocalDateTime deadline) {
+		// TODO Auto-generated method stub
+		this.deadline=deadline;
+	}
+
+	public void setReplay(String replay) {
+		// TODO Auto-generated method stub
+		this.replay=replay;
+	}
+
+	public void setCategory(String category) {
+		// TODO Auto-generated method stub
+		this.category=category;
+	}
 }

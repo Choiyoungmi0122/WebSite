@@ -11,18 +11,20 @@ import com.example.demo.table.UserInfo;
 
 
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @RequiredArgsConstructor
 @Service
+@Setter
 public class CalenderService {
-	private final CalenderRepository calenderRepository;
+	private final CalenderRepository calenderRepository = null;
 	
 	//Calender DB에 값 추가 함수
 	public void AddCalenderData(UserInfo userInfo, LocalDateTime Calender_Register, 
 			String Calender_Text,LocalDateTime Calender_Deadline, 
 			String Calender_Category,String Calender_Replay) {
 		Calender calender = new Calender();
-		calender.setUserinfo(userInfo);
+		calender.setuserinfo(userInfo);
 		calender.setRegister(Calender_Register);
 		calender.setText(Calender_Text);
 		calender.setDeadline(Calender_Deadline);
@@ -36,8 +38,8 @@ public class CalenderService {
 		calender.setRegister(register);
 		calender.setText(Calender_Text);
 		calender.setDeadline(Calender_Deadline);
-		calender.setCategory(Calender_Category);
-		calender.setReplay(Calender_Replay);
+		//calender.setCategory(Calender_Category);
+		//calender.setReplay(Calender_Replay);
 	}
 	
 	public Calender getCalender(Integer id) {
