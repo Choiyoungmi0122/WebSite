@@ -10,8 +10,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,22 +26,28 @@ public class Calender {
 	@ManyToOne
 	@JoinColumn(name="Student_Id")
 	private UserInfo userinfo;
-	
+
 	@Column(name="Calender_Register")
 	private LocalDateTime register;
 	@Column(name="Calender_Text")
 	private String text;
-	@Column(name="Calender_Deadline")
-	private LocalDateTime deadline;
-	@Column(name="Calender_Category")
-	private String category;
-	@Column(name="Calender_Replay")
-	private String replay;
+	
+	public Integer getId() {
+		return id;
+	}
 	
 	public Object getUserInfo() {
 		return userinfo;
 	}
 
+	public LocalDateTime getRegister() {
+		return register;
+	}
+	
+	public String getText() {
+		return text;
+	}
+	
 	public void setuserinfo(UserInfo userInfo) {
 		this.userinfo=userInfo;
 	}
@@ -54,38 +58,6 @@ public class Calender {
 
 	public void setText(String text) {
 		this.text=text;
-	}
-
-	public void setDeadline(LocalDateTime deadline) {
-		this.deadline=deadline;
-	}
-
-	public void setReplay(String replay) {
-		this.replay=replay;
-	}
-
-	public void setCategory(String category) {
-		this.category=category;
-	}
-
-	public LocalDateTime getRegister() {
-		return register;
-	}
-
-	public String getText() {
-		return text;
-	}
-
-	public LocalDateTime getDeadline() {
-		return deadline;
-	}
-
-	public String getCategory() {
-		return category;
-	}
-
-	public String getReplay() {
-		return replay;
 	}
 
 }
