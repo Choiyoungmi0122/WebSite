@@ -33,14 +33,14 @@ public class CalenderController {
 	public String calenderMain() {
         return "CalenderMain";
     }
-	/*
+	
 	@GetMapping("/{day}")
 	public String loadCalender(Model model,@PathVariable("day") String register) {
 		//List<Calender> calender = this.calenderService.getDayList(register);
 		//model.addAttribute("calender",calender);
 		return "CalenderMain";
 	}
-	*/
+	
 	/*
 	//캘린더에서 날짜 클릭시 http://8080/calender/{클릭한 날짜}로 url 이동
 	@GetMapping("/{day}")

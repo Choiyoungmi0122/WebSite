@@ -87,7 +87,7 @@
                         
         }
         .chosenDay.choiceDay,
-        .today.choiceDay, .today.choiceDay {
+        .today.choiceDay {
             background: #0C58D2;
             color: #fff;
             font-weight: 800;
@@ -144,11 +144,12 @@
         
 	<script>
         window.onload = function () { buildCalendar();}    // 웹 페이지가 로드되면 buildCalendar 실행
-
+	
         let nowMonth = new Date();  // 현재 달을 페이지를 로드한 날의 달로 초기화
         let today = new Date();     // 페이지를 로드한 날짜를 저장
         today.setHours(0, 0, 0, 0);    // 비교 편의를 위해 today의 시간을 초기화
-        redirectToPage(today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDay())
+
+        urldata(this);
 
         // 달력 생성 : 해당 달에 맞춰 테이블을 만들고, 날짜를 채워 넣는다.
         function buildCalendar() {
@@ -159,6 +160,8 @@
             let tbody_Calendar = document.querySelector(".Calendar > tbody");
             document.getElementById("calYear").innerText = nowMonth.getFullYear();             // 연도 숫자 갱신
             document.getElementById("calMonth").innerText = leftPad(nowMonth.getMonth() + 1);  // 월 숫자 갱신
+            
+   
 
             while (tbody_Calendar.rows.length > 0) {                        // 이전 출력결과가 남아있는 경우 초기화
                 tbody_Calendar.deleteRow(tbody_Calendar.rows.length - 1);
@@ -174,23 +177,24 @@
 
                 let nowColumn = nowRow.insertCell();        // 새 열을 추가하고
 
-                let newDIV = document.createElement("p");
+                let newDIV;
+                newDIV = document.createElement("p");
                 newDIV.innerHTML = leftPad(nowDay.getDate());        // 추가한 열에 날짜 입력
                 nowColumn.appendChild(newDIV);
+                
+                
 
                 if (nowDay.getDay() == 6) {                 // 토요일인 경우
                     nowRow = tbody_Calendar.insertRow();    // 새로운 행 추가
                 }
-
-                if (nowDay.getFullYear() == today.getFullYear() && nowDay.getMonth() == today.getMonth() && nowDay.getDate() == today.getDate()) { // 오늘인 경우           
-                    newDIV.className = "today";
-                    newDIV.onclick = function () { choiceDate(this); }
-                }
-                else {                                      // 미래인 경우
-                    newDIV.className = "chosenDay";
-                    newDIV.onclick = function () { choiceDate(this); }
-                }
-            }
+                
+	            newDIV.className = "chosenDay";
+                
+                if ((nowDay.getFullYear() == chosenDate.getAttribute("data-year")) && (nowDay.getMonth() == chosenDate.getAttribute("data-month")) && (nowDay.getDate() == chosenDate.getAttribute("data-day"))) {
+					newDIV.classList.add("choiceDay");  
+				}
+	            newDIV.onclick = function () { choiceDate(this); }
+			}
         }
        
 
@@ -209,14 +213,19 @@
 			let url = "http://localhost:8080/calender/"
     		window.location.href = url+day; // 이동할 HTML 페이지의 URL을 지정
 		}
-		function chosenDate(){
-			let currentUrl = window.location.href;		//현재페이지의 url
-            let parts = currentUrl.split("/");			// URL을 "/"로 분할하여 배열로 저장
-            let value = parts[parts.length - 1];		// 배열의 마지막 요소인 day을 가져옴
-            let integerValue = parseInt(numericString);	//정수로 변환
-            if(integerValue>=1 && integerValue <=30){
-				newDIV.classList.add(integerValue); 
-			}
+		
+		function urldata(chosenDate) {
+		  let url = window.location.href;
+		  let datePart = url.split("/")[4];
+		  let dateParts = datePart.split("-");
+		  let year = parseInt(dateParts[0]);
+		  let month = parseInt(dateParts[1]);
+		  let day = parseInt(dateParts[2]);
+		
+		  chosenDate.setAttribute("data-year", year);
+		  chosenDate.setAttribute("data-month", month);
+		  chosenDate.setAttribute("data-day", day);
+		  chosenDate.classList.add("chosenDay");
 		}
 
         // 이전달 버튼 클릭
