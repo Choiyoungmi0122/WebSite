@@ -46,9 +46,7 @@
             font-size: 20px;
           }
           
-          
-          
-        
+
         </style>
       </head>
       <body>
@@ -67,22 +65,35 @@
           <a href="JoinMain.html">회원가입</a>
         </div>
 
-        <!--기본 상단 요소 건들지 말것 수정필요시 '최영미'한테 연락하여 같이 고칠 것!!! -->
+        <!--기본 상단 요소 건들지 말것 수정필요시 '최영                                                          미'한테 연락하여 같이 고칠 것!!! -->
         
-    <div layout:fragment="content" class="container">
-    	<h5 class="my-3 border-bottom pb-2">일정 등록</h5>
-    	<form th:action="@{/question/create}" method="post">
-        	<div class="mb-3">
-            	<label for="subject" class="form-label">제목</label>
-            	<input type="text" name="subject" id="subject" class="form-control">
-        	</div>
-        	<div class="mb-3">
-            	<label for="content" class="form-label">내용</label>
-            	<textarea name="content" id="content" class="form-control" rows="10"></textarea>
-        	</div>
-    	</form>
-    	
-</div>
+		<div layout:fragment="content" class="container">
+		    <h5 class="my-3 border-bottom pb-2">일정 등록</h5>
+		    <form th:action="@{/calender/create}" method="post">
+				<div class="mb-3">
+					<label class="form-label">날짜 선택</label><br>
+					<input type="date" name="register" id="register"/>
+				</div>
+		        <div class="mb-3">
+		            <label for="text" class="form-label">일정</label><br>
+		            <textarea name="text" id="text" class="form-control" rows="3"></textarea>
+		        </div>
+		        <input type="submit" value="저장하기" class="btn btn-primary my-2">
+		    </form>
+		</div>
     </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
