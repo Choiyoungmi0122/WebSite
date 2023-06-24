@@ -27,7 +27,7 @@ import com.example.demo.table.UserInfo;
 @Controller
 
 public class CalenderController {
-	private final CalenderService calenderService = new CalenderService();
+	private final CalenderService calService = new CalenderService();
 	
 	@GetMapping("")
 	public String calenderMain() {
@@ -40,34 +40,19 @@ public class CalenderController {
 		//model.addAttribute("calender",calender);
 		return "CalenderMain";
 	}
-	
 
-	/*
-	//캘린더에서 날짜 클릭시 http://8080/calender/{클릭한 날짜}로 url 이동
-	@GetMapping("/{day}")
-	public String loadCalender(Model model,@PathVariable("register") LocalDate register) {
-		List<Calender> calender = this.calenderService.getDayList(register);
-		model.addAttribute("calender",calender);
-		return "CalenderMain";
-	}
-	*/
-	
-
-	@GetMapping(value = "/create")
-    public String detail() {
+	@GetMapping("/create")
+    public String create(CalenderRegisteForm calenderRegisteForm) {
         return "CalenderCreate";
     }
 
-	
 	//http://8080/calender/create
 	//일정 등록 html에서 등록 버튼 눌렀을 때 저장하는 함수
 	//*역할조건 안넣음 @PreAuthorize
-	@PostMapping("/create4")
-	public String createCalender(//입력 값들
-			@Valid CalenderRegisteForm calenderRegisteForm, BindingResult bindingResult, 
-
-			UserInfo userinfo, @RequestParam("text") String text, 
-			@RequestParam("register") LocalDate register) {
+	@PostMapping("/create")
+	public String create(//입력 값들
+			@Valid CalenderRegisteForm crf, BindingResult bindingResult,
+			Principal principal){
 
 		//BindingResult는 입력을 했는지 확인위해 추가
 		//@RequestParam("가져올 데이터의 이름") [데이터타입] [가져온데이터를 담을 변수]
@@ -76,9 +61,9 @@ public class CalenderController {
             return "/create";
         }
 		
-		this.calenderService.addData(userinfo, register, text);
+		this.calService.addData(crf.getRegister(), crf.getText());
 
-		return ("CalenderCreate"); 
+		return "redirect:/calender/{day}"; 
 
 	}
 	
@@ -89,7 +74,7 @@ public class CalenderController {
 	public void modifyLoad(CalenderRegisteForm calenderRegisteForm, @PathVariable("id") Integer Calender_Id,
 			Principal principal) {
 		//매개변수를 CalenderForm, 일정의 id, 사용자의 정보로 한다.
-		Calender calender = this.calenderService.getInfo(Calender_Id);
+		Calender calender = this.calService.getInfo(Calender_Id);
 		
 		if(!calender.getUserInfo().equals(principal.getName()))/*사용자의 학번과 작성자의 학번 비교)*/ {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정 권한이 없습니다.");
@@ -108,23 +93,23 @@ public class CalenderController {
         if (bindingResult.hasErrors()) {
             return "캘린더수정html";
         }
-        Calender calender = this.calenderService.getInfo(Calender_Id);
+        Calender calender = this.calService.getInfo(Calender_Id);
         
-        this.calenderService.modifyData(calender, calenderRegisteForm.getRegister(),
+        this.calService.modifyData(calender, calenderRegisteForm.getRegister(),
         		calenderRegisteForm.getText());
 
         return ("redirect:/calender"); //달력 출력 화면으로 전환
     }
     
     //일정 삭제 시 작동하는 함수
-    public String deleteCalender(CalenderRegisteForm calenderRegisteForm, @PathVariable("id") Integer Calender_Id,
+    public String deleteCalender(@PathVariable("id") Integer Calender_Id,
 			Principal principal) {
-		Calender calender = this.calenderService.getInfo(Calender_Id);
+		Calender calender = this.calService.getInfo(Calender_Id);
 		
 		if(!calender.getUserInfo().equals(principal.getName()))/*사용자의 학번과 작성자의 학번 비교)*/ {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정 권한이 없습니다.");
         }
-		this.calenderService.delete(calender);
+		this.calService.delete(calender);
     	return ("redirect:/calender");
     }
 }

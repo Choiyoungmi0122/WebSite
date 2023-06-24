@@ -192,9 +192,6 @@
                 
 	            newDIV.className = "chosenDay";
                 
-                if ((nowDay.getFullYear() == chosenDate.getAttribute("data-year")) && (nowDay.getMonth() == chosenDate.getAttribute("data-month")) && (nowDay.getDate() == chosenDate.getAttribute("data-day"))) {
-					newDIV.classList.add("choiceDay");  
-				}
 	            newDIV.onclick = function () { choiceDate(this); }
 			}
         }

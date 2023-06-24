@@ -58,13 +58,13 @@
         </ul>
 			<script>
 			  // 현재 날짜를 가져오기
-			  var today = new Date();
-			  var year = today.getFullYear();
-			  var month = today.getMonth() + 1;
-			  var day = today.getDate();
+			  let today = new Date();
+			  let year = today.getFullYear();
+			  let month = today.getMonth() + 1;
+			  let day = today.getDate();
 			
 			  // 링크에 오늘 날짜를 추가
-			  var calendarLink = document.getElementById("calendarLink");
+			  let calendarLink = document.getElementById("calendarLink");
 			  calendarLink.href = "calender/" + year + "-" + month + "-" + day;
 			</script>
         <div class="join-login-btn">

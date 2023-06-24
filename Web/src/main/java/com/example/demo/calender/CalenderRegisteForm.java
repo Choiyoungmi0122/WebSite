@@ -12,6 +12,7 @@ import lombok.Setter;
 //스프링 부트 2-15
 public class CalenderRegisteForm {
 	
+
 	private LocalDate register;
 	// html에서 시작 일정의 변수 
 	
@@ -19,7 +20,7 @@ public class CalenderRegisteForm {
 	//빈칸이면 에러메세지 출력
 	private String text;
 	// html에서 입력창의 변수
-	
+
 	public LocalDate getRegister() {
 		return register;
 	}

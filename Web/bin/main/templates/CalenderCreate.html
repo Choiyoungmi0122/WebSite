@@ -69,7 +69,10 @@
         
 		<div layout:fragment="content" class="container">
 		    <h5 class="my-3 border-bottom pb-2">일정 등록</h5>
-		    <form th:action="@{/calender/create}" method="post">
+		    <form th:action="@{/calender/create}" th:object="${crf}" method="post">
+				<div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
+            		<div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+        		</div>
 				<div class="mb-3">
 					<label class="form-label">날짜 선택</label><br>
 					<input type="date" name="register" id="register"/>
