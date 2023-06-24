@@ -23,5 +23,4 @@ public class CalenderForm {
 	private String Calender_Text;
 	// html에서 입력창의 변수
 	
-	
 }

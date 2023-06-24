@@ -167,11 +167,8 @@
           </tbody>
         </table>
       </div>
-      <form id="eventForm">
-        <button onclick="location.href='CalenderCreate.html'" id="add-event-btn">등록</button>
-        <button onclick="location.href='CalenderEdit.html'" id="update-event-btn" disabled>수정</button>
-        <button id="delete-event-btn" disabled>삭제</button>
-      </form>
+
+<button onclick="location.href='CalenderCreate.html'">등록</button >
 
 
   
@@ -230,13 +227,7 @@
                 }
             }
         }
-            function CalenderCreate() {
-            // 새 페이지의 경로를 설정합니다.
-            var create = "/CalenderCreate";
 
-            // 새 페이지로 이동합니다.
-            window.location.href = create;
-            }
 
         // 날짜 선택
         function choiceDate(newDIV) {
@@ -244,6 +235,7 @@
                 document.getElementsByClassName("choiceDay")[0].classList.remove("choiceDay");  // 해당 날짜의 "choiceDay" class 제거
             }
             newDIV.classList.add("choiceDay");           // 선택된 날짜에 "choiceDay" class 추가
+            
         }
         
         
