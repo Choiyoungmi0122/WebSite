@@ -2,6 +2,8 @@ package com.example.demo.calender;
 
 import java.time.LocalDateTime;
 
+import com.example.demo.table.UserInfo;
+
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,17 +17,25 @@ public class CalenderRegisteForm {
 	
 	private LocalDateTime register;
 	// html에서 시작 일정의 변수 
-	private LocalDateTime deadline;
-	// html에서 종료 일정의 변수 
-	private String category;
-	// html에서 카테고리의 변수 
-	private String replay;
-	// html에서 반복 일정의 변수 
 	
 	@NotEmpty(message = "내용은 필수항목입니다.")
 	//빈칸이면 에러메세지 출력
 	private String text;
 	// html에서 입력창의 변수
 	
-	
+	public LocalDateTime getRegister() {
+		return register;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setRegister(LocalDateTime register) {
+		this.register=register;
+	}
+
+	public void setText(String text) {
+		this.text=text;
+	}
 }
