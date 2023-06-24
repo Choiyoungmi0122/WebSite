@@ -1,7 +1,7 @@
 package com.example.demo.table;
 
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,7 +28,7 @@ public class Calender {
 	private UserInfo userinfo;
 
 	@Column(name="Calender_Register")
-	private LocalDateTime register;
+	private LocalDate register;
 	@Column(name="Calender_Text")
 	private String text;
 	
@@ -40,7 +40,7 @@ public class Calender {
 		return userinfo;
 	}
 
-	public LocalDateTime getRegister() {
+	public LocalDate getRegister() {
 		return register;
 	}
 	
@@ -52,7 +52,7 @@ public class Calender {
 		this.userinfo=userInfo;
 	}
 
-	public void setRegister(LocalDateTime register) {
+	public void setRegister(LocalDate register) {
 		this.register=register;
 	}
 

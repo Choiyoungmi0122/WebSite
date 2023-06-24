@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import java.security.Principal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -17,37 +17,39 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.demo.table.Calender;
 import com.example.demo.table.UserInfo;
 
-@RequestMapping("/calender")
+@RequestMapping("/")
 @RequiredArgsConstructor
 @Controller
 
 public class CalenderController {
 	private final CalenderService calenderService = new CalenderService();
-	
-	
-	//모든 값 model에 추가
-	/*@GetMapping("")	
-    public String calenderMain(Model model) {
-		List<Calender> calenderInfo = this.calenderService.getList();
-        model.addAttribute("calenderInfo", calenderInfo);
-        return "CalenderMain";
-    }
-	*/
-	
+	/*
 	@GetMapping("")
 	public String calenderMain() {
         return "CalenderMain";
-    }
+    }*/
 	
-	public void loadCalender() {
-		
+	@GetMapping("/calender/{day}")
+	public String loadCalender(Model model,@PathVariable("day") String register) {
+		//List<Calender> calender = this.calenderService.getDayList(register);
+		//model.addAttribute("calender",calender);
+		return "CalenderMain";
 	}
+	/*
+	//캘린더에서 날짜 클릭시 http://8080/calender/{클릭한 날짜}로 url 이동
+	@GetMapping("/{day}")
+	public String loadCalender(Model model,@PathVariable("register") LocalDate register) {
+		List<Calender> calender = this.calenderService.getDayList(register);
+		model.addAttribute("calender",calender);
+		return "CalenderMain";
+	}
+	*/
+	
 	
 	//http://8080/calender/create
 	//일정 등록 html에서 등록 버튼 눌렀을 때 저장하는 함수
@@ -56,7 +58,7 @@ public class CalenderController {
 	public String createCalender(//입력 값들
 			@Valid CalenderRegisteForm calenderRegisteForm, BindingResult bindingResult, 
 			@RequestParam UserInfo userinfo, @RequestParam("text") String text, 
-			@RequestParam("register") LocalDateTime register) {
+			@RequestParam("register") LocalDate register) {
 		//BindingResult는 입력을 했는지 확인위해 추가
 		//@RequestParam("가져올 데이터의 이름") [데이터타입] [가져온데이터를 담을 변수]
 		
@@ -65,7 +67,7 @@ public class CalenderController {
         }
 		
 		this.calenderService.addData(userinfo, register, text);
-		return ("redirect:/CalenderMain"); 
+		return ("redirect:/calender"); 
 	}
 	
 	//http://8080/calender/modify/{id}
@@ -99,7 +101,7 @@ public class CalenderController {
         this.calenderService.modifyData(calender, calenderRegisteForm.getRegister(),
         		calenderRegisteForm.getText());
 
-        return ("redirect:/CalenderMain"); //달력 출력 화면으로 전환
+        return ("redirect:/calender"); //달력 출력 화면으로 전환
     }
     
     //일정 삭제 시 작동하는 함수
@@ -111,6 +113,6 @@ public class CalenderController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정 권한이 없습니다.");
         }
 		this.calenderService.delete(calender);
-    	return ("redirect:/CalenderMain");
+    	return ("redirect:/calender");
     }
 }

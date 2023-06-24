@@ -1,6 +1,6 @@
 package com.example.demo.calender;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,12 +19,12 @@ import lombok.Setter;
 public class CalenderService {
 	private final CalenderRepository calenderRepository = null;
 	
-	public List<Calender> getList() {
-        return this.calenderRepository.findAll();
+	public List<Calender> getDayList(String register) {
+        return this.calenderRepository.findByRegister(LocalDate.parse(register));
     }
 	
 	//추가
-	public void addData(UserInfo userInfo, LocalDateTime Calender_Register, 
+	public void addData(UserInfo userInfo, LocalDate Calender_Register, 
 			String Calender_Text) {
 		Calender calender = new Calender();
 		calender.setuserinfo(userInfo);
@@ -33,7 +33,7 @@ public class CalenderService {
 		this.calenderRepository.save(calender);
 	}
 	//수정
-	public void modifyData(Calender calender, LocalDateTime register,
+	public void modifyData(Calender calender, LocalDate register,
 			String text) {
 		calender.setRegister(register);
 		calender.setText(text);
@@ -47,6 +47,7 @@ public class CalenderService {
 		else
 			return null;
 	}
+	
 	//삭제
 	public void delete(Calender calender) {
 		this.calenderRepository.delete(calender);

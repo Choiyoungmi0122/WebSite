@@ -1,10 +1,9 @@
 package com.example.demo.calender;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import com.example.demo.table.UserInfo;
 
-import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,7 +16,7 @@ public class CalenderForm {
 	private Integer id;
 	private UserInfo userinfo;
 	// html에서 등록자의 변수
-	private LocalDateTime register;
+	private LocalDate register;
 	// html에서 시작 일정의 변수 
 	private String text;
 	// html에서 입력창의 변수
@@ -27,7 +26,7 @@ public class CalenderForm {
 		return userinfo;
 	}
 	
-	public LocalDateTime getRegister() {
+	public LocalDate getRegister() {
 		//일정의 등록일 반환
 		return register;
 	}
@@ -41,7 +40,7 @@ public class CalenderForm {
 		this.userinfo = userinfo;
 	}
 	
-	public void setRegister(LocalDateTime register) {
+	public void setRegister(LocalDate register) {
 		this.register = register;
 	}
 
