@@ -49,13 +49,18 @@ public class CalenderController {
 		
 	}
 	
+	@GetMapping(value = "/create")
+    public String detail() {
+        return "CalenderCreate";
+    }
+	
 	//http://8080/calender/create
 	//일정 등록 html에서 등록 버튼 눌렀을 때 저장하는 함수
 	//*역할조건 안넣음 @PreAuthorize
-	@PostMapping("/create")
+	@PostMapping("/create4")
 	public String createCalender(//입력 값들
 			@Valid CalenderRegisteForm calenderRegisteForm, BindingResult bindingResult, 
-			@RequestParam UserInfo userinfo, @RequestParam("text") String text, 
+			UserInfo userinfo, @RequestParam("text") String text, 
 			@RequestParam("register") LocalDateTime register) {
 		//BindingResult는 입력을 했는지 확인위해 추가
 		//@RequestParam("가져올 데이터의 이름") [데이터타입] [가져온데이터를 담을 변수]
@@ -65,7 +70,7 @@ public class CalenderController {
         }
 		
 		this.calenderService.addData(userinfo, register, text);
-		return ("redirect:/CalenderMain"); 
+		return ("CalenderCreate"); 
 	}
 	
 	//http://8080/calender/modify/{id}
