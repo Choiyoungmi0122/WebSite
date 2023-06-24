@@ -182,10 +182,7 @@
                     nowRow = tbody_Calendar.insertRow();    // 새로운 행 추가
                 }
 
-                if (nowDay < today) {                       // 지난날인 경우
-                    newDIV.className = "pastDay";
-                }
-                else if (nowDay.getFullYear() == today.getFullYear() && nowDay.getMonth() == today.getMonth() && nowDay.getDate() == today.getDate()) { // 오늘인 경우           
+                if (nowDay.getFullYear() == today.getFullYear() && nowDay.getMonth() == today.getMonth() && nowDay.getDate() == today.getDate()) { // 오늘인 경우           
                     newDIV.className = "today";
                     newDIV.onclick = function () { choiceDate(this); }
                 }
