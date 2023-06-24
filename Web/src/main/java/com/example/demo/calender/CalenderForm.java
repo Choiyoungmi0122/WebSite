@@ -22,19 +22,30 @@ public class CalenderForm {
 	private String text;
 	// html에서 입력창의 변수
 	
+	public UserInfo getUserInfo() {
+		//일정의 작성자 이름 반환
+		return userinfo;
+	}
+	
 	public LocalDateTime getRegister() {
+		//일정의 등록일 반환
 		return register;
 	}
 
 	public String getText() {
+		//일정의 내용 반환
 		return text;
 	}
-
+	
+	public void setUserInfo(UserInfo userinfo) {
+		this.userinfo = userinfo;
+	}
+	
 	public void setRegister(LocalDateTime register) {
-		this.register=register;
+		this.register = register;
 	}
 
 	public void setText(String text) {
-		this.text=text;
+		this.text = text;
 	}
 }

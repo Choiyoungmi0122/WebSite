@@ -17,12 +17,6 @@ public class CalenderRegisteForm {
 	
 	private LocalDateTime register;
 	// html에서 시작 일정의 변수 
-	private LocalDateTime deadline;
-	// html에서 종료 일정의 변수 
-	private String category;
-	// html에서 카테고리의 변수 
-	private String replay;
-	// html에서 반복 일정의 변수 
 	
 	@NotEmpty(message = "내용은 필수항목입니다.")
 	//빈칸이면 에러메세지 출력
@@ -37,18 +31,6 @@ public class CalenderRegisteForm {
 		return text;
 	}
 
-	public LocalDateTime getDeadline() {
-		return deadline;
-	}
-
-	public String getCategory() {
-		return category;
-	}
-
-	public String getReplay() {
-		return replay;
-	}
-
 	public void setRegister(LocalDateTime register) {
 		this.register=register;
 	}
@@ -56,19 +38,4 @@ public class CalenderRegisteForm {
 	public void setText(String text) {
 		this.text=text;
 	}
-
-	public void setDeadline(LocalDateTime deadline) {
-		this.deadline=deadline;
-	}
-
-	public void setReplay(String replay) {
-		this.replay=replay;
-	}
-
-	public void setCategory(String category) {
-		this.category=category;
-	}
-
-	
-	
 }
