@@ -54,8 +54,19 @@
             <!--매핑 : 공지사항 insight/Importantmain , 게시판 : insight/Notice , 캘린더 : insight/Calendermain-->
           <li><a href="ImportantMain.html">공지사항</a></li>
           <li><a href="NoticeMain.html">게시판</a></li>
-          <li><a href="calender">캘린더</a></li>
+          <li><a href="#" id="calendarLink">캘린더</a></li>
         </ul>
+			<script>
+			  // 현재 날짜를 가져오기
+			  var today = new Date();
+			  var year = today.getFullYear();
+			  var month = today.getMonth() + 1;
+			  var day = today.getDate();
+			
+			  // 링크에 오늘 날짜를 추가
+			  var calendarLink = document.getElementById("calendarLink");
+			  calendarLink.href = "calender/" + year + "-" + month + "-" + day;
+			</script>
         <div class="join-login-btn">
           <a href="LoginMain.html">로그인</a>
           <a href="JoinMain.html">회원가입</a>

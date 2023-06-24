@@ -1,9 +1,6 @@
 package com.example.demo.calender;
 
-import java.time.LocalDateTime;
-
-import com.example.demo.table.UserInfo;
-
+import java.time.LocalDate;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +12,7 @@ import lombok.Setter;
 //스프링 부트 2-15
 public class CalenderRegisteForm {
 	
-	private LocalDateTime register;
+	private LocalDate register;
 	// html에서 시작 일정의 변수 
 	
 	@NotEmpty(message = "내용은 필수항목입니다.")
@@ -23,7 +20,7 @@ public class CalenderRegisteForm {
 	private String text;
 	// html에서 입력창의 변수
 	
-	public LocalDateTime getRegister() {
+	public LocalDate getRegister() {
 		return register;
 	}
 
@@ -31,7 +28,7 @@ public class CalenderRegisteForm {
 		return text;
 	}
 
-	public void setRegister(LocalDateTime register) {
+	public void setRegister(LocalDate register) {
 		this.register=register;
 	}
 
