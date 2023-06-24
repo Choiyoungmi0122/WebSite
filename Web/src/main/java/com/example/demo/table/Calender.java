@@ -26,7 +26,7 @@ public class Calender {
 	@ManyToOne
 	@JoinColumn(name="Student_Id")
 	private UserInfo userinfo;
-	
+
 	@Column(name="Calender_Register")
 	private LocalDateTime register;
 	@Column(name="Calender_Text")
