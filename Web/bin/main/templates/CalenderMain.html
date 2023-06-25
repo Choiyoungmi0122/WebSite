@@ -131,13 +131,13 @@
 		</div>
         <ul class="menu">
              <!--매핑 : 공지사항 insight/Importantmain , 게시판 : insight/Notice , 캘린더 : insight/Calendermain-->
-          <li><a href="ImportantMain.html">공지사항</a></li>
-          <li><a href="NoticeMain.html">게시판</a></li>
-          <li><a href="CalenderMain.html">캘린더</a></li>
+          <li><a href="ImportantMain">공지사항</a></li>
+          <li><a href="NoticeMain">게시판</a></li>
+          <li><a href="@{/calender}" >캘린더</a></li>
         </ul>
         <div class="join-login-btn">
-          <a href="LoginMain.html">로그인</a>
-          <a href="JoinMain.html">회원가입</a>
+          <a href="LoginMain">로그인</a>
+          <a href="JoinMain">회원가입</a>
         </div>
 
         <!--기본 상단 요소 건들지 말것 수정필요시 '최영미'한테 연락하여 같이 고칠 것!!! -->
@@ -205,7 +205,8 @@
             newDIV.classList.add("choiceDay");           // 선택된 날짜에 "choiceDay" class 추가
             let selectedDate = newDIV.textContent;
             
-            redirectToPage(nowMonth.getFullYear()+"-"+(nowMonth.getMonth()+1)+"-"+selectedDate);
+            let month = ('0' + (nowMonth.getMonth() + 1)).slice(-2);
+            redirectToPage(nowMonth.getFullYear()+"-"+month+"-"+selectedDate);
         }
         //날짜 선택시 url 주소 변경 함수
         function redirectToPage(day) {

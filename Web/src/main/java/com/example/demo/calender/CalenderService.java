@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.share.DataNotFoundException;
 import com.example.demo.table.Calender;
 import com.example.demo.table.UserInfo;
 import com.example.demo.user.UserRepository;
@@ -17,23 +18,36 @@ import lombok.Setter;
 @Service
 @Setter
 public class CalenderService {
-	private final CalenderRepository calRepo = null;
+	private final CalenderRepository calRepo;
+	private final UserRepository userRepo;
 	
-	public List<Calender> getDayList(String register) {
-        return this.calRepo.findByRegister(LocalDate.parse(register));
+	public List<Calender> getDayList(LocalDate register) {
+        return this.calRepo.findByRegister(register);
+    }
+	public Optional<UserInfo> getUserInfo(String Id){
+		return this.userRepo.findById(Long.parseLong(Id));
+	}
+	public Calender getCalender(Integer id) {  
+        Optional<Calender> question = this.calRepo.findById(id);
+        if (question.isPresent()) {
+            return question.get();
+        } else {
+            throw new DataNotFoundException("question not found");
+        }
     }
 
 	
 	//추가
-	public void addData(LocalDate Calender_Register, 
-			String Calender_Text) {
+	public void addData(String Id, LocalDate Calender_Register, String Calender_Text) {
 		Calender calender = new Calender();
+		Optional<UserInfo> userId = getUserInfo(Id);
+		calender.setUserinfo(userId.get());
 		calender.setRegister(Calender_Register);
 		calender.setText(Calender_Text);
 		this.calRepo.save(calender);
 	}
 	//수정
-	public void modifyData(Calender calender, LocalDate register,
+	public void modify(Calender calender, LocalDate register,
 			String text) {
 		calender.setRegister(register);
 		calender.setText(text);

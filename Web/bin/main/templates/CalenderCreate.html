@@ -58,7 +58,7 @@
              <!--매핑 : 공지사항 insight/Importantmain , 게시판 : insight/Notice , 캘린더 : insight/Calendermain-->
           <li><a href="ImportantMain.html">공지사항</a></li>
           <li><a href="NoticeMain.html">게시판</a></li>
-          <li><a href="CalenderMain.html">캘린더</a></li>
+          <li><a href="/calender">회원가입</a></li>
         </ul>
         <div class="join-login-btn">
           <a href="LoginMain.html">로그인</a>
@@ -69,10 +69,7 @@
         
 		<div layout:fragment="content" class="container">
 		    <h5 class="my-3 border-bottom pb-2">일정 등록</h5>
-		    <form th:action="@{/calender/create}" th:object="${crf}" method="post">
-				<div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
-            		<div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
-        		</div>
+		    <form th:action="@{/calender/create}" method="post">
 				<div class="mb-3">
 					<label class="form-label">날짜 선택</label><br>
 					<input type="date" name="register" id="register"/>
@@ -86,17 +83,3 @@
 		</div>
     </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

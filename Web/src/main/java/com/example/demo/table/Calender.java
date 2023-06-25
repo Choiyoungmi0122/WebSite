@@ -48,7 +48,11 @@ public class Calender {
 		return text;
 	}
 	
-	public void setuserinfo(UserInfo userInfo) {
+	public void setId(Integer Id) {
+		this.id = Id;
+	}
+	
+	public void setUserinfo(UserInfo userInfo) {
 		this.userinfo=userInfo;
 	}
 

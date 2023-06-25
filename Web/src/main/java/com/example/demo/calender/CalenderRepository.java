@@ -10,5 +10,5 @@ import com.example.demo.table.Calender;
 
 
 public interface CalenderRepository extends JpaRepository<Calender, Integer>{
-	public List<Calender> findByRegister(LocalDate register);
+	List<Calender> findByRegister(LocalDate register);
 }

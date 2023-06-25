@@ -60,8 +60,8 @@
 			  // 현재 날짜를 가져오기
 			  let today = new Date();
 			  let year = today.getFullYear();
-			  let month = today.getMonth() + 1;
-			  let day = today.getDate();
+			  let month = ('0' + (today.getMonth() + 1)).slice(-2);
+			  let day = ('0' + today.getDate()).slice(-2);
 			
 			  // 링크에 오늘 날짜를 추가
 			  let calendarLink = document.getElementById("calendarLink");
