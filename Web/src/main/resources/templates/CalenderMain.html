@@ -120,6 +120,11 @@
 			float: left;
 			margin-left: 30%;
 		}
+		div.container{
+			 width: 40%;
+			 height: auto;
+			 float: right;
+		 }
 		 
         
         </style>
@@ -141,8 +146,6 @@
         </div>
 
         <!--기본 상단 요소 건들지 말것 수정필요시 '최영미'한테 연락하여 같이 고칠 것!!! -->
-
-	 <a th:href="@{/calender/create}" class="btn btn-primary">질문 등록하기</a> 
         
 	<script>
         window.onload = function () { buildCalendar();}    // 웹 페이지가 로드되면 buildCalendar 실행
@@ -192,9 +195,7 @@
                 
 	            newDIV.className = "chosenDay";
                 
-                if ((nowDay.getFullYear() == chosenDate.getAttribute("data-year")) && (nowDay.getMonth() == chosenDate.getAttribute("data-month")) && (nowDay.getDate() == chosenDate.getAttribute("data-day"))) {
-					newDIV.classList.add("choiceDay");  
-				}
+
 	            newDIV.onclick = function () { choiceDate(this); }
 			}
         }
@@ -277,17 +278,46 @@
           </tbody>
         </table>
       </div>
-      <div class="container2">
-		  <div class="day">
-			  <h3>날짜</h3>
-		  </div>
-		  <div class="detail">
-			  <h3>내용</h3>
-		  </div>
-		  <div class="participate">
-			  <h3>참여자</h3>
-		  </div>
-	  </div>
+
+      <table>
+	    <thead>
+	        <tr>
+	            <th>제목</th>
+	            <th>작성일시</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        <tr th:each="calender : ${calender}">
+	            <td th:text="${text}"></td>
+	            <td th:text="${register}"></td>
+	        </tr>
+	    </tbody>
+	  </table>
+<div class="conatiner">
+	 <a th:href="@{/calender/create}" class="btn btn-primary">등록</a>
+	 <a th:href="@{/calender/modify}" class="btn btn-primary">수정</a>
+	 <!-- 삭제 버튼인데 넣으니까 캘린더로 안들어가짐 -->
+	 <!-- <a href="javascript:void(0);" th:data-uri="@{|/calender/delete/${calender.id}|}"
+                class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"
+                th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
+                th:text="삭제"></a> -->	  
+</div>
+
+		
     </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
