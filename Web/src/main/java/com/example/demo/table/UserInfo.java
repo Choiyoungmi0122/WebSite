@@ -23,6 +23,5 @@ public class UserInfo {
    
    @Column(name="Email", unique = true)
    private String email;
-  
 
 }
