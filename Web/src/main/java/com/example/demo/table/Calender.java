@@ -32,6 +32,7 @@ public class Calender {
 	@Column(name="Calender_Text")
 	private String text;
 	
+	/*
 	public Integer getId() {
 		return id;
 	}
@@ -48,7 +49,11 @@ public class Calender {
 		return text;
 	}
 	
-	public void setuserinfo(UserInfo userInfo) {
+	public void setId(Integer Id) {
+		this.id = Id;
+	}
+	
+	public void setUserinfo(UserInfo userInfo) {
 		this.userinfo=userInfo;
 	}
 
@@ -59,5 +64,6 @@ public class Calender {
 	public void setText(String text) {
 		this.text=text;
 	}
+	*/
 
 }
