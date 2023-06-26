@@ -11,39 +11,44 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
 
+@RequestMapping("/user")
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/UserInfo")
 public class UserController{
 	private final UserService userService;
-
-	@GetMapping("/JoinMain")
-	public String signup(UserCreateForm userCreateForm){
+	
+	@GetMapping("/join")
+	public String join(UserCreateForm userCreateForm) {
 		return "JoinMain";
 	}
-
-	@PostMapping("/JoinMain")
-	public String signup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult){
-		if (bindingResult.hasErrors()){
+	
+	@PostMapping("/join")
+	public String join(@Valid UserCreateForm userCreateForm, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
 			return "JoinMain";
 		}
-
-		if (!userCreateForm.getPwd1().equals(userCreateForm.getPwd2())){
-			bindingResult.rejectValue("password2", "passwordInCorrect", "2개의 패스워드가 일치하지 않습니다.");
+		
+		if (!userCreateForm.getPwd1().equals(userCreateForm.getPwd2())) {
+			bindingResult.rejectValue("pwd2", "passwordInCorrect",
+					"2개의 패스워드가 일치하지 않습니다.");
 			return "JoinMain";
 		}
-		try{
-			userService.create(userCreateForm.getStudent_Id(),userCreateForm.getStudent_Name(),
-				userCreateForm.getEmail(), userCreateForm.getPwd1());
-		}catch(DataIntegrityViolationException e){
+		try {
+			userService.create(userCreateForm.getId(), userCreateForm.getName(), userCreateForm.getPwd1(), userCreateForm.getEmail());
+		}catch(DataIntegrityViolationException e) {
 			e.printStackTrace();
-			bindingResult.reject("signupFailed", "이미 등록된 동아리 부원입니다.");
+			bindingResult.reject("signupFailed", "이미 등록된 부원입니다.");
 			return "JoinMain";
-		}catch(Exception e){
+		}catch(Exception e) {
 			e.printStackTrace();
 			bindingResult.reject("signupFailed", e.getMessage());
 			return "JoinMain";
 		}
+		
 		return "redirect:/";
 	}
+	@PostMapping("/login")
+    public String login() {
+        return "redirect:/";
+    }
 }

@@ -16,14 +16,14 @@ public class UserService{
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
 	
-	public UserInfo create(Integer id, String name, String pwd, String email) {
-		UserInfo userinfo = new UserInfo();
-		userinfo.setId(id);
-		userinfo.setName(name);
-		userinfo.setPwd(passwordEncoder.encode(pwd));
-		userinfo.setEmail(email);
-		this.userRepository.save(userinfo);
-		return userinfo;
+	public UserInfo create(String id, String name, String pwd, String email) {
+		UserInfo user = new UserInfo();
+		user.setId(id);
+		user.setName(name);
+		user.setPwd(passwordEncoder.encode(pwd));
+		user.setEmail(email);
+		this.userRepository.save(user);
+		return user;
 	}
 	
 	public UserInfo getUser(String name) {

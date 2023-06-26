@@ -2,10 +2,14 @@
 <html>
     <html lang = 'kr'>
     <head>
-        <meta charset="UTF-8">
+    	<!-- <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    	<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+   		<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+        <meta charset="UTF-8"> -->
         <meta name="calender" content="회원가입 페이지">
-        <title>회원가입</title>
-        <style>
+        <title>동아리 가입</title>
+       	<style>
           #logo {
             text-align: center;
             margin-top: 50px;
@@ -15,17 +19,21 @@
             font-size: 50px;
             margin-bottom: 20px;
           }
+          .toggle-content{
+            	display: none;
+          }
         </style>
         <script>
 					function toggleTerms(){
 						var content = document.getElementById("terms-content");
 						var button = document.getElementById("terms-toggle");				
-						if (content.style.display == "none"){
-							content.style.display="block";
-							button.innerText = "간략히 보기";
-						}else{
+						if(content.style.display != "none"){
 							content.style.display = "none";
 							button.innerText = "더 보기";
+						}
+						else {
+							content.style.display="block";
+							button.innerText = "간략히 보기";
 						}
 					}
 		</script>
@@ -34,35 +42,58 @@
         <div id="logo">
                     <!--매핑 : 홈  insight-->
                    <!--매핑 : 공지사항 insight/Importantmain , 게시판 : insight/Notice , 캘린더 : insight/Calendermain-->
-          <a href="home.html"><h1>insight</h1></a>
+          <a href="Home"><h1>insight</h1></a>
         </div>
                 <!--기본 상단 요소 건들지 말것 수정필요시 '최영미'한테 연락하여 같이 고칠 것!!! -->
-        <div class="sigin-input">
-            <form th:object="${userCreateForm}" method="post">
-                <fieldset>
+        <div class="container">
+        	<form th:action="@{/user/join}" th:object="${userCreateForm}" method="post">
+        		<!-- <div class="alert alert-danger" role="alert">
+            		<div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+        		</div> -->
+                <!-- <fieldset>
                     <ul>
                     	<li>
+                            <label for="sid">학번(ID)</label>
+                            <input type="text" id="id" name = "sid" placeholder="ex) 20212252">
+                        </li>
+                    	<li>
                     		<label for="sname">이름</label>
-                    		<input type="text" id="sname">
+                    		<input type="text" id="name" name = "sname">
                     	</li>
                         <li>
-                            <label for="sid">학번(ID)</label>
-                            <input type="text" id="sid" placeholder="ex) 20212252">
-                        </li>
-                        <li>
-                            <label for="semail">이메일</label>
-                            <input type="email"  id="semail">
-                        </li>
-                        <li>
                             <label for="pwd1">비밀번호</label>
-                            <input type="password" id="pwd1">
+                            <input type="password" id="pwd1" name = "pwd1">
                         </li>
                         <li>
                             <label for="pwd2">비밀번호확인</label>
-                            <input type="password" id="pwd2">
+                            <input type="password" id="pwd2" name = "pwd2">
+                        </li>
+                        <li>
+                            <label for="semail">이메일</label>
+                            <input type="email"  id="email" name = "semail">
                         </li>
                     </ul>
-                </fieldset>
+                </fieldset> -->
+           		<div class ="form-label-group">
+           			<label for="id">학번(ID)</label>
+                    <input type="text" id="id" name = "id" class = "form-control" placeholder="ex) 20212252" autofocus/>
+                </div>
+                <div class = "form-label-group">
+                	<label for="name">이름</label>
+                    <input type="text" id="name" name = "name" class = "form-control"/>
+                </div>
+                <div class = "form-label-group">
+                	<label for="pwd1">비밀번호</label>
+                	<input type="password" id="pwd1" name="pwd1" class = "form-control"/>
+                </div>
+                <div class = "form-label-group">
+                	<label for="pwd2">비밀번호 확인</label>
+                	<input type="password" id="pwd2" name="pwd2" class = "form-control"/>
+                </div>
+                <div class = "form-label-group">
+                	<label for="email">이메일</label>
+                	<input type="email" id="email" name="email" class = "form-control"/>
+                </div>
                 <!-- 이용약관 -->
                 <!-- 이용약관 start -->
 				<div class = "terms_bx">

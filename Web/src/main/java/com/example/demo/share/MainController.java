@@ -2,26 +2,30 @@ package com.example.demo.share;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/")
 public class MainController {
 
-    @GetMapping("/share")
-    @ResponseBody
-    public String index() {
-        return "index";
-    }
     @GetMapping("/")
     public String root() {
-        return "home";
+        return "Home";
     }
-    @GetMapping("/JoinMain")
+    @GetMapping("Home")
+    public String home() {
+    	return "Home";
+    }
+    @GetMapping("JoinMain")
     public String joinMainPage() {
     	return "JoinMain";
     }
     @GetMapping("LoginMain")
     public String loginMainPage() {
     	return "LoginMain";
+    }
+    @GetMapping("JoinComplete")
+    public String joinCompletePage() {
+    	return "JoinComplete";
     }
 }
