@@ -55,16 +55,8 @@ public class CalenderController {
         calService.addData(/*principal.getName()*/"20212874", LocalDate.parse(calRegister), calText);
         return "CalenderMain";
     }
-	/*
-    public String createAnswer(@Valid CalenderRegisteForm calenderRegisterForm, BindingResult bindingResult, Principal principal) {
-		if (bindingResult.hasErrors()) {
-            return "question_form";
-        }
-        calService.addData(principal.getName()"20212874", calenderRegisterForm.getCalRegister(), calenderRegisterForm.getCalText());
-        return "CalenderMain";
-    }
-	*/
-	/*
+
+	
 	@GetMapping("/modify/{id}")
 	public String modify(Model model, CalenderRegisteForm calenderRegisterForm, @PathVariable Integer id) {
 		//매개변수를 CalenderForm, 일정의 id, 사용자의 정보로 한다.
@@ -86,7 +78,7 @@ public class CalenderController {
         this.calService.modify(cal, calenderRegisterForm.getCalRegister(), calenderRegisterForm.getCalText());
         return "redirect:/calender";
     }
-	*/
+	
 	/*
 	//http://8080/calender/create
 	//일정 등록 html에서 등록 버튼 눌렀을 때 저장하는 함수
