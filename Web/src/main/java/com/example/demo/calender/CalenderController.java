@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -58,13 +59,10 @@ public class CalenderController {
 
 	
 	@GetMapping("/modify/{id}")
-	public String modify(Model model, CalenderRegisteForm calenderRegisterForm, @PathVariable Integer id) {
+	public String modify(Model model, @ModelAttribute CalenderRegisteForm calenderRegisterForm, @PathVariable Integer id) {
 		//매개변수를 CalenderForm, 일정의 id, 사용자의 정보로 한다.
 		Calender cal = this.calService.getInfo(id);
-		model.addAttribute("calender",cal);
-		
-		calenderRegisterForm.setCalRegister(cal.getRegister());
-		calenderRegisterForm.setCalText(cal.getText());
+		model.addAttribute("cal", cal);
 		return "CalenderModify";
 	}
 	

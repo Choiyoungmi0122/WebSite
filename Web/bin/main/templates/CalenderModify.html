@@ -69,13 +69,19 @@
         
 		<div layout:fragment="content" class="container">
 		    <h1 class="my-3 border-bottom pb-2">일정 수정</h1>
-			<form th:object="${calenderRegisterForm}" method="post">
-		        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-		        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+			<form th:action="@{/calender/modify/{id}}" method="post">
+				<div class="mb-3">
+					<label for="calRegister">날짜 선택:</label>
+					<input type="date" id="calRegister" name="calRegister" class="form-control">
+				</div>
 		        <div class="mb-3">
 		            <label for="calText" class="form-label">일정</label><br>
-		            <textarea name="calText" id="cal.text" class="form-control" rows="3"></textarea>
+		            <textarea id="calText" name="calText" th:text="${cal.text}" rows="3"></textarea>
 		        </div>
+		        <div class="mb-3">
+					<label for="calUserinfo" class="form-label">등록자 학번</label>
+					<input name="calUserinfo" id="calUserinfo">
+				</div>
 		        <input type="submit" value="저장하기" class="btn btn-primary my-2">
 		    </form>
 		</div>
