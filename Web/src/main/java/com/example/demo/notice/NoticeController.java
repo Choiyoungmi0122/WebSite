@@ -34,6 +34,34 @@ public class NoticeController {
 		return "notice/NoticeMain";
 	}
 	
+	@GetMapping("/main/free")
+	public String freelist(Model model, @RequestParam(value="page", defaultValue="0") int page) {
+		Page<Notice> noticeMain = this.noticeService.getCategory("free", page);
+		model.addAttribute("noticeMain", noticeMain);
+		return "notice/NoticeMain";
+	}
+	
+	@GetMapping("/main/coding")
+	public String codinglist(Model model, @RequestParam(value="page", defaultValue="0") int page) {
+		Page<Notice> noticeMain = this.noticeService.getCategory("coding", page);
+		model.addAttribute("noticeMain", noticeMain);
+		return "notice/NoticeMain";
+	}
+	
+	@GetMapping("/main/gallery")
+	public String gallerylist(Model model, @RequestParam(value="page", defaultValue="0") int page) {
+		Page<Notice> noticeMain = this.noticeService.getCategory("gallery", page);
+		model.addAttribute("noticeMain", noticeMain);
+		return "notice/NoticeMain";
+	}
+	
+	@GetMapping("/main/contest")
+	public String contestlist(Model model, @RequestParam(value="page", defaultValue="0") int page) {
+		Page<Notice> noticeMain = this.noticeService.getCategory("contest", page);
+		model.addAttribute("noticeMain", noticeMain);
+		return "notice/NoticeMain";
+	}
+	
 	@GetMapping(value = "/detail/{id}")
 	public String detail(Model model, @PathVariable("id") Integer id, NoticeCommentForm noticecommentForm) {
 		Notice notice = this.noticeService.getNotice(id);

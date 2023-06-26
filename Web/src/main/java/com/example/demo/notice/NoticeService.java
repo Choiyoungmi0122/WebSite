@@ -30,6 +30,13 @@ public class NoticeService {
 		return this.noticeRepository.findAll(pageable);
 	}
 	
+	public Page<Notice> getCategory(String number, int page){
+		List<Sort.Order> sorts = new ArrayList<>();
+		sorts.add(Sort.Order.desc("register"));
+		Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+		return this.noticeRepository.findByNumber(number, pageable);
+	}
+	
 	public Notice getNotice(Integer id) {
 		Optional<Notice> notice = this.noticeRepository.findById(id);
 		if (notice.isPresent()) {
