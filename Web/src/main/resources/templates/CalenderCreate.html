@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang = 'kr'>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="calender" content="캘린더에서 등록 버튼 클릭했을때 페이지">
+        <title>일정 등록</title>
+        <style>
+			@import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
+
+          #logo {
+            text-align: center;
+            margin-top: 50px;
+          }
+      
+          #logo h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+          }
+      
+          .menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+          }
+      
+          .menu li {
+            list-style: none;
+            margin-right: 10px;
+          }
+      
+          .menu li:last-child {
+            margin-right: 0;
+          }
+      
+          .join-login-btn {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 50px;
+          }
+      
+          .join-login-btn a {
+            display: inline-block;
+            margin-left: 10px;
+            font-size: 20px;
+          }
+          
+
+        </style>
+      </head>
+      <body>
+        <div id="logo">
+          <a href="Home.html"><h1>insight</h1></a>
+		</div>
+        <ul class="menu"> 
+          <li><a href="ImportantMain.html">공지사항</a></li>
+          <li><a href="NoticeMain.html">게시판</a></li>
+          <li><a href="/calender">회원가입</a></li>
+        </ul>
+        <div class="join-login-btn">
+          <a href="LoginMain.html">로그인</a>
+          <a href="JoinMain.html">회원가입</a>
+        </div>
+
+		<div layout:fragment="content" class="container">
+		    <h1 class="my-3 border-bottom pb-2">일정 등록</h1>
+		    <form th:action="@{/calender/create}" method="post">
+				<div class="mb-3">
+					<label for="calRegister">날짜 선택:</label>
+					<input type="date" id="calRegister" name="calRegister" class="form-control">
+				</div>
+		        <div class="mb-3">
+		            <label for="calText" class="form-label">일정</label><br>
+		            <textarea name="calText" id="calText" class="form-control" rows="3"></textarea>
+		        </div>
+		        <div class="mb-3">
+					<label for="calUserinfo" class="form-label">등록자 학번</label>
+					<input type="text" name="calUserinfo" id="calUserinfo" class="form-control">
+				</div>
+		        <input type="submit" value="저장하기" class="btn btn-primary my-2">
+		    </form>
+		</div>
+    </body>
+</html>
