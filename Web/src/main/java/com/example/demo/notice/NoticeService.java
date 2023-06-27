@@ -1,7 +1,6 @@
 package com.example.demo.notice;
 
 import com.example.demo.share.DataNotFoundException;
-import com.example.demo.table.Notice;
 
 import java.util.List;
 import java.util.Optional;

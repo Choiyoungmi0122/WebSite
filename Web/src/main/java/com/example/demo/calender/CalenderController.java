@@ -23,8 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.example.demo.table.Calender;
-import com.example.demo.table.UserInfo;
+import com.example.demo.user.UserInfo;
 
 @RequestMapping("/calender")
 @RequiredArgsConstructor

@@ -1,8 +1,10 @@
 
-package com.example.demo.table;
+package com.example.demo.calender;
 
 
 import java.time.LocalDate;
+
+import com.example.demo.user.UserInfo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,17 +23,14 @@ import lombok.Setter;
 public class Calender {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="Calender_Id")
-	private Integer id;
+	private Integer calId;
 	
 	@ManyToOne
-	@JoinColumn(name="Student_Id")
 	private UserInfo userinfo;
 
-	@Column(name="Calender_Register")
-	private LocalDate register;
-	@Column(name="Calender_Text")
-	private String text;
+	private LocalDate calRegister;
+	
+	private String calText;
 
 
 }

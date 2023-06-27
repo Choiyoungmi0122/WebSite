@@ -1,7 +1,9 @@
-package com.example.demo.table;
+package com.example.demo.notice;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import com.example.demo.user.UserInfo;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;

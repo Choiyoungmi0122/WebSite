@@ -1,4 +1,4 @@
-package com.example.demo.table;
+package com.example.demo.notice;
 
 import jakarta.persistence.Entity;
 import lombok.Getter;

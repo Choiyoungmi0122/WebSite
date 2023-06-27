@@ -7,8 +7,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.share.DataNotFoundException;
-import com.example.demo.table.Calender;
-import com.example.demo.table.UserInfo;
+import com.example.demo.user.UserInfo;
 import com.example.demo.user.UserRepository;
 
 import lombok.RequiredArgsConstructor;

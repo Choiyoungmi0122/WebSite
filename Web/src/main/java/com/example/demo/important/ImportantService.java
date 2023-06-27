@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import com.example.demo.share.DataNotFoundException;
-import com.example.demo.table.Important;
 
 @Service
 public class ImportantService{
@@ -32,9 +31,9 @@ public class ImportantService{
 	
 	public void Input(String Impor_Title, String Impor_Text) {
 	    Important im = new Important();
-	    im.setTitle(Impor_Title);
-	    im.setText(Impor_Text);
-	    im.setRegister(LocalDateTime.now());
+	    im.setImpoTitle(Impor_Title);
+	    im.setImpoText(Impor_Text);
+	    im.setImpoRegister(LocalDateTime.now());
 //	    im.setImportant(true); // 필독 여부 설정 (원하는 값으로 수정)
 
 	    this.importantRepository.save(im);

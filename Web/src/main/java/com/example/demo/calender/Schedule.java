@@ -1,5 +1,7 @@
-package com.example.demo.table;
+package com.example.demo.calender;
 
+
+import com.example.demo.user.UserInfo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,15 +22,12 @@ public class Schedule {
 
 	@Id
 	@GeneratedValue(strategy =  GenerationType.IDENTITY)
-	@Column(name="Schedule_Id")
-	private Integer id;
+	private Integer calId;
 	
 	@ManyToOne
-	@JoinColumn(name="Calender_Id")
-	private Calender calender;
+	private Calender calCalender;
 	
 	@ManyToOne
-	@JoinColumn(name="Student_Id")
 	private UserInfo userInfo;
 
 }

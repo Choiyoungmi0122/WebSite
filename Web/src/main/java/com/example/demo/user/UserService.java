@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.demo.share.DataNotFoundException;
-import com.example.demo.table.UserInfo;
 
 import lombok.RequiredArgsConstructor;
 

@@ -1,6 +1,8 @@
-package com.example.demo.table;
+package com.example.demo.important;
 
 import java.time.LocalDateTime;
+
+import com.example.demo.user.UserInfo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,25 +20,21 @@ import lombok.Setter;
 @Entity
 public class Important {
 	
-	@JoinColumn(name="Student_Id")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private UserInfo userinfo;		// 작성자 pk
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="Impor_Id")
-	private Integer Impor_Id;
+	private Integer impoId;
 	
-    @Column(name="Impor_Title", length = 200)	// 제목 
-    private String title;
+    @Column( length = 200)	// 제목 
+    private String impoTitle;
     
-    @Column(name="Impor_Text", columnDefinition = "TEXT")   // 내용 
-    private String text;
+    @Column(columnDefinition = "TEXT")   // 내용 
+    private String impoText;
     
-    @Column(name="Impor_Register")
-    private LocalDateTime register;	// 작성일시
+    private LocalDateTime impoRegister;	// 작성일시
     
-    @Column(name="Important")
-    private Boolean important;		// 필독 여부 
+    private Boolean impoTf;		// 필독 여부 
 
 }

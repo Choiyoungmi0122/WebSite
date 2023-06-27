@@ -1,7 +1,10 @@
-package com.example.demo.table;
+package com.example.demo.notice.comment;
 
 
 import java.time.LocalDateTime;
+
+import com.example.demo.notice.Notice;
+import com.example.demo.user.UserInfo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
