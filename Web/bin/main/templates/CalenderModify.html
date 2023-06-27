@@ -64,24 +64,20 @@
           <a href="LoginMain.html">로그인</a>
           <a href="JoinMain.html">회원가입</a>
         </div>
-
+		
         <!--기본 상단 요소 건들지 말것 수정필요시 '최영미'한테 연락하여 같이 고칠 것!!! -->
         
 		<div layout:fragment="content" class="container">
 		    <h1 class="my-3 border-bottom pb-2">일정 수정</h1>
-			<form th:action="@{/calender/modify/{id}}" method="post">
+			<form action="@{calender/modify/${id}}" th:action th:object="${calenderRegisterForm}" method="post">
 				<div class="mb-3">
 					<label for="calRegister">날짜 선택:</label>
-					<input type="date" id="calRegister" name="calRegister" class="form-control">
+					<input type="date" th:field="*{calRegister}" class="form-control">
 				</div>
 		        <div class="mb-3">
-		            <label for="calText" class="form-label">일정</label><br>
-		            <textarea id="calText" name="calText" th:text="${cal.text}" rows="3"></textarea>
+		            <label for="calText" class="form-label">일정</label>
+		            <textarea th:field="*{calText}" class="form-control" ></textarea>
 		        </div>
-		        <div class="mb-3">
-					<label for="calUserinfo" class="form-label">등록자 학번</label>
-					<input name="calUserinfo" id="calUserinfo">
-				</div>
 		        <input type="submit" value="저장하기" class="btn btn-primary my-2">
 		    </form>
 		</div>

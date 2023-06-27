@@ -52,29 +52,38 @@ public class CalenderController {
 	//일정 등록 html에서 등록 버튼 눌렀을 때 저장하는 함수
 	@PostMapping("/create")
 	public String createAnswer(Model model, @RequestParam String calRegister, @RequestParam String calText,
-    		Principal principal) {
-        calService.addData(/*principal.getName()*/"20212874", LocalDate.parse(calRegister), calText);
+			@RequestParam String calUserinfo, Principal principal) {
+        calService.addData(/*principal.getName()*/calUserinfo, LocalDate.parse(calRegister), calText);
         return "CalenderMain";
     }
 
 	
 	@GetMapping("/modify/{id}")
-	public String modify(Model model, @ModelAttribute CalenderRegisteForm calenderRegisterForm, @PathVariable Integer id) {
+	public String modify(Model model, CalenderRegisteForm calenderRegisterForm, @PathVariable Integer id) {
 		//매개변수를 CalenderForm, 일정의 id, 사용자의 정보로 한다.
 		Calender cal = this.calService.getInfo(id);
-		model.addAttribute("cal", cal);
+		//model.addAttribute("cal", cal);
+		calenderRegisterForm.setCalRegister((cal.getRegister()).toString());
+		calenderRegisterForm.setCalText(cal.getText());
+		model.addAttribute("calenderRegisterForm",calenderRegisterForm);
 		return "CalenderModify";
 	}
 	
-	@PostMapping("/modify/{id}")
-	public String modify(@Valid CalenderRegisteForm calenderRegisterForm, BindingResult br, 
-            Principal p, @PathVariable Integer id) {
-        if (br.hasErrors()) {
+	
+	//일정 수정 페이지에서 일정을 수정후 확인 버튼을 누르면 작동하는 함수
+	//역할조건 안넣음 @PreAuthorize
+    @PostMapping("/modify/{id}")
+    public String modifyCalender(@Valid CalenderRegisteForm calenderRegisteForm, 
+    		BindingResult bindingResult, Principal principal, @PathVariable("id") Integer Calender_Id) {
+        if (bindingResult.hasErrors()) {
             return "CalenderModify";
         }
-        Calender cal = this.calService.getCalender(id);
-        this.calService.modify(cal, calenderRegisterForm.getCalRegister(), calenderRegisterForm.getCalText());
-        return "redirect:/calender";
+        Calender calender = this.calService.getInfo(Calender_Id);
+        
+        this.calService.modify(calender, calenderRegisteForm.getCalRegister(),
+        		calenderRegisteForm.getCalText());
+
+        return ("redirect:/calender"); //달력 출력 화면으로 전환
     }
 	
 	/*

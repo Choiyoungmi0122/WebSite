@@ -12,8 +12,7 @@ import lombok.Setter;
 //스프링 부트 2-15
 public class CalenderRegisteForm {
 	
-	@NotEmpty(message = "일정은 필수항목입니다.")
-	private LocalDate calRegister;
+	private String calRegister;
 	// html에서 시작 일정의 변수 
 	
 	@NotEmpty(message = "내용은 필수항목입니다.")
