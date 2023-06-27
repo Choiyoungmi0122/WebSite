@@ -47,9 +47,9 @@ public class CalenderService {
 		this.calRepo.save(calender);
 	}
 	//수정
-	public void modify(Calender calender, LocalDate register,
+	public void modify(Calender calender, String register,
 			String text) {
-		calender.setRegister(register);
+		calender.setRegister(LocalDate.parse(register));
 		calender.setText(text);
 		this.calRepo.save(calender);
 	}

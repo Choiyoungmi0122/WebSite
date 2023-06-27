@@ -12,28 +12,29 @@ import lombok.Setter;
 //스프링 부트 2-15
 public class CalenderRegisteForm {
 	
-
-	private LocalDate register;
+	private String calRegister;
 	// html에서 시작 일정의 변수 
 	
 	@NotEmpty(message = "내용은 필수항목입니다.")
 	//빈칸이면 에러메세지 출력
-	private String text;
+	private String calText;
 	// html에서 입력창의 변수
 
+	/*
 	public LocalDate getRegister() {
-		return register;
+		return calRegister;
 	}
 
 	public String getText() {
-		return text;
+		return calText;
 	}
 
 	public void setRegister(LocalDate register) {
-		this.register=register;
+		this.calRegister=register;
 	}
 
 	public void setText(String text) {
-		this.text=text;
+		this.calText=text;
 	}
+	*/
 }

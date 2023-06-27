@@ -31,7 +31,9 @@ public class Calender {
 	private LocalDate register;
 	@Column(name="Calender_Text")
 	private String text;
+
 	
+	/*
 	public Integer getId() {
 		return id;
 	}
@@ -63,5 +65,6 @@ public class Calender {
 	public void setText(String text) {
 		this.text=text;
 	}
+	*/
 
 }

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang = 'kr'>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="calender" content="캘린더에서 수정 버튼 클릭했을때 페이지">
+        <title>일정 수정</title>
+        <style>
+			@import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
+
+          #logo {
+            text-align: center;
+            margin-top: 50px;
+          }
+      
+          #logo h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+          }
+      
+          .menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+          }
+      
+          .menu li {
+            list-style: none;
+            margin-right: 10px;
+          }
+      
+          .menu li:last-child {
+            margin-right: 0;
+          }
+      
+          .join-login-btn {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 50px;
+          }
+      
+          .join-login-btn a {
+            display: inline-block;
+            margin-left: 10px;
+            font-size: 20px;
+          }
+          
+
+        </style>
+      </head>
+      <body>
+        <div id="logo">
+                    <!--매핑 : 홈  insight-->
+          <a href="Home.html"><h1>insight</h1></a>
+		</div>
+        <ul class="menu">
+             <!--매핑 : 공지사항 insight/Importantmain , 게시판 : insight/Notice , 캘린더 : insight/Calendermain-->
+          <li><a href="ImportantMain.html">공지사항</a></li>
+          <li><a href="NoticeMain.html">게시판</a></li>
+          <li><a href="CalenderMain.html">캘린더</a></li>
+        </ul>
+        <div class="join-login-btn">
+          <a href="LoginMain.html">로그인</a>
+          <a href="JoinMain.html">회원가입</a>
+        </div>
+		
+        <!--기본 상단 요소 건들지 말것 수정필요시 '최영미'한테 연락하여 같이 고칠 것!!! -->
+        
+		<div layout:fragment="content" class="container">
+		    <h1 class="my-3 border-bottom pb-2">일정 수정</h1>
+			<form action="@{calender/modify/${id}}" th:action th:object="${calenderRegisterForm}" method="post">
+				<div class="mb-3">
+					<label for="calRegister">날짜 선택:</label>
+					<input type="date" th:field="*{calRegister}" class="form-control">
+				</div>
+		        <div class="mb-3">
+		            <label for="calText" class="form-label">일정</label>
+		            <textarea th:field="*{calText}" class="form-control" ></textarea>
+		        </div>
+		        <input type="submit" value="저장하기" class="btn btn-primary my-2">
+		    </form>
+		</div>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

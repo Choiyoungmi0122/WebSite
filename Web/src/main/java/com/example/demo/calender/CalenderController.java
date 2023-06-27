@@ -9,10 +9,12 @@ import java.time.LocalTime;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,47 +45,45 @@ public class CalenderController {
 	}
 
 	@GetMapping("/create")
-    public String create(CalenderRegisteForm crf) {
+    public String create(CalenderRegisteForm calenderRegisterForm) {
         return "CalenderCreate";
     }
-
-	
 	
 	//일정 등록 html에서 등록 버튼 눌렀을 때 저장하는 함수
 	@PostMapping("/create")
-    public String createAnswer(Model model, @RequestParam String register, @RequestParam String text,
-    		Principal principal) {
-        calService.addData(/*principal.getName()*/"20212874", LocalDate.parse(register), text);
+	public String createAnswer(Model model, @RequestParam String calRegister, @RequestParam String calText,
+			@RequestParam String calUserinfo, Principal principal) {
+        calService.addData(/*principal.getName()*/calUserinfo, LocalDate.parse(calRegister), calText);
         return "CalenderMain";
     }
+
 	
 	@GetMapping("/modify/{id}")
-	public String modify(CalenderRegisteForm calenderRegisteForm, @PathVariable("id") Integer Calender_Id, 
-			@RequestParam String register, @RequestParam String text, Principal p) {
+	public String modify(Model model, CalenderRegisteForm calenderRegisterForm, @PathVariable Integer id) {
 		//매개변수를 CalenderForm, 일정의 id, 사용자의 정보로 한다.
-		Calender cal = this.calService.getInfo(Calender_Id);
-		
-		if (!cal.getUserInfo().equals(p.getName())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
-        }
-		
-		calenderRegisteForm.setRegister(cal.getRegister());
-		calenderRegisteForm.setText(cal.getText());
-		return "CalenderCreate";
+		Calender cal = this.calService.getInfo(id);
+		//model.addAttribute("cal", cal);
+		calenderRegisterForm.setCalRegister((cal.getRegister()).toString());
+		calenderRegisterForm.setCalText(cal.getText());
+		model.addAttribute("calenderRegisterForm",calenderRegisterForm);
+		return "CalenderModify";
 	}
 	
-	@PostMapping("/modify/{id}")
-	public String modify(@Valid CalenderRegisteForm crf, BindingResult br, 
-            Principal p, @PathVariable("id") Integer id) {
-        if (br.hasErrors()) {
-            return "CalenderCreate";
+	
+	//일정 수정 페이지에서 일정을 수정후 확인 버튼을 누르면 작동하는 함수
+	//역할조건 안넣음 @PreAuthorize
+    @PostMapping("/modify/{id}")
+    public String modifyCalender(@Valid CalenderRegisteForm calenderRegisteForm, 
+    		BindingResult bindingResult, Principal principal, @PathVariable("id") Integer Calender_Id) {
+        if (bindingResult.hasErrors()) {
+            return "CalenderModify";
         }
-        Calender cal = this.calService.getCalender(id);
-        if (!cal.getUserInfo().equals(p.getName())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
-        }
-        this.calService.modify(cal, crf.getRegister(), crf.getText());
-        return String.format("redirect:/calender");
+        Calender calender = this.calService.getInfo(Calender_Id);
+        
+        this.calService.modify(calender, calenderRegisteForm.getCalRegister(),
+        		calenderRegisteForm.getCalText());
+
+        return ("redirect:/calender"); //달력 출력 화면으로 전환
     }
 	
 	/*
@@ -153,7 +153,7 @@ public class CalenderController {
 			Principal p) {
 		Calender calender = this.calService.getInfo(Calender_Id);
 		
-		if(!calender.getUserInfo().equals(p.getName()))/*사용자의 학번과 작성자의 학번 비교)*/ {
+		if(!calender.getUserinfo().equals(p.getName()))/*사용자의 학번과 작성자의 학번 비교)*/ {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정 권한이 없습니다.");
         }
 		this.calService.delete(calender);
