@@ -1,6 +1,8 @@
 package com.example.demo.notice;
 
 import com.example.demo.share.DataNotFoundException;
+import com.example.demo.table.Notice;
+
 import java.util.List;
 import java.util.Optional;
 import java.time.LocalDateTime;
@@ -11,8 +13,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-
-import com.example.demo.table.Notice;
 
 import lombok.RequiredArgsConstructor;
 

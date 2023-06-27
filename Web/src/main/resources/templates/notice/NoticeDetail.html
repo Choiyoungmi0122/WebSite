@@ -38,7 +38,7 @@
     </form>
     -->
     
-    <form th:action="@{|/Notice/comment/detail/${notice.id}|}" th:object="${noticecommentForm}" method="post" class="my-3">
+    <form th:action="@{|/Notice/comment/input/${notice.id}|}" th:object="${noticecommentForm}" method="post" class="my-3">
    
         <textarea type="text" placeholder ="내용을 입력해 주세요." th:field="*{text}" rows="15" required style="resize: none;"></textarea>
          <input type="submit" value="답변등록" class="btn btn-primary my-2">

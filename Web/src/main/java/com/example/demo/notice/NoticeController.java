@@ -6,8 +6,8 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.demo.table.Notice;
 import com.example.demo.notice.comment.NoticeCommentForm;
+import com.example.demo.table.Notice;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,8 +1,9 @@
 package com.example.demo.notice.comment;
 
+import org.springframework.stereotype.Service;
+
 import com.example.demo.table.Notice;
 import com.example.demo.table.NoticeComment;
-import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 

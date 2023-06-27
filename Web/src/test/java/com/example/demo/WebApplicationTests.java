@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.example.demo.notice.*;
-import com.example.demo.table.Notice;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
