@@ -1,3 +1,4 @@
+
 package com.example.demo.table;
 
 
@@ -32,39 +33,6 @@ public class Calender {
 	@Column(name="Calender_Text")
 	private String text;
 
-	
-	/*
-	public Integer getId() {
-		return id;
-	}
-	
-	public Object getUserInfo() {
-		return userinfo;
-	}
-
-	public LocalDate getRegister() {
-		return register;
-	}
-	
-	public String getText() {
-		return text;
-	}
-	
-	public void setId(Integer Id) {
-		this.id = Id;
-	}
-	
-	public void setUserinfo(UserInfo userInfo) {
-		this.userinfo=userInfo;
-	}
-
-	public void setRegister(LocalDate register) {
-		this.register=register;
-	}
-
-	public void setText(String text) {
-		this.text=text;
-	}
-	*/
 
 }
+
