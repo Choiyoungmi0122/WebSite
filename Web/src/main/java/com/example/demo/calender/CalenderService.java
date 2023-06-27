@@ -21,10 +21,10 @@ public class CalenderService {
 	private final UserRepository userRepo;
 	
 	public List<Calender> getDayList(LocalDate register) {
-        return this.calRepo.findByRegister(register);
+        return this.calRepo.findByCalRegister(register);
     }
 	public Optional<UserInfo> getUserInfo(String Id){
-		return this.userRepo.findById(Long.parseLong(Id));
+		return this.userRepo.findById(Id);
 	}
 	public Calender getCalender(Integer id) {  
         Optional<Calender> question = this.calRepo.findById(id);
@@ -41,15 +41,15 @@ public class CalenderService {
 		Calender calender = new Calender();
 		Optional<UserInfo> userId = getUserInfo(Id);
 		calender.setUserinfo(userId.get());
-		calender.setRegister(Calender_Register);
-		calender.setText(Calender_Text);
+		calender.setCalRegister(Calender_Register);
+		calender.setCalText(Calender_Text);
 		this.calRepo.save(calender);
 	}
 	//수정
 	public void modify(Calender calender, String register,
 			String text) {
-		calender.setRegister(LocalDate.parse(register));
-		calender.setText(text);
+		calender.setCalRegister(LocalDate.parse(register));
+		calender.setCalText(text);
 		this.calRepo.save(calender);
 	}
 	//불러오기

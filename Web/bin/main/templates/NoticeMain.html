@@ -1,102 +1,78 @@
-<!DOCTYPE html>
-<html lang = 'kr'>
+<html lang ='kr' layout:decorate="~{layout}">
     <head>
-        <meta charset="UTF-8">
-        <meta name="notice" content="게시판 처음 들어갔을때 페이지">
         <title>게시판</title>
-        <style>
-	        .btn {
-	            display: inline-block;
-	            padding: 8px 16px;
-	            background-color: #0054FF;
-	            color: white;
-	            text-align: center;
-	            text-decoration: none;
-	            font-size: 14px;
-	            border: none;
-	            cursor: pointer;
-	            border-radius: 4px;
-	        }
-
-          #logo {
-            text-align: center;
-            margin-top: 50px;
-          }
-      
-          #logo h1 {
-            font-size: 50px;
-            margin-bottom: 20px;
-          }
-      
-          .menu {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 50px;
-          }
-      
-          .menu li {
-            list-style: none;
-            margin-right: 10px;
-          }
-      
-          .menu li:last-child {
-            margin-right: 0;
-          }
-      
-          .join-login-btn {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            margin-top: 50px;
-          }
-      
-          .join-login-btn a {
-            display: inline-block;
-            margin-left: 10px;
-            font-size: 20px;
-          }
-        </style>
       </head>
-      <body>
-        <div id="logo">
-                    <!--매핑 : 홈  insight-->
-          <a href="home.html"><h1>insight</h1></a>
-        </div>
-        <ul class="menu">
-             <!--매핑 : 공지사항 insight/Importantmain , 게시판 : insight/Notice , 캘린더 : insight/Calendermain-->
-          <li><a href="ImportantMain.html">공지사항</a></li>
-          <li><a href="NoticeMain.html">게시판</a></li>
-          <li><a href="CalenderMain.html">캘린더</a></li>
-        </ul>
-        <div class="join-login-btn">
-          <a href="LoginMain.html">로그인</a>
-          <a href="JoinMain.html">회원가입</a>
-        </div>
+        <div layout:fragment="content" style="float:right; width:75%;">
+        
          <!--기본 상단 요소 건들지 말것 수정필요시 '최영미'한테 연락하여 같이 고칠 것!!! -->
-        <h1>게시판</h1>
-       <div id="wrap">
-    	<h2>게시글 리스트</h2>
-    	<table>
-    		<tr>
-    			<th>글번호</th>
-    			<th>글제목</th>
-    			<th>작성자</th>
-    			<th>작성날짜</th>
-    			<th>조회수</th>
-    		</tr>
-			<c:forEach var="posting" items="${list }">
-				<tr>
-					<td>${posting.num }</td>
-					<td>${posting.title }</td>
-					<td>${posting.name }</td>
-					<td>${posting.writeDate }</td>
-					<td>${posting.readCount }</td>
-				</tr>
-			</c:forEach>
-    	</table>
-         <div class="submit-button">
-            <input class="btn" type="submit" value="글쓰기" onclick="location.href='NoticeInput.html' ">
-        </div>
-      </body>
+        
+       <div id="wrap" >
+       <div class="container" >
+       <h1>게시판</h1>
+       	<div id="category" >
+       	<ul style="display:inline;">
+			<li><a class="categorylink" href="/Notice/main">전체</a></li>
+			<li>|</li>
+			<li><a class="categorylink" href="/Notice/main/free">자유게시판</a></li>
+			<li>|</li>
+			<li><a class="categorylink" href="/Notice/main/coding">코딩</a></li>
+			<li>|</li>
+			<li><a class="categorylink" href="/Notice/main/gallery">갤러리</a></li>
+			<li>|</li>
+			<li><a class="categorylink" href="/Notice/main/contest">공모전</a></li>
+	   	</ul>
+	   </div>
+           	<table class="table">
+		    	<thead class="table-dark">
+		        	<tr class="text-center">
+		        		<tr>
+                  	  <th>번호</th>
+                  	  <th>제목</th>
+                  	  <th>작성자</th>
+                  	  <th>작성일</th>
+                  	  <th>조회수</th>
+               	 </tr>
+          	  </thead>
+           	 <tbody>
+                <tr th:each ="notice, loop : ${noticeMain}">
+					<td th:text="${noticeMain.getTotalElements - (noticeMain.number * noticeMain.size) - loop.index}"></td>
+				<td>
+					<a th:href="@{|/Notice/detail/${notice.id}|}" th:text="${notice.title}"></a>
+					<span class="text-danger small ms-2"
+                        th:if="${#lists.size(notice.commentList) > 0}" 
+                        th:text="${#lists.size(notice.commentList)}">
+                    </span>
+				</td>
+				<td th:text="${#temporals.format(notice.register, 'yyyy-MM-dd HH:mm')}"></td>
+			</tr>
+			</tbody>
+			</table>
+			<div th:if="${!noticeMain.isEmpty()}">
+        		<ul class="pagination justify-content-center">
+            		<li class="page-item" th:classappend="${!noticeMain.hasPrevious} ? 'disabled'">
+                		<a class="page-link"
+                    		th:href="@{|?page=${noticeMain.number-1}|}">
+                    		<span>이전</span>
+                		</a>
+            		</li>
+            		<li th:each="page: ${#numbers.sequence(0, noticeMain.totalPages-1)}"
+            			th:if="${page >= noticeMain.number-2 and page <= noticeMain.number+2}"
+                		th:classappend="${page == noticeMain.number} ? 'active'"
+                		class="page-item">
+                		<a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
+            		</li>
+            		<li class="page-item" th:classappend="${!noticeMain.hasNext} ? 'disabled'">
+                		<a class="page-link" th:href="@{|?page=${noticeMain.number+1}|}">
+                    		<span>다음</span>
+                		</a>
+            		</li>
+        		</ul>
+    		</div>
+    		<div class="submit-button">
+			<a th:href="@{/Notice/input}" class="btn">글쓰기</a>
+			</div>
+		</div>
+        
+      </div>
+      </div>
 </html>

@@ -28,13 +28,13 @@ public class UserController{
 			return "JoinMain";
 		}
 		
-		if (!userCreateForm.getPwd1().equals(userCreateForm.getPwd2())) {
+		if (!userCreateForm.getUsPwd1().equals(userCreateForm.getUsPwd2())) {
 			bindingResult.rejectValue("pwd2", "passwordInCorrect",
 					"2개의 패스워드가 일치하지 않습니다.");
 			return "JoinMain";
 		}
 		try {
-			userService.create(userCreateForm.getId(), userCreateForm.getName(), userCreateForm.getPwd1(), userCreateForm.getEmail());
+			userService.create(userCreateForm.getUsId(), userCreateForm.getUsName(), userCreateForm.getUsPwd1(), userCreateForm.getUsEmail());
 		}catch(DataIntegrityViolationException e) {
 			e.printStackTrace();
 			bindingResult.reject("signupFailed", "이미 등록된 부원입니다.");

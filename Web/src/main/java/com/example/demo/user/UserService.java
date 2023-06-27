@@ -17,16 +17,16 @@ public class UserService{
 	
 	public UserInfo create(String id, String name, String pwd, String email) {
 		UserInfo user = new UserInfo();
-		user.setId(id);
-		user.setName(name);
-		user.setPwd(passwordEncoder.encode(pwd));
-		user.setEmail(email);
+		user.setUsId(id);
+		user.setUsName(name);
+		user.setUsPwd(passwordEncoder.encode(pwd));
+		user.setUsEmail(email);
 		this.userRepository.save(user);
 		return user;
 	}
 	
 	public UserInfo getUser(String name) {
-		Optional<UserInfo> userInfo = this.userRepository.findByname(name);
+		Optional<UserInfo> userInfo = this.userRepository.findByUsName(name);
 		if(userInfo.isPresent()) {
 			return userInfo.get();
 		}else {

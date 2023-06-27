@@ -22,17 +22,17 @@ public class UserSecurityService implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException{
-		Optional<UserInfo> _userInfo = this.userRepository.findByname(name);
+		Optional<UserInfo> _userInfo = this.userRepository.findByUsName(name);
 		if(_userInfo.isEmpty()) {
 			throw new UsernameNotFoundException("해당 부원을 찾을 수 없습니다.");
 		}
 		UserInfo userInfo = _userInfo.get();
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		if("admin".equals(name)) {
-			authorities.add(new SimpleGrantedAuthority(UserRole.ADMIN.getValue()));
+			authorities.add(new SimpleGrantedAuthority(UserRole.ADMIN.getUsValue()));
 		}else {
-			authorities.add(new SimpleGrantedAuthority(UserRole.USER.getValue()));
+			authorities.add(new SimpleGrantedAuthority(UserRole.USER.getUsValue()));
 		}
-		return new User(userInfo.getName(), userInfo.getPwd(), authorities);
+		return new User(userInfo.getUsName(), userInfo.getUsPwd(), authorities);
 	}
 }

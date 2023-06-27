@@ -22,16 +22,14 @@ public class UserInfo {
 //	private Long number;
 	
    @Id
-   @Column(name="Student_Id", unique = true)
-   private String id;
+   @Column(unique = true)
+   private String usId;
    
-   @Column(name="Student_Name")
-   private String name;
+   private String usName;
    
-   @Column(name="Pwd")
-   private String pwd;
+   private String usPwd;
    
-   @Column(name="Email", unique = true)
-   private String email;
+   @Column(unique = true)
+   private String usEmail;
   
 }
