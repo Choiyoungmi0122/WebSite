@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang = 'kr'>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="notice" content="게시판 처음 들어갔을때 페이지">
+        <title>게시판</title>
+        <style>
+	        .btn {
+	            display: inline-block;
+	            padding: 8px 16px;
+	            background-color: #0054FF;
+	            color: white;
+	            text-align: center;
+	            text-decoration: none;
+	            font-size: 14px;
+	            border: none;
+	            cursor: pointer;
+	            border-radius: 4px;
+	        }
+
+          #logo {
+            text-align: center;
+            margin-top: 50px;
+          }
+      
+          #logo h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+          }
+      
+          .menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+          }
+      
+          .menu li {
+            list-style: none;
+            margin-right: 10px;
+          }
+      
+          .menu li:last-child {
+            margin-right: 0;
+          }
+      
+          .join-login-btn {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 50px;
+          }
+      
+          .join-login-btn a {
+            display: inline-block;
+            margin-left: 10px;
+            font-size: 20px;
+          }
+        </style>
+      </head>
+      <body>
+        <div id="logo">
+                    <!--매핑 : 홈  insight-->
+          <a href="home.html"><h1>insight</h1></a>
+        </div>
+        <ul class="menu">
+             <!--매핑 : 공지사항 insight/Importantmain , 게시판 : insight/Notice , 캘린더 : insight/Calendermain-->
+          <li><a href="ImportantMain.html">공지사항</a></li>
+          <li><a href="NoticeMain.html">게시판</a></li>
+          <li><a href="CalenderMain.html">캘린더</a></li>
+        </ul>
+        <div class="join-login-btn">
+          <a href="LoginMain.html">로그인</a>
+          <a href="JoinMain.html">회원가입</a>
+        </div>
+         <!--기본 상단 요소 건들지 말것 수정필요시 '최영미'한테 연락하여 같이 고칠 것!!! -->
+        <h1>게시판</h1>
+       <div id="wrap">
+    	<h2>게시글 리스트</h2>
+    	<table>
+    		<tr>
+    			<th>글번호</th>
+    			<th>글제목</th>
+    			<th>작성자</th>
+    			<th>작성날짜</th>
+    			<th>조회수</th>
+    		</tr>
+			<c:forEach var="posting" items="${list }">
+				<tr>
+					<td>${posting.num }</td>
+					<td>${posting.title }</td>
+					<td>${posting.name }</td>
+					<td>${posting.writeDate }</td>
+					<td>${posting.readCount }</td>
+				</tr>
+			</c:forEach>
+    	</table>
+         <div class="submit-button">
+            <input class="btn" type="submit" value="글쓰기" onclick="location.href='NoticeInput.html' ">
+        </div>
+      </body>
+</html>
