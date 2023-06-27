@@ -22,7 +22,7 @@ public class NoticeCommentController {
 	private final NoticeService noticeService;
 	private final NoticeCommentService noticeCommentService;
 	
-	@PostMapping("/input/{id}")
+	@PostMapping("/detail/{id}")
 	public String inputComment(Model model, @PathVariable("id") Integer id, @Valid NoticeCommentForm noticecommentForm, BindingResult bindingResult) {
 		Notice notice = this.noticeService.getNotice(id);
 		if (bindingResult.hasErrors()) {
