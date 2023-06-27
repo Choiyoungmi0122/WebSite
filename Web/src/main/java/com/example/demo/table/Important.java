@@ -20,25 +20,38 @@ public class Important {
 	
 	@JoinColumn(name="Student_Id")
 	@ManyToOne(fetch = FetchType.LAZY)
-	private UserInfo userinfo;		//작성자 pk
+	private UserInfo userinfo;		// 작성자 pk
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="Impor_Id")
 	private Integer Impor_Id;
 	
-    @Column(name="Impor_Title", length = 200)	//제목 
+    @Column(name="Impor_Title", length = 200)	// 제목 
     private String title;
     
-    @Column(name="Impor_Text", columnDefinition = "TEXT")   //내용 
+    @Column(name="Impor_Text", columnDefinition = "TEXT")   // 내용 
     private String text;
     
     @Column(name="Impor_Register")
-    private LocalDateTime register;	//작성일시
+    private LocalDateTime register;	// 작성일시
     
     @Column(name="Important")
-    private Boolean important;		//필독 여부 
+    private Boolean important;		// 필독 여부 
 
+	public void setTitle(String impor_Title) {
+		this.title = impor_Title;
+	}
 
-	
+	public void setText(String impor_Text) {
+		this.text = impor_Text;
+	}
+
+	public void setRegister(LocalDateTime now) {
+		this.register = now;
+	}
+
+	public void setImportant(boolean b) {
+		this.important = b;
+	}
 }

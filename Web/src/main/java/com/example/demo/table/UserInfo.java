@@ -27,10 +27,5 @@ public class UserInfo {
    
    @Column(name="Email", unique = true)
    private String email;
+}
   
-<<<<<<< HEAD
-}
-=======
-
-}
->>>>>>> branch 'Calender' of https://github.com/Choiyoungmi0122/WebSite.git
