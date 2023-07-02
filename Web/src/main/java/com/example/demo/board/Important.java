@@ -1,8 +1,8 @@
-package com.example.demo.board;
+package com.version1.insight.board;
 
 import java.time.LocalDateTime;
 
-import com.example.demo.user.UserInfo;
+import com.
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
