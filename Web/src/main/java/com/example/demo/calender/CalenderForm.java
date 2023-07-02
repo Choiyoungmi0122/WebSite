@@ -2,7 +2,7 @@ package com.example.demo.calender;
 
 import java.time.LocalDate;
 
-import com.example.demo.table.UserInfo;
+import com.example.demo.user.UserInfo;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,38 +13,11 @@ import lombok.Setter;
 //스프링 부트 2-15
 public class CalenderForm {
 	
-	private Integer calender_id;
-	private UserInfo calender_userinfo;
+	private Integer calId;
+	private UserInfo calUserinfo;
 	// html에서 등록자의 변수
-	private LocalDate calender_register;
+	private LocalDate calRegister;
 	// html에서 시작 일정의 변수 
-	private String text;
+	private String calText;
 	// html에서 입력창의 변수
-	
-	public UserInfo getUserInfo() {
-		//일정의 작성자 이름 반환
-		return calender_userinfo;
-	}
-	
-	public LocalDate getRegister() {
-		//일정의 등록일 반환
-		return calender_register;
-	}
-
-	public String getText() {
-		//일정의 내용 반환
-		return text;
-	}
-	
-	public void setUserInfo(UserInfo userinfo) {
-		this.calender_userinfo = userinfo;
-	}
-	
-	public void setRegister(LocalDate register) {
-		this.calender_register = register;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
 }

@@ -19,22 +19,4 @@ public class CalenderRegisteForm {
 	//빈칸이면 에러메세지 출력
 	private String calText;
 	// html에서 입력창의 변수
-
-	/*
-	public LocalDate getRegister() {
-		return calRegister;
-	}
-
-	public String getText() {
-		return calText;
-	}
-
-	public void setRegister(LocalDate register) {
-		this.calRegister=register;
-	}
-
-	public void setText(String text) {
-		this.calText=text;
-	}
-	*/
 }
