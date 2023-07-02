@@ -51,21 +51,19 @@ public class CalenderController {
 	
 	//일정 등록 html에서 등록 버튼 눌렀을 때 저장하는 함수
 	@PostMapping("/create")
-	public String createAnswer(Model model, @RequestParam String calRegister, @RequestParam String calText,
-			@RequestParam String calUserinfo, Principal principal) {
-        calService.addData(/*principal.getName()*/calUserinfo, LocalDate.parse(calRegister), calText);
+	public String createAnswer(CalenderRegisteForm calenderRegisterForm, Principal principal) {
+        calService.addData(/*principal.getName()*/"20212874", calenderRegisterForm.getCalRegister(), calenderRegisterForm.getCalText());
         return "CalenderMain";
     }
 
 	
 	@GetMapping("/modify/{id}")
-	public String modify(Model model, CalenderRegisteForm calenderRegisterForm, @PathVariable Integer id) {
+	public String modify(CalenderRegisteForm calenderRegisterForm, @PathVariable Integer id) {
 		//매개변수를 CalenderForm, 일정의 id, 사용자의 정보로 한다.
 		Calender cal = this.calService.getInfo(id);
 		//model.addAttribute("cal", cal);
 		calenderRegisterForm.setCalRegister((cal.getCalRegister()).toString());
 		calenderRegisterForm.setCalText(cal.getCalText());
-		model.addAttribute("calenderRegisterForm",calenderRegisterForm);
 		return "CalenderModify";
 	}
 	
