@@ -18,7 +18,6 @@ import lombok.Setter;
 @Setter
 public class CalendarService {
 	private final CalendarRepository calRepo;
-	private final UserRepository userRepo;
 	
 	public List<Calendar> getDayList(LocalDate register) {
         return this.calRepo.findByCalStartDay(register);
@@ -52,8 +51,9 @@ public class CalendarService {
 		Optional<Calendar> calendar = this.calRepo.findById(calId);
 		if(calendar.isPresent())
 			return calendar.get();
-		else
-			return null;
+		else{
+            throw new DataNotFoundException("notice not found");
+        }
 	}
 	
 	//삭제

@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 
 import java.security.Principal;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
+
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,12 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.version1.insight.user.UserInfo;
@@ -46,39 +43,45 @@ public class CalendarController {
 		model.addAttribute("calendar",calendar);
 		return "calendar_main";
 	}
-
+	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/create")
-    public String create(CalendarRegisteForm calendarRegisterForm) {
-        return "calendar_create";
+    public String createAnswer(CalendarRegisteForm calendarRegisteForm) {
+        return "calendar_form";
     }
 	
+	@PreAuthorize("isAuthenticated()")
 	//일정 등록 html에서 등록 버튼 눌렀을 때 저장하는 함수
 	@PostMapping("/create")
-	public String createAnswer(CalendarRegisteForm calendarRegisterForm, Principal principal) {
+	public String createAnswer(@Valid CalendarRegisteForm calendarRegisteForm, BindingResult bindingResult, Principal principal) {
+		if (bindingResult.hasErrors()) {
+            return "calendar_form";
+        }
 		UserInfo userInfo = this.userService.getUser(principal.getName());
-        calService.addData(userInfo, calendarRegisterForm.getCalStartDay(), calendarRegisterForm.getCalText());
-        return "calendar_main";
+        this.calService.addData(userInfo, calendarRegisteForm.getCalStartDay(), calendarRegisteForm.getCalText());
+        return String.format("redirect:/calendar/%s", calendarRegisteForm.getCalStartDay());
     }
 
-	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/modify/{id}")
-	public String modifyCalendar(CalendarRegisteForm calendarRegisterForm, @PathVariable("id") Integer calId
+	public String modifyCalendar(CalendarRegisteForm calendarRegisteForm, Model model, @PathVariable("id") Integer calId
 			,Principal principal) {
 		Calendar calendar = this.calService.getInfo(calId);
 		if (!calendar.getCalAuthor().getUsername().equals(principal.getName())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
+			return String.format("redirect:/calendar/%s", calendar.getCalStartDay());
         }
 		//매개변수를 CalendarForm, 일정의 id, 사용자의 정보로 한다.
-		calendarRegisterForm.setCalStartDay((calendar.getCalStartDay()).toString());
-		calendarRegisterForm.setCalText(calendar.getCalText());
+		model.addAttribute(calendar);
+		calendarRegisteForm.setCalStartDay((calendar.getCalStartDay()).toString());
+		calendarRegisteForm.setCalText(calendar.getCalText());
 		return "calendar_modify";
 	}
 	
-	
+	@PreAuthorize("isAuthenticated()")	
 	//일정 수정 페이지에서 일정을 수정후 확인 버튼을 누르면 작동하는 함수
 	//역할조건 안넣음 @PreAuthorize
     @PostMapping("/modify/{id}")
-    public String modifyCalendar(@Valid CalendarRegisteForm calendarRegisteForm, 
+    public String modifyCalendar(@Valid CalendarRegisteForm calendarRegisteForm, Model model,
     		BindingResult bindingResult, Principal principal, @PathVariable("id") Integer calId) {
         if (bindingResult.hasErrors()) {
             return "calendar_modify";
@@ -89,9 +92,10 @@ public class CalendarController {
         }
         this.calService.modify(calendar, calendarRegisteForm.getCalStartDay(), calendarRegisteForm.getCalText());
 
-        return ("redirect:/calendar"); //달력 출력 화면으로 전환
+        return String.format("redirect:/calendar/%s", calendarRegisteForm.getCalStartDay()); //달력 출력 화면으로 전환
     }
-    
+	
+	@PreAuthorize("isAuthenticated()")
     //일정 삭제 시 작동하는 함수
 	@GetMapping("/delete/{id}")
     public String deleteCalendar(@PathVariable("id") Integer calId,
@@ -101,7 +105,8 @@ public class CalendarController {
 		if(!calendar.getCalAuthor().getUsername().equals(principal.getName()))/*사용자의 학번과 작성자의 학번 비교)*/ {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제 권한이 없습니다.");
         }
+		LocalDate back = calendar.getCalStartDay();
 		this.calService.delete(calendar);
-    	return ("redirect:/calendar");
+		return String.format("redirect:/calendar/%s",back);
     }
 }
