@@ -37,6 +37,34 @@ public class NoticeController {
         return "question_list";
     }
 	
+	@GetMapping("/main/free")
+	public String freelist(Model model, @RequestParam(value="page", defaultValue="0") int page) {
+		Page<Notice> noticeList = this.noticeService.getCategory("free", page);
+		model.addAttribute("noticeList", noticeList);
+		return "question_list";
+	}
+	
+	@GetMapping("/main/coding")
+	public String codinglist(Model model, @RequestParam(value="page", defaultValue="0") int page) {
+		Page<Notice> noticeList = this.noticeService.getCategory("coding", page);
+		model.addAttribute("noticeList", noticeList);
+		return "question_list";
+	}
+	
+	@GetMapping("/main/gallery")
+	public String gallerylist(Model model, @RequestParam(value="page", defaultValue="0") int page) {
+		Page<Notice> noticeList = this.noticeService.getCategory("gallery", page);
+		model.addAttribute("noticeList", noticeList);
+		return "question_list";
+	}
+	
+	@GetMapping("/main/contest")
+	public String contestlist(Model model, @RequestParam(value="page", defaultValue="0") int page) {
+		Page<Notice> noticeList = this.noticeService.getCategory("contest", page);
+		model.addAttribute("noticeList", noticeList);
+		return "question_list";
+	}
+	
 	@GetMapping(value = "/detail/{id}")
     public String detail(Model model, @PathVariable("id") Integer noticeId, NoticeCommentForm noticeCommentForm) {
 		Notice notice = this.noticeService.getNotice(noticeId);
@@ -57,7 +85,7 @@ public class NoticeController {
             return "question_form";
         }
 		UserInfo userInfo = this.userService.getUser(principal.getName());
-		this.noticeService.create(noticeForm.getNoticeTitle(), noticeForm.getNoticeText(), userInfo);
+		this.noticeService.create(noticeForm.getNoticeTitle(), noticeForm.getNoticeText(), userInfo, noticeForm.getNoticeCategory());
 		return "redirect:/notice/main";
     }
 

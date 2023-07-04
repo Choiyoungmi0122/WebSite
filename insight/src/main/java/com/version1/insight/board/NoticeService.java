@@ -1,6 +1,7 @@
 package com.version1.insight.board;
 
 import java.util.List;
+
 import com.version1.insight.DataNotFoundException;
 import com.version1.insight.user.UserInfo;
 
@@ -35,12 +36,20 @@ public class NoticeService {
         }
     }
 	
-	public void create(String noticeTitle, String noticeText, UserInfo user) {
+	public Page<Notice> getCategory(String noticeCategory, int page){
+		List<Sort.Order> sorts = new ArrayList<>();
+		sorts.add(Sort.Order.desc("noticeRegister"));
+		Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+		return this.noticeRepository.findByNoticeCategory(noticeCategory, pageable);
+	}
+	
+	public void create(String noticeTitle, String noticeText, UserInfo user, String noticeCategory) {
 		Notice q = new Notice();
         q.setNoticeTitle(noticeTitle);
         q.setNoticeText(noticeText);
         q.setNoticeRegister(LocalDateTime.now());
         q.setNoticeAuthor(user);
+        q.setNoticeCategory(noticeCategory);
         this.noticeRepository.save(q);
     }
 	

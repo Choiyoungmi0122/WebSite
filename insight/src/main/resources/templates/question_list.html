@@ -1,6 +1,22 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="container my-3">
     <table class="table">
+		<div id="wrap" >
+       <div class="container" >
+       <h1>게시판</h1>
+       	<div id="category" >
+	       	<ul style="display:inline;">
+				<li><a class="categorylink" href="/notice/main">전체</a></li>
+				<li>|</li>
+				<li><a class="categorylink" href="/notice/main/free">자유게시판</a></li>
+				<li>|</li>
+				<li><a class="categorylink" href="/notice/main/coding">코딩</a></li>
+				<li>|</li>
+				<li><a class="categorylink" href="/notice/main/gallery">갤러리</a></li>
+				<li>|</li>
+				<li><a class="categorylink" href="/notice/main/contest">공모전</a></li>
+		   	</ul>
+	   </div>
         <thead class="table-dark">
         <tr class="text-center">
 			<th>번호</th>
