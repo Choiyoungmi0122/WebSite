@@ -10,7 +10,17 @@
         </tr>
     </thead>
     <tbody>
-        <tr class="text-center" th:each="important, loop : ${importantList}">
+		<tr id = "impo" class="text-center" th:each="important2: ${importantList2}">
+            <td th:text="필독"></td>
+            <td class="text-start">
+                <a th:href="@{|/important/detail/${important2.impoId}|}" th:text="${important2.impoTitle}"></a>
+            	
+            </td>
+            <td><span th:if="${important2.impoAuthor != null}" th:text="${important2.impoAuthor.studentName}"></span></td>
+            <td th:text="${#temporals.format(important2.impoRegister, 'yyyy-MM-dd HH:mm')}"></td>
+            
+        </tr>
+        <tr id = "impo" class="text-center" th:each="important, loop : ${importantList}">
             <td th:text="${importantList.getTotalElements - (importantList.number * importantList.size) - loop.index}"></td>
             <td class="text-start">
                 <a th:href="@{|/important/detail/${important.impoId}|}" th:text="${important.impoTitle}"></a>
@@ -18,7 +28,21 @@
             </td>
             <td><span th:if="${important.impoAuthor != null}" th:text="${important.impoAuthor.studentName}"></span></td>
             <td th:text="${#temporals.format(important.impoRegister, 'yyyy-MM-dd HH:mm')}"></td>
+            
         </tr>
+        
+        <!--script>
+			function impoSort(){
+				var re = important.impoTf.sort(function(a,b){
+					if(a < b)	return 1;
+					if(a > b)	return -1;
+					if(a === b)	return 0;
+				});
+				return re
+			}
+			
+		</script-->
+		
     </tbody>
 </table>
 <!-- 페이징처리 시작 -->

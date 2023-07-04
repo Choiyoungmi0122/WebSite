@@ -20,6 +20,7 @@ public class UserInfo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	//학번
 	@Column(unique = true, length = 8)
 	private String username;
 	
@@ -31,10 +32,10 @@ public class UserInfo {
 	private String email;
 	
 	@Column(unique=true)
-	private Integer phoneNumber;
+	private String phoneNumber;
 	
 	private String major;
-	private Integer grade;
+	private String grade;
 	private String doing;
 	private String condition;
 	private String wantedAct;

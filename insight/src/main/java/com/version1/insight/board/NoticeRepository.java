@@ -11,5 +11,5 @@ public interface NoticeRepository extends JpaRepository<Notice, Integer> {
 	Notice findByNoticeTitleAndNoticeText(String noticeTitle, String noticeText); // 제목 및 내용 호출
 	List<Notice> findByNoticeTitleLike(String noticeTitle);
 	Page<Notice> findAll(Pageable pageable); // main 리스트 호출
-	Page<Notice> findByNoticeCategory(String NoticeCategory, Pageable pageable); // 카테고리 설정
+	Page<Notice> findByNoticeCategory(String noticeCategory, Pageable pageable); // 카테고리 설정
 }

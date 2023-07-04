@@ -15,4 +15,6 @@ public class ImportantForm {
 
     @NotEmpty(message="내용은 필수항목입니다.")
     private String impoText;
+
+    private Boolean impoTf;		// 필독 여부 
 }

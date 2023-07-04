@@ -91,11 +91,12 @@ public class NoticeController {
 
 	@PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{id}")
-    public String noticeModify(NoticeForm noticeForm, @PathVariable("id") Integer noticeId, Principal principal) {
+    public String noticeModify(Model model, NoticeForm noticeForm, @PathVariable("id") Integer noticeId, Principal principal) {
         Notice notice = this.noticeService.getNotice(noticeId);
         if(!notice.getNoticeAuthor().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
+        model.addAttribute(notice);
         noticeForm.setNoticeTitle(notice.getNoticeTitle());
         noticeForm.setNoticeText(notice.getNoticeText());
         return "question_form";

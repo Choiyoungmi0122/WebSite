@@ -11,14 +11,21 @@
             height: 80px;
             text-align: center;
         }
+        
+        div{
+			margin:0%;
+			padding: 0%;
+		}
 
         .Calendar {
             text-align: left;
-            width: 30%;
-            height: 90%;
-            margin-left: 3%;
-            margin-top: 5%;
+            max-width: 10%;
+            margin: 0%;
+            padding: 0%;
+            
         }
+        
+
 
         .Calendar>thead>tr:first-child>td {
             font-family: 'Questrial', sans-serif;
@@ -182,56 +189,63 @@
 
 <body>
     <div layout:fragment="content">
-        <table class="Calendar">
-            <thead>
-                <tr>
-                    <td onClick="prevCalendar();" style="cursor:pointer;">&#60;</td>
-                    <td colspan="5">
-                        <span id="calYear"></span>년
-                        <span id="calMonth"></span>월
-                    </td>
-                    <td onClick="nextCalendar();" style="cursor:pointer;">&#62;</td>
-                </tr>
-                <tr>
-                    <td>일</td>
-                    <td>월</td>
-                    <td>화</td>
-                    <td>수</td>
-                    <td>목</td>
-                    <td>금</td>
-                    <td>토</td>
-                </tr>
-            </thead>
-
-            <tbody>
-            </tbody>
-        </table>
-        <table class="table">
-	        <thead class="table-dark">
-		        <tr class="text-center">
-		            <th style="width:50%">제목</th>
-		            <th>작성자</th>
-		            <th>일정</th>
-		        </tr>
-		    </thead>
-		    <tbody>
-		        <tr class="text-center" th:each="calendar : ${calendar}">
-		            <td class="text-start">
-		                <a sec:authorize="!isAuthenticated()"
-			                th:text="${calendar.calText}">
-		                </a>
-		                <a th:href="@{|/calendar/modify/${calendar.calId}|}"
-			                sec:authorize="isAuthenticated()"
-			                th:if="${calendar.calAuthor != null and #authentication.getPrincipal().getUsername() == calendar.calAuthor.username}"
-			                th:text="${calendar.calText}">
-		                </a>
-		            </td>
-		            <td><span th:if="${calendar.calAuthor != null}" th:text="${calendar.calAuthor.studentName}"></span></td>
-		            <td th:text="${#temporals.format(calendar.calStartDay, 'yyyy-MM-dd')}"></td>
-		        </tr>
-		    </tbody>
-		</table>
-		<a th:href="@{/calendar/create}" class="btn btn-primary">등록</a>
+		<div>
+	        <table class="Calendar">
+	            <thead>
+	                <tr>
+	                    <td onClick="prevCalendar();" style="cursor:pointer;">&#60;</td>
+	                    <td colspan="5">
+	                        <span id="calYear"></span>년
+	                        <span id="calMonth"></span>월
+	                    </td>
+	                    <td onClick="nextCalendar();" style="cursor:pointer;">&#62;</td>
+	                </tr>
+	                <tr>
+	                    <td>일</td>
+	                    <td>월</td>
+	                    <td>화</td>
+	                    <td>수</td>
+	                    <td>목</td>
+	                    <td>금</td>
+	                    <td>토</td>
+	                </tr>
+	                
+	                
+	            </thead>
+	
+	            <tbody>
+					
+	            </tbody>
+	        </table>
+        </div>
+        <div>
+	        <table class="table" style="float:right; width:55%;">
+		        <thead class="table-dark">
+			        <tr class="text-center">
+			            <th style="width:50%">제목</th>
+			            <th>작성자</th>
+			            <th>일정</th>
+			        </tr>
+			    </thead>
+			    <tbody>
+			        <tr class="text-center" th:each="calendar : ${calendar}">
+			            <td class="text-start">
+			                <a sec:authorize="!isAuthenticated()"
+				                th:text="${calendar.calText}">
+			                </a>
+			                <a th:href="@{|/calendar/modify/${calendar.calId}|}"
+				                sec:authorize="isAuthenticated()"
+				                th:if="${calendar.calAuthor != null and #authentication.getPrincipal().getUsername() == calendar.calAuthor.username}"
+				                th:text="${calendar.calTex	t}">
+			                </a>
+			            </td>
+			            <td><span th:if="${calendar.calAuthor != null}" th:text="${calendar.calAuthor.studentName}"></span></td>
+			            <td th:text="${#temporals.format(calendar.calStartDay, 'yyyy-MM-dd')}"></td>
+			        </tr>
+			    </tbody>
+			</table>
+			<a th:href="@{/calendar/create}" class="btn btn-primary">등록</a>
+        </dixv>
 	</div>
 </body>
 

@@ -43,8 +43,9 @@ public class NoticeCommentController {
 	
 	@PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{id}")
-    public String noticeCommentModify(NoticeCommentForm noticeCommentForm, @PathVariable("id") Integer cmId, Principal principal) {
+    public String noticeCommentModify(Model model, NoticeCommentForm noticeCommentForm, @PathVariable("id") Integer cmId, Principal principal) {
 		NoticeComment noticeComment = this.noticeCommentService.getNoticeComment(cmId);
+		model.addAttribute("notice", noticeComment.getNotice());
         if (!noticeComment.getCmAuthor().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
@@ -56,7 +57,8 @@ public class NoticeCommentController {
     @PostMapping("/modify/{id}")
     public String noticeCommentModify(@Valid NoticeCommentForm noticeCommentForm, BindingResult bindingResult,
             @PathVariable("id") Integer cmId, Principal principal) {
-        if (bindingResult.hasErrors()) {
+		
+		if (bindingResult.hasErrors()) {
             return "answer_form";
         }
         NoticeComment noticeComment = this.noticeCommentService.getNoticeComment(cmId);
