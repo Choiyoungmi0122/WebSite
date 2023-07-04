@@ -47,6 +47,7 @@ public class CalendarController {
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/create")
     public String createAnswer(CalendarRegisteForm calendarRegisteForm) {
+		calendarRegisteForm.setCalStartDay((LocalDate.now()	).toString());
         return "calendar_form";
     }
 	

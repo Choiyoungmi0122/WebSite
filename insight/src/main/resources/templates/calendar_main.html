@@ -6,23 +6,18 @@
     <style>
         @import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
         
-       td {
+        td {
             width: 80px;
             height: 80px;
             text-align: center;
         }
         
-      
-
         .Calendar {
             text-align: left;
             max-width: 10%;
             margin: 0%;
             padding: 0%;
-            
         }
-        
-
 
         .Calendar>thead>tr:first-child>td {
             font-family: 'Questrial', sans-serif;
@@ -187,7 +182,7 @@
 <body>
     <div layout:fragment="content">
 		<div>
-	        <table class="Calendar">
+	        <table class="Calendar" style="width:40%; float:left">
 	            <thead>
 	                <tr>
 	                    <td onClick="prevCalendar();" style="cursor:pointer;">&#60;</td>
@@ -206,8 +201,6 @@
 	                    <td>금</td>
 	                    <td>토</td>
 	                </tr>
-	                
-	                
 	            </thead>
 	
 	            <tbody>
@@ -216,7 +209,8 @@
 	        </table>
         </div>
         <div>
-	        <table class="table" style="float:right; width:55%;">
+			<a th:href="@{/calendar/create}" class="btn btn-primary">등록</a>
+	        <table class="table" style="width:60%; float:right">
 		        <thead class="table-dark">
 			        <tr class="text-center">
 			            <th style="width:50%">제목</th>
@@ -233,7 +227,7 @@
 			                <a th:href="@{|/calendar/modify/${calendar.calId}|}"
 				                sec:authorize="isAuthenticated()"
 				                th:if="${calendar.calAuthor != null and #authentication.getPrincipal().getUsername() == calendar.calAuthor.username}"
-				                th:text="${calendar.calTex	t}">
+				                th:text="${calendar.calText}">
 			                </a>
 			            </td>
 			            <td><span th:if="${calendar.calAuthor != null}" th:text="${calendar.calAuthor.studentName}"></span></td>
@@ -241,8 +235,7 @@
 			        </tr>
 			    </tbody>
 			</table>
-			<a th:href="@{/calendar/create}" class="btn btn-primary">등록</a>
-        </dixv>
+        </div>
 	</div>
 </body>
 
