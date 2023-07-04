@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.version1.insight.user.UserInfo;
@@ -56,12 +57,14 @@ public class ImportantController {
 	
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/create")
-    public String importantCreate(@Valid ImportantForm importantForm, BindingResult bindingResult, Principal principal) {
+    public String importantCreate(@Valid ImportantForm importantForm, BindingResult bindingResult, Principal principal, MultipartHttpServletRequest multiRequest) throws Exception {
 		if (bindingResult.hasErrors()) {
             return "important_form";
         }
 		UserInfo userInfo = this.userService.getUser(principal.getName());
 		this.importantService.create(importantForm.getImpoTitle(), importantForm.getImpoText(), userInfo, importantForm.getImpoTf());
+		
+		importantService.uploadFile(multiRequest);
 		
 		return "redirect:/important/main";
     }
@@ -104,6 +107,6 @@ public class ImportantController {
         this.importantService.delete(important);
         return "redirect:/important/main";
     }
-	 
+	
 	 
 }

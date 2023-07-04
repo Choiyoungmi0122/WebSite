@@ -1,16 +1,18 @@
 package com.version1.insight.board;
 
+
 import java.time.LocalDateTime;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import com.version1.insight.user.UserInfo;
 
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,4 +41,7 @@ public class Important {
     
     private LocalDateTime impoModifyRegister;
     
+    //private String impoFileName;	//파일이름
+    
+    private MultipartFile impoFilePath;	//파일 경로
 }

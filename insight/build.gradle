@@ -29,6 +29,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE'
 	implementation 'org.commonmark:commonmark:0.21.0'
+	compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
+	compile group: 'commons-io', name: 'commons-io', version: '2.4'
 }
 
 tasks.named('test') {

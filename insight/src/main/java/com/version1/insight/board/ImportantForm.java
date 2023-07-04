@@ -17,4 +17,9 @@ public class ImportantForm {
     private String impoText;
 
     private Boolean impoTf;		// 필독 여부 
+    
+    
+    //private String impoFileName;	//파일이름
+    
+    //private String impoFilePath;	//파일 경로
 }

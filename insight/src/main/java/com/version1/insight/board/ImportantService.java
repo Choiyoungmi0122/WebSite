@@ -1,6 +1,8 @@
 package com.version1.insight.board;
 
 import java.util.List;
+import java.util.Map;
+
 import com.version1.insight.DataNotFoundException;
 import com.version1.insight.user.UserInfo;
 
@@ -8,11 +10,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import org.springframework.data.domain.Sort;
 
@@ -90,4 +97,37 @@ public class ImportantService {
 	public void delete(Important important) {
         this.importantRepository.delete(important);
     }
+	
+	public void uploadFile(MultipartHttpServletRequest multiRequest) throws Exception{
+		Map<String, MultipartFile> files = multiRequest.getFileMap();
+		Iterator<Map.Entry<String, MultipartFile>> itr = files.entrySet().iterator();
+		MultipartFile mFile=null;
+		String filePath = "C:\\Users\\kimbo\\git";
+		
+		while(itr.hasNext()) {
+			Map.Entry<String, MultipartFile> entry = itr.next();
+			
+			mFile=entry.getValue();
+			
+			String fileOrgName=mFile.getOriginalFilename();
+			
+			if(!fileOrgName.isEmpty()) {
+				File fileFolder=new File(filePath);
+				
+				if(!fileFolder.exists()) {
+					if(fileFolder.mkdir())
+						System.out.println("[file.mkdidrs] : Success!!");
+				}
+			
+				File saveFile = new File(filePath, fileOrgName);
+				
+				
+				
+				mFile.transferTo(saveFile);
+			}
+			
+			
+		}
+	
+	}
 }

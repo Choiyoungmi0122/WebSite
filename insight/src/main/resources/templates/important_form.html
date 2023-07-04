@@ -1,7 +1,7 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="container">
     <h5 class="my-3 border-bottom pb-2">공지등록</h5>
-    <form th:object="${importantForm}" method="post">
+    <form th:object="${importantForm}" method="post" enctype="multipart/form-data">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 		<div th:replace="~{form_errors :: formErrorsFragment}"></div>
 		
@@ -33,7 +33,10 @@
         <input type="hidden" name="_impoTf" value="off">   <!--hidden은 체크박스의 name 속성값 앞에 _붙이기로 약속-->
 		<label for="impoTf" class="form-check-label">필독</label>
 			
-       
+        <input type="file" name="file1">
+ 
     </form>
+    
+    
 </div>
 </html>
