@@ -40,8 +40,4 @@ public class Important {
     private Boolean impoTf;		// 필독 여부 
     
     private LocalDateTime impoModifyRegister;
-    
-    //private String impoFileName;	//파일이름
-    
-    private MultipartFile impoFilePath;	//파일 경로
 }

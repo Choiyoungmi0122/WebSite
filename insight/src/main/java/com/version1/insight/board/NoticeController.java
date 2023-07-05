@@ -30,38 +30,49 @@ public class NoticeController {
 	private final NoticeService noticeService;
 	private final UserService userService;
 	
-	@GetMapping("/main")
-    public String list(Model model, @RequestParam(value="page", defaultValue="0") int page) {
-        Page<Notice> noticeList = this.noticeService.getList(page);
+	@GetMapping("/main/all")
+    public String list(Model model, @RequestParam(value="page", defaultValue="1") int page, 
+    		@RequestParam(value = "kw", defaultValue = "") String kw) {
+        Page<Notice> noticeList = this.noticeService.getList(page-1, kw, "");
         model.addAttribute("noticeList", noticeList);
+        model.addAttribute("kw", kw);
+        model.addAttribute("ca", "all");
         return "question_list";
     }
 	
 	@GetMapping("/main/free")
-	public String freelist(Model model, @RequestParam(value="page", defaultValue="0") int page) {
-		Page<Notice> noticeList = this.noticeService.getCategory("free", page);
+	public String freelist(Model model, @RequestParam(value="page", defaultValue="1") int page, @RequestParam(value = "kw", defaultValue = "") String kw) {
+		Page<Notice> noticeList = this.noticeService.getList(page-1, kw, "free");
 		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("kw", kw);
+		model.addAttribute("ca","free");
 		return "question_list";
 	}
 	
 	@GetMapping("/main/coding")
-	public String codinglist(Model model, @RequestParam(value="page", defaultValue="0") int page) {
-		Page<Notice> noticeList = this.noticeService.getCategory("coding", page);
+	public String codinglist(Model model, @RequestParam(value="page", defaultValue="1") int page, @RequestParam(value = "kw", defaultValue = "") String kw) {
+		Page<Notice> noticeList = this.noticeService.getList(page-1, kw, "coding");
 		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("kw", kw);
+		model.addAttribute("ca","coding");
 		return "question_list";
 	}
 	
 	@GetMapping("/main/gallery")
-	public String gallerylist(Model model, @RequestParam(value="page", defaultValue="0") int page) {
-		Page<Notice> noticeList = this.noticeService.getCategory("gallery", page);
+	public String gallerylist(Model model, @RequestParam(value="page", defaultValue="1") int page, @RequestParam(value = "kw", defaultValue = "") String kw) {
+		Page<Notice> noticeList = this.noticeService.getList(page-1, kw, "gallery");
 		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("kw", kw);
+		model.addAttribute("ca","gallery");
 		return "question_list";
 	}
 	
 	@GetMapping("/main/contest")
-	public String contestlist(Model model, @RequestParam(value="page", defaultValue="0") int page) {
-		Page<Notice> noticeList = this.noticeService.getCategory("contest", page);
+	public String contestlist(Model model, @RequestParam(value="page", defaultValue="1") int page, @RequestParam(value = "kw", defaultValue = "") String kw) {
+		Page<Notice> noticeList = this.noticeService.getList(page-1, kw, "contest");
 		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("kw", kw);
+		model.addAttribute("ca","contest");
 		return "question_list";
 	}
 	

@@ -33,11 +33,13 @@ public class ImportantController {
 	private final UserService userService;
 	
 	@GetMapping("/main")
-    public String list(Model model, @RequestParam(value="page", defaultValue="0") int page) {
+    public String list(Model model, @RequestParam(value="page", defaultValue="0") int page,
+    		@RequestParam(value = "kw", defaultValue = "") String kw) {
         List<Important> importantList2 = this.importantService.getList();
-        Page<Important> importantList = this.importantService.getPage(page);
+        Page<Important> importantList = this.importantService.getPage(page, kw);
         model.addAttribute("importantList2", importantList2);
         model.addAttribute("importantList", importantList);
+        model.addAttribute("kw", kw);
         
         return "important_list";
     }
