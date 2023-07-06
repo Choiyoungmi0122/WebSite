@@ -18,5 +18,8 @@ public class CalendarRegisteForm {
 	//빈칸이면 에러메세지 출력
 	private String calText;
 	// html에서 입력창의 변수
+	private String calEndDay;
+	private String calStartTime;
+	private String calEndTime;
 	
 }

@@ -221,9 +221,13 @@
 			    <tbody>
 			        <tr class="text-center" th:each="calendar : ${calendar}">
 			            <td class="text-start">
-			                <a sec:authorize="!isAuthenticated()"
+			                <a sec:authorize="isAnonymous()"
 				                th:text="${calendar.calText}">
 			                </a>
+			                <a sec:authorize="isAuthenticated()"
+			                th:if="${calendar.calAuthor != null and #authentication.getPrincipal().getUsername() != calendar.calAuthor.username}"
+				                th:text="${calendar.calText}">
+			                </a>	
 			                <a th:href="@{|/calendar/modify/${calendar.calId}|}"
 				                sec:authorize="isAuthenticated()"
 				                th:if="${calendar.calAuthor != null and #authentication.getPrincipal().getUsername() == calendar.calAuthor.username}"

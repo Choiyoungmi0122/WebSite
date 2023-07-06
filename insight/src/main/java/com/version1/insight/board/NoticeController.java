@@ -97,7 +97,7 @@ public class NoticeController {
         }
 		UserInfo userInfo = this.userService.getUser(principal.getName());
 		this.noticeService.create(noticeForm.getNoticeTitle(), noticeForm.getNoticeText(), userInfo, noticeForm.getNoticeCategory());
-		return "redirect:/notice/main";
+		return "redirect:/notice/main/all";
     }
 
 	@PreAuthorize("isAuthenticated()")

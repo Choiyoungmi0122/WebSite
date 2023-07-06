@@ -47,7 +47,8 @@ public class CalendarController {
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/create")
     public String createAnswer(CalendarRegisteForm calendarRegisteForm) {
-		calendarRegisteForm.setCalStartDay((LocalDate.now()	).toString());
+		calendarRegisteForm.setCalStartDay((LocalDate.now()).toString());
+		calendarRegisteForm.setCalEndDay(null);
         return "calendar_form";
     }
 	
@@ -58,8 +59,14 @@ public class CalendarController {
 		if (bindingResult.hasErrors()) {
             return "calendar_form";
         }
+		if(calendarRegisteForm.getCalEndDay() != "")
+		{
+			if(0<(LocalDate.parse(calendarRegisteForm.getCalStartDay())).compareTo(LocalDate.parse(calendarRegisteForm.getCalEndDay())))
+				return "calendar_form";
+		}
 		UserInfo userInfo = this.userService.getUser(principal.getName());
-        this.calService.addData(userInfo, calendarRegisteForm.getCalStartDay(), calendarRegisteForm.getCalText());
+        this.calService.addData(userInfo, calendarRegisteForm.getCalText(), calendarRegisteForm.getCalStartDay(), calendarRegisteForm.getCalEndDay(), 
+        		calendarRegisteForm.getCalStartTime(), calendarRegisteForm.getCalEndTime());
         return String.format("redirect:/calendar/%s", calendarRegisteForm.getCalStartDay());
     }
 
@@ -75,6 +82,18 @@ public class CalendarController {
 		model.addAttribute(calendar);
 		calendarRegisteForm.setCalStartDay((calendar.getCalStartDay()).toString());
 		calendarRegisteForm.setCalText(calendar.getCalText());
+		if(calendar.getCalEndDay()==null)
+			calendarRegisteForm.setCalEndDay(null);
+		else
+			calendarRegisteForm.setCalEndDay(calendar.getCalEndDay().toString());
+		if(calendar.getCalStartTime()==null)
+			calendarRegisteForm.setCalStartTime(null);
+		else
+			calendarRegisteForm.setCalStartTime(calendar.getCalStartTime().toString());
+		if(calendar.getCalEndTime()==null)
+			calendarRegisteForm.setCalEndTime(null);
+		else
+			calendarRegisteForm.setCalEndTime(calendar.getCalEndTime().toString());
 		return "calendar_modify";
 	}
 	
@@ -91,7 +110,13 @@ public class CalendarController {
         if (!calendar.getCalAuthor().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
-        this.calService.modify(calendar, calendarRegisteForm.getCalStartDay(), calendarRegisteForm.getCalText());
+        if(calendarRegisteForm.getCalEndDay() != "")
+		{
+			if(0<(LocalDate.parse(calendarRegisteForm.getCalStartDay())).compareTo(LocalDate.parse(calendarRegisteForm.getCalEndDay())))
+				return "calendar_modify";
+		}
+        this.calService.modify(calendar, calendarRegisteForm.getCalText(), calendarRegisteForm.getCalStartDay(), calendarRegisteForm.getCalEndDay(), 
+        		calendarRegisteForm.getCalStartTime(), calendarRegisteForm.getCalEndTime());
 
         return String.format("redirect:/calendar/%s", calendarRegisteForm.getCalStartDay()); //달력 출력 화면으로 전환
     }

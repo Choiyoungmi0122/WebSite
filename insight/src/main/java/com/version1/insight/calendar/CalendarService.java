@@ -1,6 +1,7 @@
 package com.version1.insight.calendar;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import com.version1.insight.DataNotFoundException;
 import com.version1.insight.user.UserInfo;
@@ -33,16 +34,40 @@ public class CalendarService {
 
 	
 	//추가
-	public void addData(UserInfo userInfo, String calStartDay, String calText) {
+	public void addData(UserInfo userInfo, String calText, String calStartDay,  String calEndDay, String calStartTime, String calEndTime) {
 		Calendar calendar = new Calendar();
 		calendar.setCalAuthor(userInfo);
 		calendar.setCalStartDay(LocalDate.parse(calStartDay));
+		if(calEndDay=="")
+			calendar.setCalEndDay(LocalDate.parse(calStartDay));
+		else	
+			calendar.setCalEndDay(LocalDate.parse(calEndDay));
+		if(calStartTime=="")
+			calendar.setCalStartTime(null);
+		else
+			calendar.setCalStartTime(LocalTime.parse(calStartTime));
+		if(calEndTime=="")
+			calendar.setCalEndTime(null);
+		else
+			calendar.setCalEndTime(LocalTime.parse(calEndTime));
 		calendar.setCalText(calText);
 		this.calRepo.save(calendar);
 	}
 	//수정
-	public void modify(Calendar calendar, String calStartDay, String calText) {
+	public void modify(Calendar calendar, String calText, String calStartDay,  String calEndDay, String calStartTime, String calEndTime) {
 		calendar.setCalStartDay(LocalDate.parse(calStartDay));
+		if(calEndDay=="")
+			calendar.setCalEndDay(LocalDate.parse(calStartDay));
+		else	
+			calendar.setCalEndDay(LocalDate.parse(calEndDay));
+		if(calStartTime=="")
+			calendar.setCalStartTime(null);
+		else
+			calendar.setCalStartTime(LocalTime.parse(calStartTime));
+		if(calEndTime=="")
+			calendar.setCalEndTime(null);
+		else
+			calendar.setCalEndTime(LocalTime.parse(calEndTime));
 		calendar.setCalText(calText);
 		this.calRepo.save(calendar);
 	}

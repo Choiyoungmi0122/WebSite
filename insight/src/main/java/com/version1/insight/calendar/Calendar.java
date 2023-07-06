@@ -28,8 +28,9 @@ public class Calendar {
 
 
 	private LocalDate calStartDay;
-	private LocalDate calLastDay;
-	private LocalTime calDayTime;
+	private LocalDate calEndDay;
+	private LocalTime calStartTime;
+	private LocalTime calEndTime;
 	
 	private String calText;
 	

@@ -6,8 +6,20 @@
 			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 			<div th:replace="~{form_errors :: formErrorsFragment}"></div>
 			<div class="mb-3">
-				<label for="calStartDay">날짜 선택:</label>
+				<label for="calStartDay">시작 날짜 선택:</label>
 				<input type="date" th:field="*{calStartDay}" class="form-control">
+			</div>
+			<div class="mb-3">
+				<label for="calEndDay">종료 날짜 선택:</label>
+				<input type="date" th:field="*{calEndDay}" class="form-control">
+			</div>
+			<div class="mb-3">
+				<label for="calStartTime">시작 시간 선택:</label>
+				<input type="time" th:field="*{calStartTime}" class="form-control">
+			</div>
+			<div class="mb-3">
+				<label for="calEndTime">종료 시간 선택:</label>
+				<input type="time" th:field="*{calEndTime}" class="form-control">
 			</div>
 	        <div class="mb-3">
 	            <label for="calText" class="form-label">일정</label>
