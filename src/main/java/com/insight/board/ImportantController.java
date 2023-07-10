@@ -20,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.insight.user.UserInfo;
 import com.insight.user.UserService;
 
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -51,13 +52,13 @@ public class ImportantController {
         return "important_detail";
     }
 	
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/create")
     public String importantCreate(ImportantForm importantForm) {
         return "important_form";
     }
 	
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/create")
     public String importantCreate(@Valid ImportantForm importantForm, BindingResult bindingResult, Principal principal, MultipartHttpServletRequest multiRequest) throws Exception {
 		if (bindingResult.hasErrors()) {
@@ -71,20 +72,17 @@ public class ImportantController {
 		return "redirect:/important/main";
     }
 
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/modify/{id}")
     public String importantModify(ImportantForm importantForm, @PathVariable("id") Integer impoId, Principal principal) {
         Important important = this.importantService.getImportant(impoId);
-        if(!important.getImpoAuthor().getUsername().equals(principal.getName())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
-        }
         importantForm.setImpoTf(important.getImpoTf());
         importantForm.setImpoTitle(important.getImpoTitle());
         importantForm.setImpoText(important.getImpoText());
         return "important_form";
     }
 	
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/modify/{id}")
     public String importantModify(@Valid ImportantForm importantForm, BindingResult bindingResult, 
             Principal principal, @PathVariable("id") Integer impoId) {
@@ -92,20 +90,14 @@ public class ImportantController {
             return "important_form";
         }
         Important important = this.importantService.getImportant(impoId);
-        if (!important.getImpoAuthor().getUsername().equals(principal.getName())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
-        }
         this.importantService.modify(important, importantForm.getImpoTitle(), importantForm.getImpoText(), importantForm.getImpoTf());
         return String.format("redirect:/important/detail/%s", impoId);
     }
 	
-	 @PreAuthorize("isAuthenticated()")
+	 @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/delete/{id}")
     public String importantDelete(Principal principal, @PathVariable("id") Integer impoId) {
 	 Important important = this.importantService.getImportant(impoId);
-        if (!important.getImpoAuthor().getUsername().equals(principal.getName())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
-        }
         this.importantService.delete(important);
         return "redirect:/important/main";
     }

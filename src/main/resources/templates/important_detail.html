@@ -20,12 +20,10 @@
             </div>
             <div class="my-3">
 	            <a th:href="@{|/important/modify/${important.impoId}|}" class="btn btn-sm btn-outline-secondary"
-	                sec:authorize="isAuthenticated()"
-	                th:if="${important.impoAuthor != null and #authentication.getPrincipal().getUsername() == important.impoAuthor.username}"
+	                sec:authorize="hasRole('ADMIN')"
 	                th:text="수정"></a>
                 <a href="javascript:void(0);" th:data-uri="@{|/important/delete/${important.impoId}|}"
-	                class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"
-	                th:if="${important.impoAuthor != null and #authentication.getPrincipal().getUsername() == important.impoAuthor.username}"
+	                class="delete btn btn-sm btn-outline-secondary" sec:authorize="hasRole('ADMIN')"
 	                th:text="삭제"></a>
 	        </div>
         </div>

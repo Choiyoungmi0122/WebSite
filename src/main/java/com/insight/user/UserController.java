@@ -1,10 +1,15 @@
 package com.insight.user;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 
 import java.security.Principal;
 
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+import org.springframework.boot.autoconfigure.web.ServerProperties.Reactive.Session;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,7 +17,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.server.ResponseStatusException;
 
+import com.insight.board.Notice;
 import com.insight.calendar.Calendar;
 import com.insight.calendar.CalendarRegisteForm;
 
@@ -59,17 +66,20 @@ public class UserController {
         return "redirect:/";
         
     }
+    
     @GetMapping("/login")
     public String login() {
         return "login_form";
     }
     
+    
+    @RolesAllowed({"USER_ROLE", "ADMIN_ROLE"})
     @GetMapping(value = "/detail/{id}")
     public String detail(UserModifyForm userModifyForm, Model model, @PathVariable("id") String username,
     		Principal principal, BindingResult bindingResult) {
     	UserInfo userInfo = this.userService.getUser(username);
     	model.addAttribute("username",username);
-    	if(!userInfo.getUsername().equals(username)) {
+    	if((!userInfo.getUsername().equals(principal.getName())) && (!principal.getName().equals("87654321"))) {
     		return "redirect:/";
     	}
 //    	if (!userModifyForm.getPassword1().equals(userModifyForm.getPassword2())) {
@@ -115,5 +125,16 @@ public class UserController {
 
         return "redirect:/";
         
+    }
+    
+    @RolesAllowed({"USER_ROLE", "ADMIN_ROLE"})
+    @GetMapping("/delete/{id}")
+    public String userDelete(Principal principal, @PathVariable("id") String username) {
+        UserInfo userInfo = this.userService.getUser(username);
+        if((!userInfo.getUsername().equals(principal.getName())) && (!principal.getName().equals("87654321"))) {
+        	throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
+    	}
+        this.userService.delete(userInfo);
+        return "redirect:/";
     }
 }

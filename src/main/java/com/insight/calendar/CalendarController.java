@@ -1,5 +1,6 @@
 package com.insight.calendar;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
@@ -44,7 +45,7 @@ public class CalendarController {
 		return "calendar_main";
 	}
 	
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
 	@GetMapping("/create")
     public String createAnswer(CalendarRegisteForm calendarRegisteForm) {
 		calendarRegisteForm.setCalStartDay((LocalDate.now()).toString());
@@ -52,7 +53,7 @@ public class CalendarController {
         return "calendar_form";
     }
 	
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
 	//일정 등록 html에서 등록 버튼 눌렀을 때 저장하는 함수
 	@PostMapping("/create")
 	public String createAnswer(@Valid CalendarRegisteForm calendarRegisteForm, BindingResult bindingResult, Principal principal) {
@@ -70,18 +71,18 @@ public class CalendarController {
         return String.format("redirect:/calendar/%s", calendarRegisteForm.getCalStartDay());
     }
 
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
 	@GetMapping("/modify/{id}")
 	public String modifyCalendar(CalendarRegisteForm calendarRegisteForm, Model model, @PathVariable("id") Integer calId
 			,Principal principal) {
 		Calendar calendar = this.calService.getInfo(calId);
-		if (!calendar.getCalAuthor().getUsername().equals(principal.getName())) {
-			return String.format("redirect:/calendar/%s", calendar.getCalStartDay());
-        }
 		//매개변수를 CalendarForm, 일정의 id, 사용자의 정보로 한다.
 		model.addAttribute(calendar);
 		calendarRegisteForm.setCalStartDay((calendar.getCalStartDay()).toString());
 		calendarRegisteForm.setCalText(calendar.getCalText());
+		if((!calendar.getCalAuthor().getUsername().equals(principal.getName())) && (!principal.getName().equals("87654321")))/*사용자의 학번과 작성자의 학번 비교)*/ {
+			return String.format("redirect:/calendar/%s", calendar.getCalStartDay()	); //달력 출력 화면으로 전환 
+        }
 		if(calendar.getCalEndDay()==null)
 			calendarRegisteForm.setCalEndDay(null);
 		else
@@ -97,7 +98,7 @@ public class CalendarController {
 		return "calendar_modify";
 	}
 	
-	@PreAuthorize("isAuthenticated()")	
+	@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
 	//일정 수정 페이지에서 일정을 수정후 확인 버튼을 누르면 작동하는 함수
 	//역할조건 안넣음 @PreAuthorize
     @PostMapping("/modify/{id}")
@@ -107,9 +108,6 @@ public class CalendarController {
             return "calendar_modify";
         }
         Calendar calendar = this.calService.getInfo(calId);
-        if (!calendar.getCalAuthor().getUsername().equals(principal.getName())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
-        }
         if(calendarRegisteForm.getCalEndDay() != "")
 		{
 			if(0<(LocalDate.parse(calendarRegisteForm.getCalStartDay())).compareTo(LocalDate.parse(calendarRegisteForm.getCalEndDay())))
@@ -119,17 +117,19 @@ public class CalendarController {
         		calendarRegisteForm.getCalStartTime(), calendarRegisteForm.getCalEndTime());
 
         return String.format("redirect:/calendar/%s", calendarRegisteForm.getCalStartDay()); //달력 출력 화면으로 전환
+        
+        
     }
 	
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     //일정 삭제 시 작동하는 함수
 	@GetMapping("/delete/{id}")
     public String deleteCalendar(@PathVariable("id") Integer calId,
 			Principal principal) {
 		Calendar calendar = this.calService.getInfo(calId);
 		
-		if(!calendar.getCalAuthor().getUsername().equals(principal.getName()))/*사용자의 학번과 작성자의 학번 비교)*/ {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제 권한이 없습니다.");
+		if((!calendar.getCalAuthor().getUsername().equals(principal.getName())) && (!principal.getName().equals("87654321")))/*사용자의 학번과 작성자의 학번 비교)*/ {
+			return String.format("redirect:/calendar/%s", calendar.getCalStartDay()	); //달력 출력 화면으로 전환 
         }
 		LocalDate back = calendar.getCalStartDay();
 		this.calService.delete(calendar);

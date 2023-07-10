@@ -6,6 +6,7 @@ import java.security.Principal;
 import com.insight.user.UserInfo;
 import com.insight.user.UserService;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -83,13 +84,13 @@ public class NoticeController {
         return "question_detail";
     }
 	
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
 	@GetMapping("/create")
     public String noticeCreate(NoticeForm noticeForm) {
         return "question_form";
     }
 	
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
 	@PostMapping("/create")
     public String noticeCreate(@Valid NoticeForm noticeForm, BindingResult bindingResult, Principal principal) {
 		if (bindingResult.hasErrors()) {
@@ -100,10 +101,11 @@ public class NoticeController {
 		return "redirect:/notice/main/all";
     }
 
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @GetMapping("/modify/{id}")
     public String noticeModify(Model model, NoticeForm noticeForm, @PathVariable("id") Integer noticeId, Principal principal) {
         Notice notice = this.noticeService.getNotice(noticeId);
+
         if(!notice.getNoticeAuthor().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
@@ -113,7 +115,7 @@ public class NoticeController {
         return "question_form";
     }
 	
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @PostMapping("/modify/{id}")
     public String noticeModify(@Valid NoticeForm noticeForm, BindingResult bindingResult, 
             Principal principal, @PathVariable("id") Integer noticeId) {
@@ -128,7 +130,7 @@ public class NoticeController {
         return String.format("redirect:/notice/detail/%s", noticeId);
     }
 	
-	 @PreAuthorize("isAuthenticated()")
+	 @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
 	    @GetMapping("/delete/{id}")
 	    public String noticeDelete(Principal principal, @PathVariable("id") Integer noticeId) {
 	        Notice notice = this.noticeService.getNotice(noticeId);
@@ -136,6 +138,6 @@ public class NoticeController {
 	            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
 	        }
 	        this.noticeService.delete(notice);
-	        return "redirect:/notice/main";
+	        return "redirect:/notice/main/all";
 	    }
 }

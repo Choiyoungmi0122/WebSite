@@ -224,12 +224,16 @@
 			                <a sec:authorize="isAnonymous()"
 				                th:text="${calendar.calText}">
 			                </a>
-			                <a sec:authorize="isAuthenticated()"
+			                <a sec:authorize="hasRole('GUEST')"
 			                th:if="${calendar.calAuthor != null and #authentication.getPrincipal().getUsername() != calendar.calAuthor.username}"
+				                th:text="${calendar.calText}">
+			                </a>
+			                <a sec:authorize="hasRole('ADMIN')"
+			               		th:href="@{|/calendar/modify/${calendar.calId}|}"
 				                th:text="${calendar.calText}">
 			                </a>	
 			                <a th:href="@{|/calendar/modify/${calendar.calId}|}"
-				                sec:authorize="isAuthenticated()"
+				                sec:authorize="hasRole('USER')"
 				                th:if="${calendar.calAuthor != null and #authentication.getPrincipal().getUsername() == calendar.calAuthor.username}"
 				                th:text="${calendar.calText}">
 			                </a>

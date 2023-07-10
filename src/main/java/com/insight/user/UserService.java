@@ -1,12 +1,14 @@
 package com.insight.user;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.insight.DataNotFoundException;
+import com.insight.board.Notice;
 
 import lombok.RequiredArgsConstructor;
 
@@ -33,6 +35,7 @@ public class UserService {
         user.setWantedAct(wantedAct);
         user.setIntroduction(introduction);
         user.setJoinDate(LocalDate.now());
+        user.setAdminAut(false);
         this.userRepository.save(user);
     }
     public UserInfo getUser(String username) {
@@ -58,5 +61,13 @@ public class UserService {
         user.setWantedAct(wantedAct);
         user.setIntroduction(introduction);
         this.userRepository.save(user);
+    }
+    public List<UserInfo> getUserList() {
+        return this.userRepository.findAll();
+    }
+    
+    public void delete(UserInfo userInfo) {
+    	userInfo.setAdminAut(false);
+        this.userRepository.delete(userInfo);
     }
 }
