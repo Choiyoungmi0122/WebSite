@@ -209,7 +209,7 @@
 	        </table>
         </div>
         <div>
-			<a th:href="@{/calendar/create}" class="btn btn-primary">등록</a>
+			<a th:href="@{/calendar/create}" class="btn btn-primary" sec:authorize="hasRole('USER') || hasRole('ADMIN')" th:text="등록"></a>
 	        <table class="table" style="width:60%; float:right">
 		        <thead class="table-dark">
 			        <tr class="text-center">
@@ -225,15 +225,14 @@
 				                th:text="${calendar.calText}">
 			                </a>
 			                <a sec:authorize="hasRole('GUEST')"
-			                th:if="${calendar.calAuthor != null and #authentication.getPrincipal().getUsername() != calendar.calAuthor.username}"
 				                th:text="${calendar.calText}">
 			                </a>
 			                <a sec:authorize="hasRole('ADMIN')"
 			               		th:href="@{|/calendar/modify/${calendar.calId}|}"
 				                th:text="${calendar.calText}">
 			                </a>	
-			                <a th:href="@{|/calendar/modify/${calendar.calId}|}"
-				                sec:authorize="hasRole('USER')"
+			                <a sec:authorize="hasRole('USER')"
+				               	th:href="@{|/calendar/modify/${calendar.calId}|}"
 				                th:if="${calendar.calAuthor != null and #authentication.getPrincipal().getUsername() == calendar.calAuthor.username}"
 				                th:text="${calendar.calText}">
 			                </a>

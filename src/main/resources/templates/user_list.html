@@ -10,6 +10,7 @@
 				<th>전화번호</th>
 				<th>이메일</th>
 				<th>전공</th>
+				<th>권한</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -23,6 +24,7 @@
                 <td th:text="${userInfo.getPhoneNumber()}"></td>
                 <td th:text="${userInfo.getEmail()}"></td>
                 <td th:text="${userInfo.getMajor()}"></td>
+               	<td th:text="${userInfo.getAdminAut()}"></td>
             </tr>
 		</tbody>
 	</table>

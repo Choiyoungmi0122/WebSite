@@ -35,7 +35,7 @@ public class UserService {
         user.setWantedAct(wantedAct);
         user.setIntroduction(introduction);
         user.setJoinDate(LocalDate.now());
-        user.setAdminAut(false);
+        user.setAdminAut("승인 대기");
         this.userRepository.save(user);
     }
     public UserInfo getUser(String username) {
@@ -47,12 +47,11 @@ public class UserService {
         }
     }
     public void modify(UserInfo user, String studentName, String email,
-    		String password ,String phoneNumber, String major, 
+    		String phoneNumber, String major, 
     		String grade, String doing, String condition,
-    		String wantedAct, String introduction) {
+    		String wantedAct, String introduction, String adminAut) {
         user.setStudentName(studentName);
         user.setEmail(email);
-        user.setPassword(passwordEncoder.encode(password));
         user.setPhoneNumber(phoneNumber);
         user.setMajor(major);
         user.setGrade(grade);
@@ -60,14 +59,21 @@ public class UserService {
         user.setCondition(condition);
         user.setWantedAct(wantedAct);
         user.setIntroduction(introduction);
+        user.setAdminAut(adminAut);
         this.userRepository.save(user);
     }
+    
+    public void pwmodify(UserInfo user, String password) {
+    	user.setPassword(passwordEncoder.encode(password));
+    	this.userRepository.save(user);
+    }
+    
     public List<UserInfo> getUserList() {
         return this.userRepository.findAll();
     }
     
     public void delete(UserInfo userInfo) {
-    	userInfo.setAdminAut(false);
-        this.userRepository.delete(userInfo);
+    	userInfo.setAdminAut("탈퇴");
+        this.userRepository.save(userInfo);
     }
 }

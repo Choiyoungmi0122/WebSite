@@ -4,6 +4,7 @@ import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.boot.autoconfigure.web.ServerProperties.Reactive.Session;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.insight.board.Notice;
@@ -29,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-
+	
     private final UserService userService;
 
     @GetMapping("/join")
@@ -55,7 +57,7 @@ public class UserController {
                  userCreateForm.getWantedAct(),userCreateForm.getIntroduction());
         }catch(DataIntegrityViolationException e) {
             e.printStackTrace();
-            bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
+//            bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
             return "signup_form";
         }catch(Exception e) {
             e.printStackTrace();
@@ -73,7 +75,7 @@ public class UserController {
     }
     
     
-    @RolesAllowed({"USER_ROLE", "ADMIN_ROLE"})
+    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @GetMapping(value = "/detail/{id}")
     public String detail(UserModifyForm userModifyForm, Model model, @PathVariable("id") String username,
     		Principal principal, BindingResult bindingResult) {
@@ -95,9 +97,9 @@ public class UserController {
     	userModifyForm.setGrade(userInfo.getGrade());
     	userModifyForm.setIntroduction(userInfo.getIntroduction());
     	userModifyForm.setMajor(userInfo.getMajor());
-    	userModifyForm.setPassword(userInfo.getPassword());
     	userModifyForm.setPhoneNumber(userInfo.getPhoneNumber());
     	userModifyForm.setWantedAct(userInfo.getWantedAct());
+    	userModifyForm.setAdminAut(userInfo.getAdminAut());
     	return "user_detail";
     }
     
@@ -107,12 +109,16 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "user_detail";
         }
+        String adminAut = userModifyForm.getAdminAut();
+        if(adminAut==null) {
+        	adminAut ="부원";
+        }
         UserInfo userInfo = this.userService.getUser(username);
         try {
-        userService.modify(userInfo, userModifyForm.getStudentName(),userModifyForm.getEmail(), 
-        		userModifyForm.getPassword(),userModifyForm.getPhoneNumber(),userModifyForm.getMajor(),
+        userService.modify(userInfo, userModifyForm.getStudentName(),userModifyForm.getEmail(),
+        		userModifyForm.getPhoneNumber(),userModifyForm.getMajor(),
         		userModifyForm.getGrade(),userModifyForm.getDoing(),userModifyForm.getCondition(),
-        		userModifyForm.getWantedAct(),userModifyForm.getIntroduction());
+        		userModifyForm.getWantedAct(),userModifyForm.getIntroduction(), adminAut);
         }catch(DataIntegrityViolationException e) {
             e.printStackTrace();
             bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
@@ -127,14 +133,39 @@ public class UserController {
         
     }
     
-    @RolesAllowed({"USER_ROLE", "ADMIN_ROLE"})
+    @GetMapping("/detail/pwmodify/{id}")
+    public String pwdetail(Model model, @PathVariable("id") String username, Principal principal) {
+    	UserInfo userInfo = this.userService.getUser(username);
+    	model.addAttribute("userInfo",userInfo);
+    	if((!userInfo.getUsername().equals(principal.getName())) && (!principal.getName().equals("87654321"))) {
+    		return "redirect:/";
+    	}
+    	return "password_modify";
+    }
+    
+    @PostMapping("/detail/pwmodify/{id}")
+    public String pwdetail(@PathVariable("id") String username, @RequestParam String password) {
+    	UserInfo userInfo = this.userService.getUser(username);
+    	
+    	userService.pwmodify(userInfo, password);
+    	
+    	return String.format("redirect:/user/detail/%s", userInfo.getUsername());
+    }
+    
+    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @GetMapping("/delete/{id}")
     public String userDelete(Principal principal, @PathVariable("id") String username) {
         UserInfo userInfo = this.userService.getUser(username);
-        if((!userInfo.getUsername().equals(principal.getName())) && (!principal.getName().equals("87654321"))) {
+        if(!userInfo.getUsername().equals(principal.getName())) {
         	throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
     	}
         this.userService.delete(userInfo);
         return "redirect:/";
     }
+    @GetMapping("/list")
+	 public String userList(Model model) {
+		 List<UserInfo> userList = this.userService.getUserList();
+		 model.addAttribute("userList",userList);
+		 return "user_list";
+	 }
 }

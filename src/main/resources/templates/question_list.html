@@ -3,7 +3,6 @@
 	<div class="row my-3">
         <div class="col-6">
             <a sec:authorize="hasRole('USER') || hasRole('ADMIN')"
-            
              th:href="@{/notice/create}" class="btn btn-primary">등록</a>
         </div>
         <div class="col-6">
@@ -51,14 +50,13 @@
 			            
 			            
 			            <td class="text-start">
-			                <a th:href="@{|/notice/detail/${notice.noticeId}|}" th:text="${notice.noticeTitle}" sec:authorize="!hasRole('ADMIN')"></a>
-			                <a th:href="@{|/admin/notice/detail/${notice.noticeId}|}" th:text="${notice.noticeTitle}" sec:authorize="hasRole('ADMIN')"></a>
+			                <a th:href="@{|/notice/detail/${notice.noticeId}|}" th:text="${notice.noticeTitle}"></a>
 			            	<span class="text-danger small ms-2"
 			                    th:if="${#lists.size(notice.CommentList) > 0}" 
 			                    th:text="${#lists.size(notice.CommentList)}">
 			                </span>
 			            </td>
-			            <td><span th:if="${notice.noticeAuthor != null}" th:text="${notice.noticeAuthor.studentName}"></span></td>
+			            <td><span th:text="${notice.noticeAuthor.studentName}"></span></td>
 			            <td th:text="${#temporals.format(notice.noticeRegister, 'yyyy-MM-dd HH:mm')}"></td>
 			            
 			            <td th:text="${notice.noticeView}"></td>

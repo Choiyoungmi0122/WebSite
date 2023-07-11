@@ -20,18 +20,12 @@
             </div>
             <div class="my-3">
 	            <a th:href="@{|/notice/modify/${notice.noticeId}|}" class="btn btn-sm btn-outline-secondary"
-	                sec:authorize="!hasRole('ADMIN')"
-	                th:if="${notice.noticeAuthor != null and #authentication.getPrincipal().getUsername() == notice.noticeAuthor.username}"
-	                th:text="수정"></a>
-                <a th:href="@{|/admin/notice/modify/${notice.noticeId}|}" class="btn btn-sm btn-outline-secondary"
-	                sec:authorize="hasRole('ADMIN')"
+	                sec:authorize="isAuthenticated()"
+	                th:if="${#authentication.getPrincipal().getUsername() == notice.noticeAuthor.username || #authorization.expression('hasRole(''ROLE_ADMIN'')')}"
 	                th:text="수정"></a>
                 <a href="javascript:void(0);" th:data-uri="@{|/notice/delete/${notice.noticeId}|}"
-	                class="delete btn btn-sm btn-outline-secondary" sec:authorize="!hasRole('ADMIN')"
-	                th:if="${notice.noticeAuthor != null and #authentication.getPrincipal().getUsername() == notice.noticeAuthor.username}"
-	                th:text="삭제"></a>
-                <a href="javascript:void(0);" th:data-uri="@{|/admin/notice/delete/${notice.noticeId}|}"
-	                class="delete btn btn-sm btn-outline-secondary" sec:authorize="hasRole('ADMIN')"
+	                class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"
+	                th:if="${#authentication.getPrincipal().getUsername() == notice.noticeAuthor.username || #authorization.expression('hasRole(''ROLE_ADMIN'')')}"
 	                th:text="삭제"></a>
 	        </div>
         </div>
@@ -60,19 +54,13 @@
             </div>
             <div class="my-3">
 	            <a th:href="@{|/comment/modify/${noticeComment.cmId}|}" class="btn btn-sm btn-outline-secondary"
-	                sec:authorize="!hasRole('ADMIN')"
-	                th:if="${noticeComment.cmAuthor != null and #authentication.getPrincipal().getUsername() == noticeComment.cmAuthor.username}"
-	                th:text="수정"></a>
-	             <a th:href="@{|/admin/comment/modify/${noticeComment.cmId}|}" class="btn btn-sm btn-outline-secondary"
-	                sec:authorize="hasRole('ADMIN')"
+	                sec:authorize="isAuthenticated()"
+	                th:if="${#authentication.getPrincipal().getUsername() == noticeComment.cmAuthor.username || #authorization.expression('hasRole(''ROLE_ADMIN'')')}"
 	                th:text="수정"></a>
                  <a href="javascript:void(0);" th:data-uri="@{|/comment/delete/${noticeComment.cmId}|}"
-	                class="delete btn btn-sm btn-outline-secondary" sec:authorize="!hasRole('ADMIN')"
-	                th:if="${noticeComment.cmAuthor != null and #authentication.getPrincipal().getUsername() == noticeComment.cmAuthor.username}"
+	                class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"
+	                th:if="${#authentication.getPrincipal().getUsername() == noticeComment.cmAuthor.username || #authorization.expression('hasRole(''ROLE_ADMIN'')')}"
 	                th:text="삭제"></a>
-	             <a href="javascript:void(0);" th:data-uri="@{|/admin/comment/delete/${noticeComment.cmId}|}"
-	                class="delete btn btn-sm btn-outline-secondary" sec:authorize="hasRole('ADMIN')"
-	               	th:text="삭제"></a>
         	</div>
         </div>
     </div>
@@ -80,9 +68,8 @@
     <!-- 답변 작성 -->
     <form th:action="@{|/comment/create/${notice.noticeId}|}" th:object="${noticeCommentForm}" method="post" class="my-3">
 		<div th:replace="~{form_errors :: formErrorsFragment}"></div>
-        <textarea sec:authorize="isAnonymous()" disabled th:field="*{cmText}" class="form-control" rows="10"></textarea>
-        <textarea sec:authorize="isAuthenticated()" th:field="*{cmText}" class="form-control" rows="10"></textarea>
-        <input type="submit" value="답변등록" class="btn btn-primary my-2">
+        <textarea sec:authorize="hasRole('ADMIN') || hasRole('USER')" th:field="*{cmText}" class="form-control" rows="10"></textarea>
+        <input type="submit" value="답변등록" class="btn btn-primary my-2" sec:authorize="hasRole('ADMIN') || hasRole('USER')">
     </form>
 </div>
 <script layout:fragment="script" type='text/javascript'>

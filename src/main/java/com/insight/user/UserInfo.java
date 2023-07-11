@@ -43,15 +43,6 @@ public class UserInfo{
 	private String introduction;
 	private LocalDate joinDate;
 
-	private Boolean adminAut;
+	private String adminAut;
 
-//	@Builder
-//	public UserInfo(String username, String studentName, String password,
-//			String email, String adminAut) {
-//		this.username = username;
-//		this.studentName = studentName;
-//		this.password = password;
-//		this.email = email;
-//		this.adminAut = adminAut;
-//	}
 }

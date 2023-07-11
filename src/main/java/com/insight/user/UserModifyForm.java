@@ -41,4 +41,6 @@ public class UserModifyForm {
 	
 	private String introduction;
 	
+	private String adminAut;
+	
 }
