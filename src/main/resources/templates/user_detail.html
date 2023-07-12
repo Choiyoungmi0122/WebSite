@@ -11,6 +11,7 @@
         <div class="form-group" sec:authorize="hasRole('ADMIN')">
                 <label for="adminAut" style="display: inline-block">권한:</label>
                 <select th:field="*{adminAut}" required style="width:12%; display:inline-block;">
+					<option value="관리자">관리자</option>
                     <option value="부원">부원</option>
                     <option value="승인 대기">승인 대기</option>
                     <option value="승인 거절">승인 거절</option>

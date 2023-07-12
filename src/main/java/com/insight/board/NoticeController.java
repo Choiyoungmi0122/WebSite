@@ -106,7 +106,7 @@ public class NoticeController {
     public String noticeModify(Model model, NoticeForm noticeForm, @PathVariable("id") Integer noticeId, Principal principal) {
         Notice notice = this.noticeService.getNotice(noticeId);
 
-        if(!notice.getNoticeAuthor().getUsername().equals(principal.getName())) {
+        if((!notice.getNoticeAuthor().getUsername().equals(principal.getName())) && (!principal.getName().equals("87654321"))) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
         model.addAttribute(notice);
@@ -123,7 +123,7 @@ public class NoticeController {
             return "question_form";
         }
         Notice notice = this.noticeService.getNotice(noticeId);
-        if (!notice.getNoticeAuthor().getUsername().equals(principal.getName())) {
+        if((!notice.getNoticeAuthor().getUsername().equals(principal.getName())) && (!principal.getName().equals("87654321"))) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
         this.noticeService.modify(notice, noticeForm.getNoticeTitle(), noticeForm.getNoticeText());
@@ -134,7 +134,7 @@ public class NoticeController {
 	    @GetMapping("/delete/{id}")
 	    public String noticeDelete(Principal principal, @PathVariable("id") Integer noticeId) {
 	        Notice notice = this.noticeService.getNotice(noticeId);
-	        if (!notice.getNoticeAuthor().getUsername().equals(principal.getName())) {
+	        if((!notice.getNoticeAuthor().getUsername().equals(principal.getName())) && (!principal.getName().equals("87654321"))) {
 	            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
 	        }
 	        this.noticeService.delete(notice);
