@@ -1,16 +1,17 @@
 package com.insight.user;
 
-import jakarta.annotation.security.RolesAllowed;
+
 import jakarta.validation.Valid;
 
 import java.security.Principal;
 import java.util.List;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
-import org.springframework.boot.autoconfigure.web.ServerProperties.Reactive.Session;
+
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,10 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
-
-import com.insight.board.Notice;
-import com.insight.calendar.Calendar;
-import com.insight.calendar.CalendarRegisteForm;
 
 import lombok.RequiredArgsConstructor;
 
@@ -84,11 +81,7 @@ public class UserController {
     	if((!userInfo.getUsername().equals(principal.getName())) && (!principal.getName().equals("87654321"))) {
     		return "redirect:/";
     	}
-//    	if (!userModifyForm.getPassword1().equals(userModifyForm.getPassword2())) {
-//            bindingResult.rejectValue("password2", "passwordInCorrect", 
-//                    "2개의 패스워드가 일치하지 않습니다.");
-//            return "signup_form";
-//        }
+
     	userModifyForm.setUsername(userInfo.getUsername());
     	userModifyForm.setStudentName(userInfo.getStudentName());
     	userModifyForm.setCondition(userInfo.getCondition());

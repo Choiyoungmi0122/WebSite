@@ -230,6 +230,9 @@
 			                <a sec:authorize="hasRole('ADMIN')"
 			               		th:href="@{|/calendar/modify/${calendar.calId}|}"
 				                th:text="${calendar.calText}">
+			                </a>
+			                <a sec:authorize="hasRole('USER')"
+				               	th:text="${calendar.calText}">
 			                </a>	
 			                <a sec:authorize="hasRole('USER')"
 				               	th:href="@{|/calendar/modify/${calendar.calId}|}"
