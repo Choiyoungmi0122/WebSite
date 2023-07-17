@@ -32,6 +32,8 @@ public class UserSecurityService implements UserDetailsService {
             authorities.add(new SimpleGrantedAuthority(UserRole.ADMIN.getValue()));
         }else if (siteUser.getAdminAut().equals("부원")) {
             authorities.add(new SimpleGrantedAuthority(UserRole.USER.getValue()));
+        }else if (siteUser.getAdminAut().equals("탈퇴")) {
+        	throw new UsernameNotFoundException("사용자를 찾을수 없습니다.");
         }else {
         	authorities.add(new SimpleGrantedAuthority(UserRole.GUEST.getValue()));
         }
