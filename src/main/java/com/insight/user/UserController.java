@@ -153,8 +153,9 @@ public class UserController {
         	throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
     	}
         this.userService.delete(userInfo);
-        return "redirect:/";
+        return "redirect:/user/logout";
     }
+    
     @GetMapping("/list")
 	 public String userList(Model model) {
 		 List<UserInfo> userList = this.userService.getUserList();
