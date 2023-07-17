@@ -57,8 +57,8 @@
 	                sec:authorize="hasRole('USER') || hasRole('ADMIN')"
 	                th:if="${#authentication.getPrincipal().getUsername() == noticeComment.cmAuthor.username || #authorization.expression('hasRole(''ROLE_ADMIN'')')}"
 	                th:text="수정"></a>
-                 <a href="javascript:void(0);" th:data-uri="@{|/comment/delete/${noticeComment.cmId}|}"
-	                class="delete btn btn-sm btn-outline-secondary" sec:authorize="hasRole('USER') || hasRole('ADMIN')"
+                 <a href="javascript:void(0);" th:data-uri="@{|/comment/delete/${noticeComment.cmId}|}" class="delete btn btn-sm btn-outline-secondary"
+                 	sec:authorize="hasRole('USER') || hasRole('ADMIN')"
 	                th:if="${#authentication.getPrincipal().getUsername() == noticeComment.cmAuthor.username || #authorization.expression('hasRole(''ROLE_ADMIN'')')}"
 	                th:text="삭제"></a>
         	</div>
