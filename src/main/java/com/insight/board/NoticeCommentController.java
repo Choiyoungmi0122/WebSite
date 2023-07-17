@@ -47,7 +47,7 @@ public class NoticeCommentController {
     public String noticeCommentModify(Model model, NoticeCommentForm noticeCommentForm, @PathVariable("id") Integer cmId, Principal principal) {
 		NoticeComment noticeComment = this.noticeCommentService.getNoticeComment(cmId);
 		model.addAttribute("notice", noticeComment.getNotice());
-        if (!noticeComment.getCmAuthor().getUsername().equals(principal.getName())) {
+        if ((!noticeComment.getCmAuthor().getUsername().equals(principal.getName())) && (!principal.getName().equals("87654321"))) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
         noticeCommentForm.setCmText(noticeComment.getCmText());
