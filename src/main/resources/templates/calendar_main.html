@@ -233,11 +233,12 @@
 				                th:text="${calendar.calText}">
 			                </a>
 			                <a sec:authorize="hasRole('USER')"
+			                th:if="${#authentication.getPrincipal().getUsername() != calendar.calAuthor.username}"
 				               	th:text="${calendar.calText}">
 			                </a>	
 			                <a sec:authorize="hasRole('USER')"
 				               	th:href="@{|/calendar/modify/${calendar.calId}|}"
-				                th:if="${calendar.calAuthor != null and #authentication.getPrincipal().getUsername() == calendar.calAuthor.username}"
+				                th:if="${#authentication.getPrincipal().getUsername() == calendar.calAuthor.username}"
 				                th:text="${calendar.calText}">
 			                </a>
 			            </td>

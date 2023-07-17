@@ -131,14 +131,14 @@ public class NoticeController {
         return String.format("redirect:/notice/detail/%s", noticeId);
     }
 	
-	 @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
-	    @GetMapping("/delete/{id}")
-	    public String noticeDelete(Principal principal, @PathVariable("id") Integer noticeId) {
-	        Notice notice = this.noticeService.getNotice(noticeId);
-	        if((!notice.getNoticeAuthor().getUsername().equals(principal.getName())) && (!principal.getName().equals("87654321"))) {
-	            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
-	        }
-	        this.noticeService.delete(notice);
-	        return "redirect:/notice/main/all";
-	    }
+	@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
+    @GetMapping("/delete/{id}")
+    public String noticeDelete(Principal principal, @PathVariable("id") Integer noticeId) {
+        Notice notice = this.noticeService.getNotice(noticeId);
+        if((!notice.getNoticeAuthor().getUsername().equals(principal.getName())) && (!principal.getName().equals("87654321"))) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
+        }
+        this.noticeService.delete(notice);
+        return "redirect:/notice/main/all";
+    }
 }
