@@ -105,9 +105,10 @@ public class NoticeService {
         return this.noticeRepository.findAll(spec, pageable);
     }
 	
-	public void modify(Notice notice, String noticeTitle, String noticeText) {
+	public void modify(Notice notice, String noticeTitle, String noticeText, String noticeCategory) {
         notice.setNoticeTitle(noticeTitle);
         notice.setNoticeText(noticeText);
+        notice.setNoticeCategory(noticeCategory);
         notice.setNoticeModifyRegister(LocalDateTime.now());
         this.noticeRepository.save(notice);
     }

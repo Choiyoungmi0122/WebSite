@@ -112,6 +112,7 @@ public class NoticeController {
         model.addAttribute(notice);
         noticeForm.setNoticeTitle(notice.getNoticeTitle());
         noticeForm.setNoticeText(notice.getNoticeText());
+        noticeForm.setNoticeCategory(notice.getNoticeCategory());
         return "question_form";
     }
 	
@@ -126,7 +127,7 @@ public class NoticeController {
         if((!notice.getNoticeAuthor().getUsername().equals(principal.getName())) && (!principal.getName().equals("87654321"))) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
-        this.noticeService.modify(notice, noticeForm.getNoticeTitle(), noticeForm.getNoticeText());
+        this.noticeService.modify(notice, noticeForm.getNoticeTitle(), noticeForm.getNoticeText(), noticeForm.getNoticeCategory());
         return String.format("redirect:/notice/detail/%s", noticeId);
     }
 	
