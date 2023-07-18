@@ -6,8 +6,8 @@
 		        color: red;
 		        font-size: 30px;
 		        background-color: #ffcccc;
-		        padding: 10px;
-		        border: 1px solid #ff9999;
+		        padding: 5px;
+		        border: 2px solid #ff9999;
 		        border-radius: 5px;
 		    }
 		</style>
@@ -26,11 +26,11 @@
 			    </div>
 				<div class="mb-3">
 					<label for="calStartDay">시작 날짜 선택:</label>
-					<input type="date" th:field="*{calStartDay}" class="form-control">
+					<input type="date" id="calStartDay" th:field="*{calStartDay}" class="form-control">
 				</div>
 				<div class="mb-3">
 					<label for="calEndDay">종료 날짜 선택:</label>
-					<input type="date" th:field="*{calEndDay}" class="form-control">
+					<input type="date" id="calEndDay" th:field="*{calEndDay}" class="form-control">
 				</div>
 				<div class="mb-3">
 					<label for="calStartTime">시작 시간 선택:</label>
@@ -46,12 +46,12 @@
 		        </div>
 		        <div th:if="${modify}" class="my-3">
 					<input type="submit" value="수정" class="btn btn-primary my-2">
-	                <a href="javascript:void(0);" th:data-uri="@{|/calendar/delete/${calendar.calId}|}"
+	                <a href="javascript:void(0);" th:data-uri="@{|/calendar/delete/${calId}|}"
 		                class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"
 		                th:text="삭제"></a>
 				</div>
 				<div th:if="${create}" class="my-3">
-					<input type="submit" value="저장하기" class="btn btn-primary my-2">
+					<button type="submit" value="저장하기" class="btn btn-primary">저장하기</button>
 				</div>
 		    </form>
 		</div>
@@ -64,6 +64,7 @@
 			        };
 			    });
 			});
+
 		</script>
 	</body>
 </html>
