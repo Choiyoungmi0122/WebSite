@@ -129,7 +129,7 @@ public class UserController {
     }
     
     @GetMapping("/detail/pwmodify/{id}")
-    public String pwdetail(Model model, @PathVariable("id") String username, Principal principal) {
+    public String pwdetail(UserPwModifyForm userModifyForm, Model model, @PathVariable("id") String username, Principal principal) {
     	UserInfo userInfo = this.userService.getUser(username);
     	model.addAttribute("userInfo",userInfo);
     	
@@ -141,11 +141,24 @@ public class UserController {
     }
     
     @PostMapping("/detail/pwmodify/{id}")
-    public String pwdetail(@PathVariable("id") String username, @RequestParam String password) {
+    public String pwdetail(@Valid UserPwModifyForm userPwModifyForm, BindingResult bindingResult, @PathVariable("id") String username) {
+    	if (bindingResult.hasErrors()){
+            return "password_modify";
+        }
     	UserInfo userInfo = this.userService.getUser(username);
-    	
-    	userService.pwmodify(userInfo, password);
-    	
+        
+        try{
+            userService.pwmodify(userInfo, userPwModifyForm.getPassword1());
+        }catch(DataIntegrityViolationException e){
+            e.printStackTrace();
+            bindingResult.reject("passwordChangeFailed", "변경에 실패하였습니다.");
+            return "password_modify";
+        }catch(Exception e){
+            e.printStackTrace();
+            bindingResult.reject("passwordChangeFailed", e.getMessage());
+            return "password_modify";
+        }
+        
     	return String.format("redirect:/user/detail/%s", userInfo.getUsername());
     }
     

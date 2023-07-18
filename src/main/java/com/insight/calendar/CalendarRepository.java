@@ -10,5 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CalendarRepository extends JpaRepository<Calendar, Integer>{
 	List<Calendar> findByCalStartDay(LocalDate register);
-	Page<Calendar> findByCalStartDay(LocalDate register, Pageable pageable);
+	Page<Calendar> findByCalStartDay(LocalDate day, Pageable pageable);
+	Page<Calendar> findByCalStartDayLessThanEqualAndCalEndDayGreaterThanEqual(LocalDate day1, LocalDate day2, Pageable pageable);
 }

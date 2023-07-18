@@ -27,9 +27,9 @@ public class CalendarService {
         return this.calRepo.findByCalStartDay(register);
     }
 	
-	public Page<Calendar> getListDayPage(LocalDate register, int page){
+	public Page<Calendar> getListDayPage(LocalDate day, int page){
 		Pageable pageable = PageRequest.of(page, 5);
-		return this.calRepo.findByCalStartDay(register, pageable);
+		return this.calRepo.findByCalStartDayLessThanEqualAndCalEndDayGreaterThanEqual(day, day, pageable);
 	}
 	
 	public Calendar getCalendar(Integer id) {  
