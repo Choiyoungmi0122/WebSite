@@ -8,15 +8,15 @@
         
         .custom-element {
 	        position: absolute;
-	        top: 150px;
-	        right: 350px;
+	        top: 13%;
+	        right: 16%;
 	        padding: 20px
 	    }
 	    
 	    .countBox {
 			position: absolute;
-	        Bottom: 100px;
-	        right: 480px;
+	        Bottom: 10%;
+	        right: 30%;
 	        padding: 20px
 		}
         
@@ -28,7 +28,7 @@
         
         .Calendar {
             text-align: left;
-            max-width: 30%;
+            max-width: 60%;
             margin: 0%;
             padding: 0%;
         }
@@ -200,8 +200,8 @@
 		<div class="custom-element">
 			<h1 id="calAllDay"></h1>
 		</div>
-		<div>
-	        <table class="Calendar" style="width:40%; float:left">
+		<div style="width:40%; float:left">
+	        <table class="Calendar" >
 	            <thead>
 	                <tr>
 	                    <td onClick="prevCalendar();" style="cursor:pointer;">&#60;</td>
@@ -227,75 +227,77 @@
 	            </tbody>
 	        </table>
         </div>
-        <a th:href="@{/calendar/create}" class="btn btn-primary" sec:authorize="hasRole('USER') || hasRole('ADMIN')" th:text="등록"></a>
-        <table class="table" style="width:60%; float:right">
-	        <thead class="table-dark">
-		        <tr class="text-center">
-		            <th style="width:40%">제목</th>
-		            <th>작성자</th>
-		            <th>일자</th>
-		            <th>시간</th>
-		        </tr>
-		    </thead>
-		    <tbody>
-		        <tr class="text-center" th:each="calendar, loop : ${calList}">
-		            <td class="text-start">
-		                <a sec:authorize="isAnonymous()"
-			                th:text="${calendar.calText}">
-		                </a>
-		                <a sec:authorize="hasRole('GUEST')"
-			                th:text="${calendar.calText}">
-		                </a>
-		                <a sec:authorize="hasRole('ADMIN')"
-		               		th:href="@{|/calendar/modify/${calendar.calId}|}"
-			                th:text="${calendar.calText}">
-		                </a>
-		                <a sec:authorize="hasRole('USER')"
-		                	th:if="${#authentication.getPrincipal().getUsername() != calendar.calAuthor.username}"
-			               	th:text="${calendar.calText}">
-		                </a>	
-		                <a sec:authorize="hasRole('USER')"
-			               	th:href="@{|/calendar/modify/${calendar.calId}|}"
-			                th:if="${#authentication.getPrincipal().getUsername() == calendar.calAuthor.username}"
-			                th:text="${calendar.calText}">
-		                </a>
-		            </td>
-		            <td><span th:text="${calendar.calAuthor.studentName}"></span></td>
-		            <td th:if="${calendar.calStartDay} == ${calendar.calEndDay}" 
-		            	th:text="종일"></td>
-		            <td th:if="${calendar.calStartDay} != ${calendar.calEndDay}" 
-		            	th:text="${#temporals.format(calendar.calStartDay, 'yyyy-MM-dd') + ' - ' + #temporals.format(calendar.calEndDay, 'yyyy-MM-dd')}"></td>
-		            <td th:if="${calendar.calStartTime == null && calendar.calEndTime == null}"
-		            	th:text="'시간 미정'"></td>
-	            	<td th:if="${calendar.calStartTime != null && calendar.calEndTime != null}"
-		            	th:text="${#temporals.format(calendar.calStartTime, 'HH:mm') + ' - ' + #temporals.format(calendar.calEndTime, 'HH:mm')}"></td>
-		        </tr>
-		    </tbody>
-			<!-- 페이징처리 시작 -->
-		    <div class="countBox" th:if="${!calList.isEmpty()}">
-		        <ul class="pagination justify-content-center">
-		            <li class="page-item" th:classappend="${!calList.hasPrevious} ? 'disabled'">
-		                <a class="page-link"
-		                    th:href="@{|?page=${calList.number-1}|}">
-		                    <span>이전</span>
-		                </a>
-		            </li>
-					<li th:each="page: ${#numbers.sequence(0, calList.totalPages-1)}"
-					    th:if="${page >= (calList.number <= 5 ? 0 : (calList.number - 5)) and 
-					    page <= (calList.number >= (calList.totalPages - 6) ? (calList.totalPages - 1) : (calList.number + 5))}"
-					    th:classappend="${page == calList.number} ? 'active'"
-					    class="page-item">
-					    <a th:text="${page+1}" class="page-link" th:href="@{|?page=${page+1}|}"></a>
-					</li>
-
-		            <li class="page-item" th:classappend="${!calList.hasNext} ? 'disabled'">
-		                <a class="page-link" th:href="@{|?page=${calList.number+1}|}">
-		                    <span>다음</span>
-		                </a>
-		            </li>
-		        </ul>
+        <div style="width:60%; float:right">
+	        <a th:href="@{/calendar/create}" class="btn btn-primary" sec:authorize="hasRole('USER') || hasRole('ADMIN')" th:text="등록"></a>
+	        <table class="table">
+		        <thead class="table-dark">
+			        <tr class="text-center">
+			            <th style="width:40%">제목</th>
+			            <th>작성자</th>
+			            <th>일자</th>
+			            <th>시간</th>
+			        </tr>
+			    </thead>
+			    <tbody>
+			        <tr class="text-center" th:each="calendar, loop : ${calList}">
+			            <td class="text-start">
+			                <a sec:authorize="isAnonymous()"
+				                th:text="${calendar.calText}">
+			                </a>
+			                <a sec:authorize="hasRole('GUEST')"
+				                th:text="${calendar.calText}">
+			                </a>
+			                <a sec:authorize="hasRole('ADMIN')"
+			               		th:href="@{|/calendar/modify/${calendar.calId}|}"
+				                th:text="${calendar.calText}">
+			                </a>
+			                <a sec:authorize="hasRole('USER')"
+			                	th:if="${#authentication.getPrincipal().getUsername() != calendar.calAuthor.username}"
+				               	th:text="${calendar.calText}">
+			                </a>	
+			                <a sec:authorize="hasRole('USER')"
+				               	th:href="@{|/calendar/modify/${calendar.calId}|}"
+				                th:if="${#authentication.getPrincipal().getUsername() == calendar.calAuthor.username}"
+				                th:text="${calendar.calText}">
+			                </a>
+			            </td>
+			            <td><span th:text="${calendar.calAuthor.studentName}"></span></td>
+			            <td th:if="${calendar.calStartDay} == ${calendar.calEndDay}" 
+			            	th:text="종일"></td>
+			            <td th:if="${calendar.calStartDay} != ${calendar.calEndDay}" 
+			            	th:text="${#temporals.format(calendar.calStartDay, 'yyyy-MM-dd') + ' - ' + #temporals.format(calendar.calEndDay, 'yyyy-MM-dd')}"></td>
+			            <td th:if="${calendar.calStartTime == null && calendar.calEndTime == null}"
+			            	th:text="'시간 미정'"></td>
+		            	<td th:if="${calendar.calStartTime != null && calendar.calEndTime != null}"
+			            	th:text="${#temporals.format(calendar.calStartTime, 'HH:mm') + ' - ' + #temporals.format(calendar.calEndTime, 'HH:mm')}"></td>
+			        </tr>
+			    </tbody>
+				<!-- 페이징처리 시작 -->
+			    <div class="countBox" th:if="${!calList.isEmpty()}">
+			        <ul class="pagination justify-content-center">
+			            <li class="page-item" th:classappend="${!calList.hasPrevious} ? 'disabled'">
+			                <a class="page-link"
+			                    th:href="@{|?page=${calList.number-1}|}">
+			                    <span>이전</span>
+			                </a>
+			            </li>
+						<li th:each="page: ${#numbers.sequence(0, calList.totalPages-1)}"
+						    th:if="${page >= (calList.number <= 5 ? 0 : (calList.number - 5)) and 
+						    page <= (calList.number >= (calList.totalPages - 6) ? (calList.totalPages - 1) : (calList.number + 5))}"
+						    th:classappend="${page == calList.number} ? 'active'"
+						    class="page-item">
+						    <a th:text="${page+1}" class="page-link" th:href="@{|?page=${page+1}|}"></a>
+						</li>
+	
+			            <li class="page-item" th:classappend="${!calList.hasNext} ? 'disabled'">
+			                <a class="page-link" th:href="@{|?page=${calList.number+1}|}">
+			                    <span>다음</span>
+			                </a>
+			            </li>
+			        </ul>
+			    </div>
+			    <!-- 페이징처리 끝 -->
 		    </div>
-		    <!-- 페이징처리 끝 -->
 		</table>
 	</div>
     <form th:action="@{/calendar/{urlDay}/main}" method="get" id="searchForm">
