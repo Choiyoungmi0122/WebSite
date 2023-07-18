@@ -262,9 +262,9 @@
 		            </td>
 		            <td><span th:text="${calendar.calAuthor.studentName}"></span></td>
 		            <td th:if="${calendar.calStartDay} == ${calendar.calEndDay}" 
-		            	th:text="종일"></td>
+		            	th:text="당일"></td>
 		            <td th:if="${calendar.calStartDay} != ${calendar.calEndDay}" 
-		            	th:text="${#temporals.format(calendar.calStartDay, 'yyyy-MM-dd') + ' - ' + #temporals.format(calendar.calEndDay, 'yyyy-MM-dd')}"></td>
+		            	th:text="${#temporals.format(calendar.calStartDay, 'yy.MM.dd') + ' - ' + #temporals.format(calendar.calEndDay, 'yy.MM.dd')}"></td>
 		            <td th:if="${calendar.calStartTime == null && calendar.calEndTime == null}"
 		            	th:text="'시간 미정'"></td>
 	            	<td th:if="${calendar.calStartTime != null && calendar.calEndTime != null}"
