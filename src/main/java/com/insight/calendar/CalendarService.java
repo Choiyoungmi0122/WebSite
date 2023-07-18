@@ -5,11 +5,14 @@ import java.time.LocalTime;
 
 import com.insight.DataNotFoundException;
 import com.insight.user.UserInfo;
-import com.insight.user.UserRepository;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
-
-import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -23,6 +26,12 @@ public class CalendarService {
 	public List<Calendar> getDayList(LocalDate register) {
         return this.calRepo.findByCalStartDay(register);
     }
+	
+	public Page<Calendar> getListDayPage(LocalDate register, int page){
+		Pageable pageable = PageRequest.of(page, 5);
+		return this.calRepo.findByCalStartDay(register, pageable);
+	}
+	
 	public Calendar getCalendar(Integer id) {  
         Optional<Calendar> question = this.calRepo.findById(id);
         if (question.isPresent()) {
@@ -31,7 +40,16 @@ public class CalendarService {
             throw new DataNotFoundException("question not found");
         }
     }
-
+	
+	//불러오기
+	public Calendar getInfo(Integer calId) {
+		Optional<Calendar> calendar = this.calRepo.findById(calId);
+		if(calendar.isPresent())
+			return calendar.get();
+		else{
+			throw new DataNotFoundException("notice not found");
+		}
+	}
 	
 	//추가
 	public void addData(UserInfo userInfo, String calText, String calStartDay,  String calEndDay, String calStartTime, String calEndTime) {
@@ -70,15 +88,6 @@ public class CalendarService {
 			calendar.setCalEndTime(LocalTime.parse(calEndTime));
 		calendar.setCalText(calText);
 		this.calRepo.save(calendar);
-	}
-	//불러오기
-	public Calendar getInfo(Integer calId) {
-		Optional<Calendar> calendar = this.calRepo.findById(calId);
-		if(calendar.isPresent())
-			return calendar.get();
-		else{
-            throw new DataNotFoundException("notice not found");
-        }
 	}
 	
 	//삭제

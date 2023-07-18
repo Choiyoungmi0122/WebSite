@@ -1,12 +1,10 @@
 package com.insight.board;
 
-import java.util.List;
 import java.security.Principal;
 
 import com.insight.user.UserInfo;
 import com.insight.user.UserService;
 
-import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 
 import org.springframework.security.access.prepost.PreAuthorize;
