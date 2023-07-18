@@ -64,20 +64,19 @@ public class CalendarController {
 	@PostMapping("/create")
 	public String createCalendar(Model model, @Valid CalendarRegisteForm calendarRegisteForm, BindingResult bindingResult, Principal principal){
 		if (bindingResult.hasErrors()) {
-            return "calendar_form";
+			return "redirect:/calendar/create";
         }
 		
 		if((calendarRegisteForm.getCalEndDay() != "") && 
 				(0<(LocalDate.parse(calendarRegisteForm.getCalStartDay())).compareTo(LocalDate.parse(calendarRegisteForm.getCalEndDay()))))
 		{
 			model.addAttribute("DateError", "종료일은 시작일 보다 빠를 수 없습니다.");
-			return "calendar_form";
-			
+			return "redirect:/calendar/create";
 		}
 		if ((calendarRegisteForm.getCalStartTime() != "") && (calendarRegisteForm.getCalEndTime() != "") && 
 				(0<(LocalTime.parse(calendarRegisteForm.getCalStartTime())).compareTo(LocalTime.parse(calendarRegisteForm.getCalEndTime())))){
 			model.addAttribute("TimeError", "종료 시간은 시작 시간보다 빠를 수 없습니다.");
-			return "calendar_form";
+			return "redirect:/calendar/create";
 		}
 		UserInfo userInfo = this.userService.getUser(principal.getName());
         this.calService.addData(userInfo, calendarRegisteForm.getCalText(), calendarRegisteForm.getCalStartDay(), calendarRegisteForm.getCalEndDay(), 
@@ -122,20 +121,20 @@ public class CalendarController {
     public String modifyCalendar(@Valid CalendarRegisteForm calendarRegisteForm, Model model,
     		BindingResult bindingResult, Principal principal, @PathVariable("id") Integer calId) {
         if (bindingResult.hasErrors()) {
-            return "calendar_form";
+            return String.format("redirect:/calendar/modify/%s", calId);
         }
         Calendar calendar = this.calService.getInfo(calId);
         if((calendarRegisteForm.getCalEndDay() != "") && 
 				(0<(LocalDate.parse(calendarRegisteForm.getCalStartDay())).compareTo(LocalDate.parse(calendarRegisteForm.getCalEndDay()))))
 		{
 			model.addAttribute("DateError", "종료일은 시작일 보다 빠를 수 없습니다.");
-			return "calendar_form";
+			return String.format("redirect:/calendar/modify/%s", calId);
 			
 		}
 		if ((calendarRegisteForm.getCalStartTime() != "") && (calendarRegisteForm.getCalEndTime() != "") && 
 				(0<(LocalTime.parse(calendarRegisteForm.getCalStartTime())).compareTo(LocalTime.parse(calendarRegisteForm.getCalEndTime())))){
 			model.addAttribute("TimeError", "종료 시간은 시작 시간보다 빠를 수 없습니다.");
-			return "calendar_form";
+			return String.format("redirect:/calendar/modify/%s", calId);
 		}
         this.calService.modify(calendar, calendarRegisteForm.getCalText(), calendarRegisteForm.getCalStartDay(), calendarRegisteForm.getCalEndDay(), 
         		calendarRegisteForm.getCalStartTime(), calendarRegisteForm.getCalEndTime());
