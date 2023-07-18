@@ -231,9 +231,10 @@
         <table class="table" style="width:60%; float:right">
 	        <thead class="table-dark">
 		        <tr class="text-center">
-		            <th style="width:50%">제목</th>
+		            <th style="width:40%">제목</th>
 		            <th>작성자</th>
-		            <th>일정</th>
+		            <th>일자</th>
+		            <th>시간</th>
 		        </tr>
 		    </thead>
 		    <tbody>
@@ -250,7 +251,7 @@
 			                th:text="${calendar.calText}">
 		                </a>
 		                <a sec:authorize="hasRole('USER')"
-		                th:if="${#authentication.getPrincipal().getUsername() != calendar.calAuthor.username}"
+		                	th:if="${#authentication.getPrincipal().getUsername() != calendar.calAuthor.username}"
 			               	th:text="${calendar.calText}">
 		                </a>	
 		                <a sec:authorize="hasRole('USER')"
@@ -260,7 +261,14 @@
 		                </a>
 		            </td>
 		            <td><span th:text="${calendar.calAuthor.studentName}"></span></td>
-		            <td th:text="${#temporals.format(calendar.calStartDay, 'yyyy-MM-dd')}"></td>
+		            <td th:if="${calendar.calStartDay} == ${calendar.calEndDay}" 
+		            	th:text="종일"></td>
+		            <td th:if="${calendar.calStartDay} != ${calendar.calEndDay}" 
+		            	th:text="${#temporals.format(calendar.calStartDay, 'yyyy-MM-dd') + ' - ' + #temporals.format(calendar.calEndDay, 'yyyy-MM-dd')}"></td>
+		            <td th:if="${calendar.calStartTime == null && calendar.calEndTime == null}"
+		            	th:text="'시간 미정'"></td>
+	            	<td th:if="${calendar.calStartTime != null && calendar.calEndTime != null}"
+		            	th:text="${#temporals.format(calendar.calStartTime, 'hh:mm') + ' - ' + #temporals.format(calendar.calEndTime, 'hh:mm')}"></td>
 		        </tr>
 		    </tbody>
 			<!-- 페이징처리 시작 -->

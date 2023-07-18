@@ -52,7 +52,7 @@ public class CalendarController {
 	
 	@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
 	@GetMapping("/create")
-    public String createAnswer(Model model, CalendarRegisteForm calendarRegisteForm) {
+    public String createCalendar(Model model, CalendarRegisteForm calendarRegisteForm) {
 		model.addAttribute("create","create");
 		calendarRegisteForm.setCalStartDay((LocalDate.now()).toString());
 		calendarRegisteForm.setCalEndDay(null);
@@ -62,7 +62,7 @@ public class CalendarController {
 	@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
 	//일정 등록 html에서 등록 버튼 눌렀을 때 저장하는 함수
 	@PostMapping("/create")
-	public String createAnswer(Model model, @Valid CalendarRegisteForm calendarRegisteForm, BindingResult bindingResult, Principal principal) throws Exception {
+	public String createCalendar(Model model, @Valid CalendarRegisteForm calendarRegisteForm, BindingResult bindingResult, Principal principal){
 		if (bindingResult.hasErrors()) {
             return "calendar_form";
         }

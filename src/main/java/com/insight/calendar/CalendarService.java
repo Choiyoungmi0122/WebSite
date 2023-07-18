@@ -52,7 +52,7 @@ public class CalendarService {
 	}
 	
 	//추가
-	public void addData(UserInfo userInfo, String calText, String calStartDay,  String calEndDay, String calStartTime, String calEndTime) {
+	public void addData(UserInfo userInfo, String calText, String calStartDay, String calEndDay, String calStartTime, String calEndTime) {
 		Calendar calendar = new Calendar();
 		calendar.setCalAuthor(userInfo);
 		calendar.setCalStartDay(LocalDate.parse(calStartDay));
@@ -60,14 +60,18 @@ public class CalendarService {
 			calendar.setCalEndDay(LocalDate.parse(calStartDay));
 		else	
 			calendar.setCalEndDay(LocalDate.parse(calEndDay));
-		if(calStartTime=="")
-			calendar.setCalStartTime(null);
-		else
+		if(calStartTime != "" && calEndTime=="") {
 			calendar.setCalStartTime(LocalTime.parse(calStartTime));
-		if(calEndTime=="")
+			calendar.setCalEndTime((LocalTime.parse(calStartTime)).plusHours(1));
+		}
+		else if(calStartTime == ""){
+			calendar.setCalStartTime(null);
 			calendar.setCalEndTime(null);
-		else
+		}
+		else {
+			calendar.setCalStartTime(LocalTime.parse(calStartTime));
 			calendar.setCalEndTime(LocalTime.parse(calEndTime));
+		}
 		calendar.setCalText(calText);
 		this.calRepo.save(calendar);
 	}
