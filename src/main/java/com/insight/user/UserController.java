@@ -78,7 +78,9 @@ public class UserController {
     		Principal principal, BindingResult bindingResult) {
     	UserInfo userInfo = this.userService.getUser(username);
     	model.addAttribute("username",username);
-    	if((!userInfo.getUsername().equals(principal.getName())) && (!principal.getName().equals("87654321"))) {
+    	
+    	String adminAut = userService.getUser(principal.getName()).getAdminAut();
+    	if((!userInfo.getUsername().equals(principal.getName())) && (!adminAut.equals("관리자"))) {
     		return "redirect:/";
     	}
 
@@ -130,7 +132,9 @@ public class UserController {
     public String pwdetail(Model model, @PathVariable("id") String username, Principal principal) {
     	UserInfo userInfo = this.userService.getUser(username);
     	model.addAttribute("userInfo",userInfo);
-    	if((!userInfo.getUsername().equals(principal.getName())) && (!principal.getName().equals("87654321"))) {
+    	
+    	String adminAut = userService.getUser(principal.getName()).getAdminAut();
+    	if((!userInfo.getUsername().equals(principal.getName())) && (!adminAut.equals("관리자"))) {
     		return "redirect:/";
     	}
     	return "password_modify";
@@ -149,6 +153,7 @@ public class UserController {
     @GetMapping("/delete/{id}")
     public String userDelete(Principal principal, @PathVariable("id") String username) {
         UserInfo userInfo = this.userService.getUser(username);
+        
         if(!userInfo.getUsername().equals(principal.getName())) {
         	throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
     	}
