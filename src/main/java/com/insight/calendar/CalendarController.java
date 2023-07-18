@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.insight.user.UserInfo;
 import com.insight.user.UserService;
@@ -89,7 +87,9 @@ public class CalendarController {
 		model.addAttribute("calendar",calendar);
 		calendarRegisteForm.setCalStartDay((calendar.getCalStartDay()).toString());
 		calendarRegisteForm.setCalText(calendar.getCalText());
-		if((!calendar.getCalAuthor().getUsername().equals(principal.getName())) && (!principal.getName().equals("87654321")))/*사용자의 학번과 작성자의 학번 비교)*/ {
+		
+		String adminAut = userService.getUser(principal.getName()).getAdminAut();
+		if((!calendar.getCalAuthor().getUsername().equals(principal.getName())) && (!adminAut.equals("관리자"))) {
 			return String.format("redirect:/calendar/%s", calendar.getCalStartDay()	); //달력 출력 화면으로 전환 
         }
 		if(calendar.getCalEndDay()==null)
@@ -133,8 +133,6 @@ public class CalendarController {
         		calendarRegisteForm.getCalStartTime(), calendarRegisteForm.getCalEndTime());
 
         return String.format("redirect:/calendar/%s", calendarRegisteForm.getCalStartDay()); //달력 출력 화면으로 전환
-        
-        
     }
 	
 	@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
@@ -144,7 +142,8 @@ public class CalendarController {
 			Principal principal) {
 		Calendar calendar = this.calService.getInfo(calId);
 		
-		if((!calendar.getCalAuthor().getUsername().equals(principal.getName())) && (!principal.getName().equals("87654321")))/*사용자의 학번과 작성자의 학번 비교)*/ {
+		String adminAut = userService.getUser(principal.getName()).getAdminAut();
+		if((!calendar.getCalAuthor().getUsername().equals(principal.getName())) && (!adminAut.equals("관리자")))/*사용자의 학번과 작성자의 학번 비교)*/ {
 			return String.format("redirect:/calendar/%s", calendar.getCalStartDay()	); //달력 출력 화면으로 전환 
         }
 		LocalDate back = calendar.getCalStartDay();
