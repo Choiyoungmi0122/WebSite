@@ -32,7 +32,7 @@
             <td th:if="${#dates.format(#dates.createNow(), 'yyyy-MM-dd') == #temporals.format(important2.impoRegister, 'yyyy-MM-dd')}"
             	th:text="${'오늘 '+#temporals.format(important2.impoRegister, 'HH:mm')}"></td>
         	<td th:if="${#dates.format(#dates.createNow(), 'yyyy-MM-dd') != #temporals.format(important2.impoRegister, 'yyyy-MM-dd')}"
-            	th:text="${#temporals.format(important2.impoRegister, 'yyyy-MM-dd HH:mm')}"></td>
+            	th:text="${#temporals.format(important2.impoRegister, 'yy.MM.dd')}"></td>
             
         </tr>
         <tr id = "impo" class="text-center" th:each="important, loop : ${importantList}">
@@ -46,7 +46,7 @@
             <td th:if="${#dates.format(#dates.createNow(), 'yyyy-MM-dd') == #temporals.format(important.impoRegister, 'yyyy-MM-dd')}"
             	th:text="${'오늘 '+#temporals.format(important.impoRegister, 'HH:mm')}"></td>
         	<td th:if="${#dates.format(#dates.createNow(), 'yyyy-MM-dd') != #temporals.format(important.impoRegister, 'yyyy-MM-dd')}"
-            	th:text="${#temporals.format(important.impoRegister, 'yyyy-MM-dd HH:mm')}"></td>
+            	th:text="${#temporals.format(important.impoRegister, 'yy.MM.dd')}"></td>
             
         </tr>
         

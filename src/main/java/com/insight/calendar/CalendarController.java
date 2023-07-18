@@ -54,6 +54,7 @@ public class CalendarController {
 	@GetMapping("/create")
     public String createCalendar(Model model, CalendarRegisteForm calendarRegisteForm) {
 		model.addAttribute("create","create");
+		model.addAttribute("calStartDay",(LocalDate.now()).toString());
 		calendarRegisteForm.setCalStartDay((LocalDate.now()).toString());
 		calendarRegisteForm.setCalEndDay(null);
         return "calendar_form";
@@ -93,7 +94,7 @@ public class CalendarController {
 		model.addAttribute("modify", "modify");
 		Calendar calendar = this.calService.getInfo(calId);
 		//매개변수를 CalendarForm, 일정의 id, 사용자의 정보로 한다.
-		model.addAttribute("calId",calId);
+		model.addAttribute("calendar", calendar);
 		calendarRegisteForm.setCalStartDay((calendar.getCalStartDay()).toString());
 		calendarRegisteForm.setCalText(calendar.getCalText());
 		
