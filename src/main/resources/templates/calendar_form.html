@@ -10,6 +10,9 @@
 		        border: 2px solid #ff9999;
 		        border-radius: 5px;
 		    }
+		    .timeBox {
+				width: 9%;
+			}
 		</style>
 	</head>
 	<body>
@@ -24,19 +27,19 @@
 			    <div th:if="${TimeError}">
 			        <span class="error" th:if="${TimeError}" th:text="${TimeError}"></span>
 			    </div>
-				<div class="mb-3">
+				<div class="timeBox">
 					<label for="calStartDay">시작 날짜 선택:</label>
 					<input type="date" id="calStartDay" th:field="*{calStartDay}" class="form-control">
 				</div>
-				<div class="mb-3">
+				<div class="timeBox">
 					<label for="calEndDay">종료 날짜 선택:</label>
 					<input type="date" id="calEndDay" th:field="*{calEndDay}" class="form-control">
 				</div>
-				<div class="mb-3">
+				<div class="timeBox">
 					<label for="calStartTime">시작 시간 선택:</label>
 					<input type="time" th:field="*{calStartTime}" class="form-control">
 				</div>
-				<div class="mb-3">
+				<div class="timeBox">
 					<label for="calEndTime">종료 시간 선택:</label>
 					<input type="time" th:field="*{calEndTime}" class="form-control">
 				</div>
