@@ -65,11 +65,12 @@
                 </a>
             </li>
             <li th:each="page: ${#numbers.sequence(0, importantList.totalPages-1)}"
-            th:if="${page >= importantList.number-5 and page <= importantList.number+5}"	
-                th:classappend="${page == importantList.number} ? 'active'" 
-                class="page-item">
-                <a th:text="${page}" class="page-link" href="javascript:void(0)" th:data-page="${page}"></a>
-            </li>
+			    th:if="${page >= (importantList.number <= 5 ? 0 : (importantList.number - 5)) and page <= (importantList.number >= (importantList.totalPages - 6) ? (importantList.totalPages - 1) : (importantList.number + 5))}"
+			    th:classappend="${page == importantList.number} ? 'active'"
+			    class="page-item">
+			    <a th:text="${page+1}" class="page-link" href="javascript:void(0)" th:data-page="${page+1}"></a>
+			</li>
+
             <li class="page-item" th:classappend="${!importantList.hasNext} ? 'disabled'">
                 <a class="page-link" href="javascript:void(0)" th:data-page="${importantList.number+1}">
                     <span>다음</span>
