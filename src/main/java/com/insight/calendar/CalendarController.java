@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.data.domain.Page;
 
 import com.insight.user.UserInfo;
 import com.insight.user.UserService;
@@ -35,11 +37,17 @@ public class CalendarController {
         return "calendar_main";
     }
 	
-	@GetMapping("/{day}")
-	public String loadCalendar(Model model,@PathVariable LocalDate day) {
-		List<Calendar> calendar = this.calService.getDayList(day);
-		model.addAttribute("calendar",calendar);
-		return "calendar_main";
+	/*
+	 * @GetMapping("/{day}") public String loadCalendar(Model model,@PathVariable
+	 * LocalDate day) { List<Calendar> calendar = this.calService.getDayList(day);
+	 * model.addAttribute("calendar",calendar); return "calendar_main"; }
+	 */
+	
+	@GetMapping("/{day}/main")
+	public String loadCalendar(Model model,@PathVariable LocalDate day, @RequestParam(value="page", defaultValue="1") int page) { 
+		Page<Calendar> calList = this.calService.getListDayPage(day, page-1);
+		model.addAttribute("calList",calList); 
+		return "calendar_main"; 
 	}
 	
 	@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
@@ -74,7 +82,7 @@ public class CalendarController {
 		UserInfo userInfo = this.userService.getUser(principal.getName());
         this.calService.addData(userInfo, calendarRegisteForm.getCalText(), calendarRegisteForm.getCalStartDay(), calendarRegisteForm.getCalEndDay(), 
         		calendarRegisteForm.getCalStartTime(), calendarRegisteForm.getCalEndTime());
-        return String.format("redirect:/calendar/%s", calendarRegisteForm.getCalStartDay());
+        return String.format("redirect:/calendar/%s/main", calendarRegisteForm.getCalStartDay());
     }
 
 	@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
@@ -90,7 +98,7 @@ public class CalendarController {
 		
 		String adminAut = userService.getUser(principal.getName()).getAdminAut();
 		if((!calendar.getCalAuthor().getUsername().equals(principal.getName())) && (!adminAut.equals("관리자"))) {
-			return String.format("redirect:/calendar/%s", calendar.getCalStartDay()	); //달력 출력 화면으로 전환 
+			return String.format("redirect:/calendar/%s/main", calendar.getCalStartDay()	); //달력 출력 화면으로 전환 
         }
 		if(calendar.getCalEndDay()==null)
 			calendarRegisteForm.setCalEndDay(null);
@@ -132,7 +140,7 @@ public class CalendarController {
         this.calService.modify(calendar, calendarRegisteForm.getCalText(), calendarRegisteForm.getCalStartDay(), calendarRegisteForm.getCalEndDay(), 
         		calendarRegisteForm.getCalStartTime(), calendarRegisteForm.getCalEndTime());
 
-        return String.format("redirect:/calendar/%s", calendarRegisteForm.getCalStartDay()); //달력 출력 화면으로 전환
+        return String.format("redirect:/calendar/%s/main", calendarRegisteForm.getCalStartDay()); //달력 출력 화면으로 전환
     }
 	
 	@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
@@ -144,10 +152,10 @@ public class CalendarController {
 		
 		String adminAut = userService.getUser(principal.getName()).getAdminAut();
 		if((!calendar.getCalAuthor().getUsername().equals(principal.getName())) && (!adminAut.equals("관리자")))/*사용자의 학번과 작성자의 학번 비교)*/ {
-			return String.format("redirect:/calendar/%s", calendar.getCalStartDay()	); //달력 출력 화면으로 전환 
+			return String.format("redirect:/calendar/%s/main", calendar.getCalStartDay()	); //달력 출력 화면으로 전환 
         }
 		LocalDate back = calendar.getCalStartDay();
 		this.calService.delete(calendar);
-		return String.format("redirect:/calendar/%s",back);
+		return String.format("redirect:/calendar/%s/main",back);
     }
 }
