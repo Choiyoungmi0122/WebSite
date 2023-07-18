@@ -59,9 +59,9 @@
 			            <td><span th:text="${notice.noticeAuthor.studentName}"></span></td>
 			            <!--<td th:text="${#temporals.format(notice.noticeRegister, 'yyyy-MM-dd HH:mm')}"></td>-->
 			            <td th:if="${#dates.format(#dates.createNow(), 'yyyy-MM-dd') == #temporals.format(notice.noticeRegister, 'yyyy-MM-dd')}"
-			            	th:text="${'오늘 '+#temporals.format(notice.noticeRegister, 'HH:mm')}"></td>
+			            	th:text="${#temporals.format(notice.noticeRegister, 'HH:mm')}"></td>
 		            	<td th:if="${#dates.format(#dates.createNow(), 'yyyy-MM-dd') != #temporals.format(notice.noticeRegister, 'yyyy-MM-dd')}"
-			            	th:text="${#temporals.format(notice.noticeRegister, 'yyyy-MM-dd HH:mm')}"></td>
+			            	th:text="${#temporals.format(notice.noticeRegister, 'yy.MM.dd')}"></td>
 
 			            <td th:text="${notice.noticeView}"></td>
 			        </tr>

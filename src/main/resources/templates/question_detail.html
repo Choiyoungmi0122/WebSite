@@ -70,6 +70,7 @@
 		<div th:replace="~{form_errors :: formErrorsFragment}"></div>
         <textarea sec:authorize="hasRole('ADMIN') || hasRole('USER')" th:field="*{cmText}" class="form-control" rows="10"></textarea>
         <input type="submit" value="답변등록" class="btn btn-primary my-2" sec:authorize="hasRole('ADMIN') || hasRole('USER')">
+        <a th:href="@{/notice/main/all}" class="btn btn-primary">목록</a>
     </form>
 </div>
 <script layout:fragment="script" type='text/javascript'>
