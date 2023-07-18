@@ -268,7 +268,7 @@
 		            <td th:if="${calendar.calStartTime == null && calendar.calEndTime == null}"
 		            	th:text="'시간 미정'"></td>
 	            	<td th:if="${calendar.calStartTime != null && calendar.calEndTime != null}"
-		            	th:text="${#temporals.format(calendar.calStartTime, 'hh:mm') + ' - ' + #temporals.format(calendar.calEndTime, 'hh:mm')}"></td>
+		            	th:text="${#temporals.format(calendar.calStartTime, 'HH:mm') + ' - ' + #temporals.format(calendar.calEndTime, 'HH:mm')}"></td>
 		        </tr>
 		    </tbody>
 			<!-- 페이징처리 시작 -->
