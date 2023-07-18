@@ -1,14 +1,13 @@
 package com.insight.calendar;
 
-import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
 
 import java.security.Principal;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
-
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -47,7 +46,8 @@ public class CalendarController {
 	
 	@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
 	@GetMapping("/create")
-    public String createAnswer(CalendarRegisteForm calendarRegisteForm) {
+    public String createAnswer(Model model, CalendarRegisteForm calendarRegisteForm) {
+		model.addAttribute("create","create");
 		calendarRegisteForm.setCalStartDay((LocalDate.now()).toString());
 		calendarRegisteForm.setCalEndDay(null);
         return "calendar_form";
@@ -56,14 +56,22 @@ public class CalendarController {
 	@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
 	//일정 등록 html에서 등록 버튼 눌렀을 때 저장하는 함수
 	@PostMapping("/create")
-	public String createAnswer(@Valid CalendarRegisteForm calendarRegisteForm, BindingResult bindingResult, Principal principal) {
+	public String createAnswer(Model model, @Valid CalendarRegisteForm calendarRegisteForm, BindingResult bindingResult, Principal principal) throws Exception {
 		if (bindingResult.hasErrors()) {
             return "calendar_form";
         }
-		if(calendarRegisteForm.getCalEndDay() != "")
+		
+		if((calendarRegisteForm.getCalEndDay() != "") && 
+				(0<(LocalDate.parse(calendarRegisteForm.getCalStartDay())).compareTo(LocalDate.parse(calendarRegisteForm.getCalEndDay()))))
 		{
-			if(0<(LocalDate.parse(calendarRegisteForm.getCalStartDay())).compareTo(LocalDate.parse(calendarRegisteForm.getCalEndDay())))
-				return "calendar_form";
+			model.addAttribute("DateError", "종료일은 시작일 보다 빠를 수 없습니다.");
+			return "calendar_form";
+			
+		}
+		if ((calendarRegisteForm.getCalStartTime() != "") && (calendarRegisteForm.getCalEndTime() != "") && 
+				(0<(LocalTime.parse(calendarRegisteForm.getCalStartTime())).compareTo(LocalTime.parse(calendarRegisteForm.getCalEndTime())))){
+			model.addAttribute("TimeError", "종료 시간은 시작 시간보다 빠를 수 없습니다.");
+			return "calendar_form";
 		}
 		UserInfo userInfo = this.userService.getUser(principal.getName());
         this.calService.addData(userInfo, calendarRegisteForm.getCalText(), calendarRegisteForm.getCalStartDay(), calendarRegisteForm.getCalEndDay(), 
@@ -75,9 +83,10 @@ public class CalendarController {
 	@GetMapping("/modify/{id}")
 	public String modifyCalendar(CalendarRegisteForm calendarRegisteForm, Model model, @PathVariable("id") Integer calId
 			,Principal principal) {
+		model.addAttribute("modify", "modify");
 		Calendar calendar = this.calService.getInfo(calId);
 		//매개변수를 CalendarForm, 일정의 id, 사용자의 정보로 한다.
-		model.addAttribute(calendar);
+		model.addAttribute("calendar",calendar);
 		calendarRegisteForm.setCalStartDay((calendar.getCalStartDay()).toString());
 		calendarRegisteForm.setCalText(calendar.getCalText());
 		if((!calendar.getCalAuthor().getUsername().equals(principal.getName())) && (!principal.getName().equals("87654321")))/*사용자의 학번과 작성자의 학번 비교)*/ {
@@ -95,7 +104,7 @@ public class CalendarController {
 			calendarRegisteForm.setCalEndTime(null);
 		else
 			calendarRegisteForm.setCalEndTime(calendar.getCalEndTime().toString());
-		return "calendar_modify";
+		return "calendar_form";
 	}
 	
 	@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
@@ -105,13 +114,20 @@ public class CalendarController {
     public String modifyCalendar(@Valid CalendarRegisteForm calendarRegisteForm, Model model,
     		BindingResult bindingResult, Principal principal, @PathVariable("id") Integer calId) {
         if (bindingResult.hasErrors()) {
-            return "calendar_modify";
+            return "calendar_form";
         }
         Calendar calendar = this.calService.getInfo(calId);
-        if(calendarRegisteForm.getCalEndDay() != "")
+        if((calendarRegisteForm.getCalEndDay() != "") && 
+				(0<(LocalDate.parse(calendarRegisteForm.getCalStartDay())).compareTo(LocalDate.parse(calendarRegisteForm.getCalEndDay()))))
 		{
-			if(0<(LocalDate.parse(calendarRegisteForm.getCalStartDay())).compareTo(LocalDate.parse(calendarRegisteForm.getCalEndDay())))
-				return "calendar_modify";
+			model.addAttribute("DateError", "종료일은 시작일 보다 빠를 수 없습니다.");
+			return "calendar_form";
+			
+		}
+		if ((calendarRegisteForm.getCalStartTime() != "") && (calendarRegisteForm.getCalEndTime() != "") && 
+				(0<(LocalTime.parse(calendarRegisteForm.getCalStartTime())).compareTo(LocalTime.parse(calendarRegisteForm.getCalEndTime())))){
+			model.addAttribute("TimeError", "종료 시간은 시작 시간보다 빠를 수 없습니다.");
+			return "calendar_form";
 		}
         this.calService.modify(calendar, calendarRegisteForm.getCalText(), calendarRegisteForm.getCalStartDay(), calendarRegisteForm.getCalEndDay(), 
         		calendarRegisteForm.getCalStartTime(), calendarRegisteForm.getCalEndTime());
