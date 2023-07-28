@@ -24,6 +24,7 @@ import com.insight.user.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+//@RequiredArgsConstructor
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/important")

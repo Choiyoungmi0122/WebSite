@@ -162,8 +162,8 @@
         }
         //날짜 선택시 url 주소 변경 함수
         function redirectToPage(day) {
-			let url = "http://localhost:8080/calendar/"
-    		window.location.href = url+day+"/main"; // 이동할 HTML 페이지의 URL을 지정
+			let url = (window.location.href).split("/");
+    		window.location.href = url[0]+'/'+url[1]+'/'+url[2]+'/'+url[3]+'/'+day+"/main"; // 이동할 HTML 페이지의 URL을 지정
 		}
 
 		function urldata() {
