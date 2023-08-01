@@ -2,7 +2,7 @@
 <div layout:fragment="content" class="container my-3">
     <div class="my-3 border-bottom">
         <div>
-            <h4>회원가입</h4>
+            <h4>동아리 신청</h4>
         </div>
     </div>
     <form th:action="@{/user/join}" th:object="${userCreateForm}" method="post">
@@ -34,10 +34,24 @@
 		</div>
         <div class="form-group">
                 <label for="major" style="display: inline-block">전공:</label>
-                <select th:field="*{major}" required style="width:12%; display:inline-block;">
-                    <option value="산업ICT기술공학과">산업ICT기술공학과</option>
+                <select th:field="*{major}" required style="width:30%; display:inline-block;">
                     <option value="컴퓨터공학과">컴퓨터공학과</option>
+                    <option value="산업융합시스템공학부">산업융합시스템공학부</option>
+                    <option value="산업ICT기술공학과">산업ICT기술공학과</option>
+                    <option value="산업경영·빅데이터공학과">산업경영·빅데이터공학과</option>
+                    <option value="창의소프트웨어공학부">창의소프트웨어공학부</option>
+                    <option value="컴퓨터소프트웨어공학과">컴퓨터소프트웨어공학과</option>
+                    <option value="응용소프트웨어공학과">응용소프트웨어공학과</option>
+                    <option value="디지털콘텐츠학과">디지털콘텐츠학과</option>
+                    <option value="인공지능학과">인공지능학과</option>
+                    <option value="디자인공학부">디자인공학부</option>
+                    <option value="제품디자인공학과">제품디자인공학과</option>
+                    <option value="인간·시스템디자인공학">인간·시스템디자인공학과</option>
+                    <option value="기계자동차로봇부품공학부">기계자동차로봇부품공학부</option>
+                    <option value="로봇·자동화공학과">로봇·자동화공학과</option>
+                    <option value="자동차공학과">자동차공학과</option>
                     <option value="기계공학과">기계공학과</option>
+                    <option value="조선해양공학과">조선해양공학과</option>
                 </select>
         </div>
         <div class="form-group">
@@ -68,8 +82,8 @@
 			<label for="introduction" class="form-label">자기소개</label>
             <textarea type="text" th:field="*{introduction}" class="form-control"></textarea>
 		</div>
-        <button type="submit" class="btn btn-primary">회원가입</button>
-        <a type="button" class="btn btn-primary my-2" th:href="@{/}">취소</a>
+        <button type="submit" class="btn btn-primary">동아리 신청</button>
+        <a type="button" class="btn btn-primary" th:href="@{/}">취소</a>
     </form>
 </div>
 </html>

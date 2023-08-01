@@ -13,4 +13,9 @@ public class HomeController {
 	public String home() {
 		return "Home";
 	}
+	
+	@GetMapping("/introduce")
+	public String Introduce() {
+        return "user_info";
+    }
 }
