@@ -1,13 +1,105 @@
-
 <!DOCTYPE html>
-<html lang = 'kr' layout:decorate="~{layout}">
-    <head>
-        
-        <title>insight</title>
-       
-      </head>
-      <body>
-       
-        <!--기본 상단 요소 건들지 말것 수정필요시 '최영미'한테 연락하여 같이 고칠 것!!! -->
-      </body>
+<html layout:decorate="~{layout}">
+<div layout:fragment="home">
+		
+	<head>
+    	<title>insight</title>
+    	
+    	<script>
+			window.onload = function() {
+			  const kindWrap = document.querySelector('.kind_wrap');
+			  const slider = kindWrap.querySelector('.slider');
+			  const slideLis = slider.querySelectorAll('li');
+			  const moveButton = kindWrap.querySelector('.arrow');
+			
+			  /* ul 넓이 계산해 주기 */
+			  const liWidth = slideLis[0].clientWidth;
+			  const sliderWidth = liWidth;
+			  slider.style.width = `${sliderWidth}%`; // Corrected the unit to 'px'
+			
+			  /* 리스너 설치하기 */
+			  let currentIdx = 0; // 슬라이드 현재 번호
+			  let translate = currentIdx * liWidth; // 슬라이드 위치 값
+			  moveButton.addEventListener('click', moveSlide);
+			
+			  // 자동 슬라이드 실행 (3초마다)
+			  const autoSlideInterval = 3000; // 3 seconds (in milliseconds)
+			  let autoSlideTimer = setInterval(autoSlide, autoSlideInterval);
+			
+			  function moveSlide(event) {
+			    event.preventDefault();
+			    if (event.target.className === 'next') {
+			      if (currentIdx !== slideLis.length - 1) {
+			        translate -= liWidth;
+			        slider.style.transform = `translateX(${translate}px)`;
+			        currentIdx += 1;
+			      }
+			    } else if (event.target.className === 'prev') {
+			      if (currentIdx !== 0) {
+			        translate += liWidth;
+			        slider.style.transform = `translateX(${translate}px)`;
+			        currentIdx -= 1;
+			      }
+			    }
+			  }
+			
+			  function autoSlide() {
+			    if (currentIdx === slideLis.length - 1) {
+			      // Go back to the first slide when reaching the last slide
+			      translate = 0;
+			      currentIdx = 0;
+			    } else {
+			      // Move to the next slide
+			      translate -= liWidth;
+			      currentIdx += 1;
+			    }
+			    slider.style.transform = `translateX(${translate}px)`;
+			  }
+			
+			  // 정지 버튼 클릭 시 자동 슬라이드 멈추기
+			  const stopButton = document.querySelector('.stop');
+			  stopButton.addEventListener('click', function() {
+			    clearInterval(autoSlideTimer);
+			  });
+			};
+
+		</script>
+	</head>
+	<div class = "main">
+	<div class="kind_wrap">
+	  <div class="kind_slider">
+	    <ul class="slider" style="margin-left:-35px;">
+	        <li><img src="/../pictrue/welcome.png" alt="" style="padding: 0px; width: 1225px; max-width: 1225px;" ></li>
+	        <li><img src="/../pictrue/coding2.jpg" alt="" style=" padding-right:300px ;margin-left:300px;" ></li>
+	        <li><img src="/../pictrue/coding.jpg" alt=""style=" padding-right:300px ;margin-left:300px;" ></li>
+	        <li><img src="/../pictrue/web.jpg" alt=""style=" padding-right:300px ;margin-left:300px;"></li>
+	        <li><img src="/../pictrue/insight.jpg" alt="image"style=" padding-right:300px ;margin-left:300px;"></li>
+	        <li><img src="/../pictrue/mt.jpg" alt=""style=" padding-left:300px ;"></li>
+	        
+	        
+	    </ul>
+	  </div>
+	  <div class="arrow">
+	      <button class="prev"><i class="prev bi bi-chevron-compact-left"style="margin-top:30px;"></i></button>
+	      <button class="next"><i class="next bi bi-chevron-compact-right" style="margin:auto;"></i></button>
+	  </div>
+	</div>
+	
+	<div>
+		<button class="jb-title">스터디</button>
+	    <p class="jb-text" style="margin-top: 5px;">주 1회 2문제 (팀당 2~3명), PPT, 프로그래머스 진행</p>
+		<button class="jb-title">웹</button>
+	    <p class="jb-text" style="margin-left: 100px;">우대 직군 : UI/UX, 기술 스택: 장고, 스프링 부트, React, Figma</p>
+	    <button class="jb-title">게임</button>
+	    <p class="jb-text" style="margin-left: 425px;">게임 제작 관심 분야</p>
+	    <button class="jb-title">로봇 팔</button>
+	    <p class="jb-text" style="margin-left: 635px;">ROS 사용 경험</p>
+	    <button class="jb-title">공모전</button>
+	    <p class="jb-text" style="margin-top: 5px;">2022 창업 300(본선 진출), 부산진구 대학 연합 , 창업 지적 재산권, ICT프로젝트 융합 공모전, 디지털 덴티스트리 부산 데이터 톤 대회, 2023해커톤 경진 대회, 2023통합경진대회, 한국 융합학회, 한국 디지털 컨텐츠학회, 부산 공유 혁신 대학 
+			<br>현재 참여 ( 2023 창업 300, IITP 그랜드 ICT 창의 자율, IITP ICT챌린지2023, 2023통합 경진 대회)</br></p>
+	    <button class="jb-title">AI/CV</button>
+	    <div class="jb-text" style="margin-left: 1010px;">Python 사용 경험</div>
+	</div>
+</div>
+</div>
 </html>
