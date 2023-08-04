@@ -1,26 +1,38 @@
 <div th:fragment="logo">
-		<div class="join-login-btn" >
-          <a th:href="@{/user/login}" sec:authorize="isAnonymous()" style="text-decoration: blink; ">로그인</a>
-          <a th:href="@{/user/logout}" sec:authorize="isAuthenticated()" style="text-decoration: blink; ">로그아웃</a>
-          <a th:href="@{/user/join}" sec:authorize="isAnonymous()" style="text-decoration: blink; ">회원가입</a>
-          <a th:href="@{|/user/detail/${#authentication.principal.username}|}" th:text="${#authentication.principal.username}" sec:authorize="hasRole('USER')"></a>
-          <a sec:authorize="hasRole('ADMIN')" th:href="@{/user/list}">회원 관리</a>
-        </div>
-        <div id="logo">
-                    <!--매핑 : 홈  insight-->
-         <h1><a href="/" style="text-decoration: blink;">insight</a></h1>
-          
-        </div>
-		<div id ="menu">
-        	<ul class ="menu">
-	             <!--매핑 : 공지사항 insight/Importantmain , 게시판 : insight/Notice , 캘린더 : insight/Calendermain-->
-		          <li><a href="/important/main" style="text-decoration: blink;">공지사항</a></li>
-		          <li><a href="/notice/main/all" style="text-decoration: blink;">게시판</a></li>
-		          <li><a href="#" style="text-decoration: blink;" id="calendarLink">캘린더</a></li>
-		          <li><a href="/introduce" style="text-decoration: blink;">동아리원 소개</a></li>
-	        </ul>
-        </div>
-			<script>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-black">
+    <div class="container-fluid">
+<a class="navbar-brand" href="/"><img class="bi me-2 mx-3" width="100" height="auto"src="/../picture/insight로고.png"></img></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/important/main">공지사항</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/notice/main/all">게시판</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="calendarLink">캘린더</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/introduce">동아리원 소개</a>
+          </li>
+        </ul>
+       <div class="text-end">
+							<ul class="menu" style="justify-content: flex-end; ">
+					          <a th:href="@{/user/login}" sec:authorize="isAnonymous()" class="px-2 text-white">로그인</a>
+					          <a th:href="@{/user/logout}" sec:authorize="isAuthenticated()" class="px-2 text-white">로그아웃</a>
+						 	  <a th:href="@{/user/join}" sec:authorize="isAnonymous()" class="px-2 text-white">회원가입</a>
+							  <a th:href="@{|/user/detail/${#authentication.principal.username}|}"th:text="${#authentication.principal.username}" sec:authorize="hasRole('USER')" class="px-2 text-white"></a>
+							  <a sec:authorize="hasRole('ADMIN')" th:href="@{/user/list}" class="px-2 text-white">회원 관리</a>
+						  </ul>
+			        </div>
+      </div>
+    </div>
+  </nav>
+    <script>
 			  // 현재 날짜를 가져오기
 			  let today = new Date();
 			  let year = today.getFullYear();
@@ -29,7 +41,7 @@
 			  let calendarLink = document.getElementById("calendarLink");
 			  // 링크에 오늘 날짜를 추가
 			  calendarLink.href = "/calendar/" + year + "-" + month + "-" + day + "/main";
-			  calendarLink.id = calendarLink.getAttribute("href").replace("#", "");
-			
+			  calendarLink.id = calendarLink.getAttribute("href").replace("!", "");
 			</script>
+ 
 </div>

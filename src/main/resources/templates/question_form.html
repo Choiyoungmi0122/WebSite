@@ -1,4 +1,9 @@
 <html layout:decorate="~{layout}">
+	<head>
+		<title>
+		게시판
+		</title>
+	</head>
 <div layout:fragment="content" class="container">
     <h5 class="my-3 border-bottom pb-2">글등록</h5>
     <form th:object="${noticeForm}" method="post">
@@ -21,9 +26,10 @@
             <label for="content" class="form-label">내용</label>
             <textarea th:field="*{noticeText}" class="form-control" rows="10"></textarea>
         </div>
+        <div style="text-align: right;">
         <input type="submit" value="저장" class="btn btn-primary my-2">
         <a th:href="@{/notice/main/all}" class="btn btn-primary">취소</a>
-        
+        </div>
     </form>
 </div>
 </html>

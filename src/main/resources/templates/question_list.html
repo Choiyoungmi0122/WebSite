@@ -1,20 +1,24 @@
 <html layout:decorate="~{layout}">
+	<head>
+		<title>
+			게시판
+		</title>
+	</head>
 <div layout:fragment="content" class="container my-3">
 	<div class="row my-3">
         <div class="col-6">
-            <a sec:authorize="hasRole('USER') || hasRole('ADMIN')"
-             th:href="@{/notice/create}" class="btn btn-primary">등록</a>
-        </div>
-        <div class="col-6">
             <div class="input-group">
                 <input type="text" id="search_kw" class="form-control" th:value="${kw}">
-                <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
+                <button class="btn btn-outline-secondary" type="button" id="btn_search"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+				  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+				</svg>
+				</button>
             </div>
         </div>
     </div>
     <table class="table">
 		<div id="wrap" >
-	       <div class="container" >
+	       <div class="container" style="padding: 0;">
 		       <h1>게시판</h1>
 		       	<div id="category" >
 			       	<ul style="display:inline;">
@@ -69,6 +73,11 @@
 	       </div>
        </div>
 	</table>
+	
+	<div style="text-align: right;">
+        <a sec:authorize="hasRole('USER') || hasRole('ADMIN')"
+         th:href="@{/notice/create}" class="btn btn-primary">등록</a>
+    </div>
 <!-- 페이징처리 시작 -->
     <div th:if="${!noticeList.isEmpty()}">
         <ul class="pagination justify-content-center">
@@ -97,8 +106,6 @@
                     <span>다음</span>
                 </a>
             </li>
-
-
         </ul>
     </div>
     <!-- 페이징처리 끝 -->

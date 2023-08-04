@@ -2,15 +2,14 @@
 <html layout:decorate="~{layout}">
 
 <head>
-    <title>달력</title>
+    <title>캘린더</title>
     <style>
         @import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
         
         .custom-element {
-	        position: absolute;
+	        position: relative;
+	        display: block;
 	        top: 13%;
-	        right: 16%;
-	        padding: 20px
 	    }
 	    
 	    .countBox {
@@ -197,9 +196,6 @@
 
 <body>
     <div layout:fragment="content">
-		<div class="custom-element">
-			<h1 id="calAllDay"></h1>
-		</div>
 		<div style="width:40%; float:left">
 	        <table class="Calendar" >
 	            <thead>
@@ -227,12 +223,14 @@
 	            </tbody>
 	        </table>
         </div>
+        <div class="custom-element">
+			<h2 id="calAllDay"></h2>
+		</div>
         <div style="width:60%; float:right">
-	        <a th:href="@{/calendar/create}" class="btn btn-primary" sec:authorize="hasRole('USER') || hasRole('ADMIN')" th:text="등록"></a>
 	        <table class="table">
 		        <thead class="table-dark">
 			        <tr class="text-center">
-			            <th style="width:40%">제목</th>
+			            <th style="width:40%;">제목</th>
 			            <th>작성자</th>
 			            <th>일자</th>
 			            <th>시간</th>
@@ -272,6 +270,7 @@
 			            	th:text="${#temporals.format(calendar.calStartTime, 'HH:mm') + ' - ' + #temporals.format(calendar.calEndTime, 'HH:mm')}"></td>
 			        </tr>
 			    </tbody>
+			    
 				<!-- 페이징처리 시작 -->
 			    <div class="countBox" th:if="${!calList.isEmpty()}">
 			        <ul class="pagination justify-content-center">
@@ -297,8 +296,11 @@
 			        </ul>
 			    </div>
 			    <!-- 페이징처리 끝 -->
-		    </div>
+			</div>
 		</table>
+		    <div style="text-align: right;">
+		   	 	<a th:href="@{/calendar/create}" class="btn btn-primary" sec:authorize="hasRole('USER') || hasRole('ADMIN')" th:text="등록"></a>
+	    	</div>
 	</div>
     <form th:action="@{/calendar/{urlDay}/main}" method="get" id="searchForm">
         <input type="hidden" id="page" name="page" th:value="${calList.number}">

@@ -1,4 +1,9 @@
 <html layout:decorate="~{layout}">
+	<head>
+		<title>
+		공지사항
+		</title>
+	</head>
 <div layout:fragment="content" class="container my-3">
     <!-- 질문 -->
     <h2 class="border-bottom py-2" th:text="${important.impoTitle}"></h2>
@@ -28,7 +33,9 @@
 	        </div>
         </div>
     </div>
-    <a th:href="@{/important/main}" class="btn btn-primary">목록</a>
+    <div style="text-align: right;">
+    	<a th:href="@{/important/main}" class="btn btn-primary">목록</a>
+	</div>
 <script layout:fragment="script" type='text/javascript'>
 const delete_elements = document.getElementsByClassName("delete");
 Array.from(delete_elements).forEach(function(element) {
