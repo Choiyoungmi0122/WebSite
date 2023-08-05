@@ -299,7 +299,7 @@
 			</div>
 		</table>
 		    <div style="text-align: right;">
-		   	 	<a th:href="@{/calendar/create}" class="btn btn-primary" sec:authorize="hasRole('USER') || hasRole('ADMIN')" th:text="등록"></a>
+		   	 	<a th:href="@{/calendar/create}" class="btn" sec:authorize="hasRole('USER') || hasRole('ADMIN')" th:text="등록"></a>
 	    	</div>
 	</div>
     <form th:action="@{/calendar/{urlDay}/main}" method="get" id="searchForm">

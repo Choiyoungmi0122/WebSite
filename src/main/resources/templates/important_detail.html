@@ -24,17 +24,17 @@
                 </div>
             </div>
             <div class="my-3">
-	            <a th:href="@{|/important/modify/${important.impoId}|}" class="btn btn-sm btn-outline-secondary"
+	            <a th:href="@{|/important/modify/${important.impoId}|}" class="btn btn-sm"
 	                sec:authorize="hasRole('ADMIN')"
 	                th:text="수정"></a>
                 <a href="javascript:void(0);" th:data-uri="@{|/important/delete/${important.impoId}|}"
-	                class="delete btn btn-sm btn-outline-secondary" sec:authorize="hasRole('ADMIN')"
+	                class="delete btn btn-sm" sec:authorize="hasRole('ADMIN')"
 	                th:text="삭제"></a>
 	        </div>
         </div>
     </div>
     <div style="text-align: right;">
-    	<a th:href="@{/important/main}" class="btn btn-primary">목록</a>
+    	<a th:href="@{/important/main}" class="btn">목록</a>
 	</div>
 <script layout:fragment="script" type='text/javascript'>
 const delete_elements = document.getElementsByClassName("delete");

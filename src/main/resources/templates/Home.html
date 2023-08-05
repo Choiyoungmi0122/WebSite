@@ -12,18 +12,31 @@
 			    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
 			    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
 			    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+			    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+			    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
 			  </div>
 		  
-		  <div class="carousel-inner" style="max-height: 500px; max-width: 100;">
-		    <div class="carousel-item active">
+		  <div class="carousel-inner" style="max-height: 500px; max-width: 100%;">
+		    <div class="carousel-item active" >
 		      <img src="/../picture/welcome.png" class="d-block w-100" alt="...">
 		    </div>
-		    <div class="carousel-item">
+		    
+		    <div class="carousel-item" data-bs-interval="5000">
 		      <img src="/../picture/coding.jpg" class="d-block w-100" alt="...">
 		    </div>
-		    <div class="carousel-item">
+		    
+		    <div class="carousel-item" data-bs-interval="5000">
 		      <img src="/../picture/mt.jpg" class="d-block w-100" alt="...">
 		    </div>
+		    
+		     <div class="carousel-item" data-bs-interval="5000">
+		      <img src="/../picture/insight.jpg" class="d-block w-100" alt="...">
+		    </div>
+		    
+		    <div class="carousel-item" data-bs-interval="5000">
+		      <img src="/../picture/coding2.jpg" class="d-block mh-30 mw-100" alt="...">
+		    </div>
+		    
 		  </div>
 		  
 		  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -46,19 +59,19 @@
         <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="/../picture/coding.jpg"></img>
         <h2 class="fw-normal">동아리 게시판</h2>
         <p>게시판입니다</p>
-        <p><a class="btn btn-secondary" href="/notice/main/all">게시판 보기 »</a></p>
+        <p><a class="btn" href="/notice/main/all">게시판 보기 »</a></p>
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
         <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="/../picture/보노보노.png"></img>
         <h2 class="fw-normal">동아리 가입</h2>
         <p>우리와 함께..</p>
-        <p><a class="btn btn-secondary" href="/user/join">동아리 가입 »</a></p>
+        <p><a class="btn" href="/user/join">동아리 가입 »</a></p>
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
         <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="/../picture/insight.jpg"</img>
         <h2 class="fw-normal">동아리 정보</h2>
         <p>Insight</p>
-        <p><a class="btn btn-secondary" href="/introduce">구성원 보기 »</a></p>
+        <p><a class="btn" href="/introduce">구성원 보기 »</a></p>
       </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
 
@@ -71,7 +84,7 @@
       <div class="col-md-7">
         <h2 class="featurette-heading fw-normal lh-1">Study<br><span class="text-body-secondary"></span></h2>
         <p class="lead">
-			
+			<ul>
 				<li style="float: left;">주 1회 1문제 (팀당 2~3명)</li>
 				<br>
 				<br>
@@ -82,11 +95,11 @@
 				<br>
 				<br>
 				<li style="float: left;">해결한 코드로 발표자료 제작 및 발표 능력 향상</li>
-			
+			</ul>
 		</p>
       </div>
       <div class="col-md-5">
-        <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" src="/../picture/프로그래머스.png"></img>
+        <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" src="/../picture/cocoding.gif"></img>
       </div>
     </div>
 
@@ -95,14 +108,21 @@
     <div class="row featurette">
       <div class="col-md-7">
         <h2 class="featurette-heading fw-normal lh-1">Web<br><span class="text-body-secondary"></span></h2>
-        <p class="lead" style="text-align: left;">우대 직군 : UI/UX <br>기술 스택: django, springboot, React, Figma
-        <br>
-        Css대한 지식, HTML작동 기능, 백엔드 작동 원리~
+        <p class="lead" style="text-align: left;">
+			<ul>
+				<li style="float: left;">우대 직군 : UI/UX</li> 
+				<br>
+				<br>
+				<li style="float: left;">기술 스택: django, springboot, React, Figma</li>
+		        <br>
+		        <br>
+		        <li style="float: left;">Css대한 지식, HTML작동 기능, 백엔드 작동 원리</li>
+	        </ul>
         </p>
         <br>
         <br>
-        <a class="btn btn-secondary" href="/../pdf/Web.pdf" download="Insight WEB.pdf">Notion PDF</a>
-        <a class="btn btn-secondary" href="https://github.com/Choiyoungmi0122/WebSite">GitHub</a>
+        <a class="btn" href="/../pdf/Web.pdf" download="Insight WEB.pdf">Notion PDF</a>
+        <a class="btn" href="https://github.com/Choiyoungmi0122/WebSite">GitHub</a>
       </div>
       <div class="col-md-5">
         <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="550" src="/../picture/웹.gif"></img>
@@ -114,11 +134,19 @@
     <div class="row featurette">
       <div class="col-md-7">
         <h2 class="featurette-heading fw-normal lh-1">Game<br><span class="text-body-secondary"></span></h2>
-        <p class="lead">게임 제작 관심 분야</p>
-        <a class="btn btn-secondary" href="/../pdf/game.pdf" download="Insight GAME.pdf">Notion PDF</a>
+        <p class="lead">
+			<ul>
+				<li style="float: left;">게임 제작 관심 분야</li>
+				<br>
+				<br>
+				<li style="float: left;">python의 pygame 라이브러리를 사용하여 리듬게임 제작</li>
+			</ul>
+			</p>
+			<br>
+        <a class="btn" href="/../pdf/game.pdf" download="Insight GAME.pdf">Notion PDF</a>
       </div>
       <div class="col-md-5">
-        <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" src="/../picture/게임.png"></img>
+        <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" src="/../picture/game.gif"></img>
       </div>
     </div>
 
@@ -128,19 +156,27 @@
       <div class="col-md-7">
         <h2 class="featurette-heading fw-normal lh-1">Robot Arm<br><span class="text-body-secondary"></span></h2>
         <p class="lead">
-			<li style="float: left;">다이나믹셀 XL430-W250-T 모터 사용하여 로봇팔의 관절 역할 수행</li>
-			<br> 
-			3D 프린팅으로 외관 제작
-			<br> 
-			로봇 제어와 통신을 위해 ROS와 NVIDIA의 jetson nano develop kit 사용
-			<br> 
-			YDLidar x3 모델을 사용하여 레이저로 객체와 주변 환경의 거리를 인식
-			<br> 
-			jetson nano IMX219-160 모델의 비전카메라를 사용하여 객체를 인식하고 시각정보를 획득
-			<br> 
-			관성모멘트와 역기구학을 사용하여 최적의 모터 속도 구현
+			<ul>
+				<li style="float: left;">다이나믹셀 XL430-W250-T 모터 사용하여 로봇팔의 관절 역할 수행</li>
+				<br>
+				<br> 
+				<li style="float: left;">3D 프린팅으로 외관 제작</li>
+				<br>
+				<br> 
+				<li style="float: left;">로봇 제어와 통신을 위해 ROS와 NVIDIA의 jetson nano develop kit 사용</li>
+				<br>
+				<br> 
+				<li style="float: left;">YDLidar x3 모델을 사용하여 레이저로 객체와 주변 환경의 거리를 인식</li>
+				<br>
+				<br> 
+				<li style="float: left;">jetson nano IMX219-160 모델의 비전카메라를 사용하여 객체를 인식하고 시각정보를 획득</li>
+				<br>
+				<br> 
+				<li style="float: left;">관성모멘트와 역기구학을 사용하여 최적의 모터 속도 구현</li>
+			</ul>
 		</p>
-		<a class="btn btn-secondary" href="/../pdf/Robot arm.pdf" download="Insight ROBOT ARM.pdf">Notion PDF</a>
+		<br>
+		<a class="btn" href="/../pdf/Robot arm.pdf" download="Insight ROBOT ARM.pdf">Notion PDF</a>
       </div>
       <div class="col-md-5">
         <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500px" height="500px" src="/../picture/로봇팔.gif"></img>
@@ -153,6 +189,15 @@
       <div class="col-md-7">
         <h2 class="featurette-heading fw-normal lh-1">Competition<br><span class="text-body-secondary"></span></h2>
         <p class="lead">
+			
+			-현재 참여-<br>
+			2023 창업 300
+			<br>IITP 그랜드 ICT 창의 자율
+			<br>IITP ICT챌린지2023
+			<br>2023통합 경진 대회
+			<br>2023 제 8회 부산 ICT 융합 해커톤 대회</p>
+			
+			-참여 대회-<br>
 			2022 창업 300(본선 진출)
 			<br> 
 			부산진구 대학 연합
@@ -166,12 +211,7 @@
 			<br>한국 디지털 컨텐츠학회
 			<br>부산 공유 혁신 대학 
 			<br><br>
-			-현재 참여-<br>
-			2023 창업 300
-			<br>IITP 그랜드 ICT 창의 자율
-			<br>IITP ICT챌린지2023
-			<br>2023통합 경진 대회
-			<br>2023 제 8회 부산 ICT 융합 해커톤 대회</p>
+			
       </div>
       <div class="col-md-5">
 		  <iframe width="500px" height="600px" src="https://www.youtube.com/embed/qdgnr6-jthA" title="What is insight" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -185,13 +225,15 @@
       <div class="col-md-7">
         <h2 class="featurette-heading fw-normal lh-1">AI/CV<br><span class="text-body-secondary"></span></h2>
         <p class="lead">
-			인공지능 딥러닝의 세부 기술 순환 신경망(RNN), 적대적 생성 신경망(GAN) 동작 이해
-			<br>
-			<br>
-			티처블 머신, 퀵드로우, 오토드로우, 텐서플로 플레이그라운드 등 인공지능의 개념 이해
-			<br>
-			<br>
-			개발 환경(코랩, 텐서플로, 케라스)을 구축, 인공지능 모델 제작
+			<ul>
+				<li style="float: left;">인공지능 딥러닝의 세부 기술 순환 신경망(RNN), 적대적 생성 신경망(GAN) 동작 이해</li>
+				<br>
+				<br>
+				<li style="float: left;">티처블 머신, 퀵드로우, 오토드로우, 텐서플로 플레이그라운드 등 인공지능의 개념 이해</li>
+				<br>
+				<br>
+				<li style="float: left;">개발 환경(코랩, 텐서플로, 케라스)을 구축, 인공지능 모델 제작</li>
+			</ul>
 		</p>
       </div>
       <div class="col-md-5">
@@ -207,7 +249,7 @@
   
   <footer class="container">
     <p class="float-end"><a href="/">Insight</a></p>
-    <p>© 2022–2023 Insight · 010-2013-5638 · choiyoungmi2252@gmail.com</p>
+    <p>© 2022–2023 · insight.2022.deu@gmail.com</p>
   </footer>
 	
 	<!--<div>

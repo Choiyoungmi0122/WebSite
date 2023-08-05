@@ -47,16 +47,17 @@
 		            <label for="calText" class="form-label">일정</label>
 		            <textarea th:field="*{calText}"class="form-control" rows="3" required></textarea>
 		        </div>
-		        <div th:if="${modify}" class="my-3">
-					<input type="submit" value="수정" class="btn btn-primary my-2">
+		        <div th:if="${modify}" class="my-3" style="text-align: right;">
+					<input type="submit" value="수정" class="btn my-2">
 	                <a href="javascript:void(0);" th:data-uri="@{|/calendar/delete/${calendar.getCalId}|}"
-		                class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"
+		                class="delete btn btn-sm" sec:authorize="isAuthenticated()"
 		                th:text="삭제"></a>
-	                <a th:href="@{|/calendar/${calendar.getCalStartDay}/main|}" class="btn btn-primary">목록</a>
+	                <a th:href="@{|/calendar/${calendar.getCalStartDay}/main|}" class="btn">목록</a>
 				</div>
+				
 				<div th:if="${create}" class="my-3">
-					<button type="submit" value="저장하기" class="btn btn-primary">저장하기</button>
-					<a th:href="@{|/calendar/${calStartDay}/main|}" class="btn btn-primary">목록</a>
+					<button type="submit" value="저장하기" class="btn">저장하기</button>
+					<a th:href="@{|/calendar/${calStartDay}/main|}" class="btn">목록</a>
 				</div>
 		    </form>
 		</div>
