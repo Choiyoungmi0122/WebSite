@@ -18,4 +18,9 @@ public class HomeController {
 	public String Introduce() {
         return "user_info";
     }
+	
+	@GetMapping("/joinrule")
+	public String Joinrule() {
+        return "join_rule";
+    }
 }
