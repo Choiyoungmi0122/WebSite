@@ -1,0 +1,37 @@
+<html layout:decorate="~{layout}">
+	<head>
+		<title>
+		회원 관리
+		</title>
+	</head>
+<div layout:fragment="content" class="container my-3">
+	<table class="table">
+		<thead class = "table-dark">
+			<tr class="text-center">
+				<th>#</th>
+				<th>학번</th>
+				<th>학년</th>
+				<th>이름</th>
+				<th>전화번호</th>
+				<th>이메일</th>
+				<th>전공</th>
+				<th>권한</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="userInfo : ${userList}" class = "text-center">
+                <td th:text="${userInfo.getId()}"></td>
+                <td>
+					<a th:text="${userInfo.getUsername()}" th:href="@{|/user/detail/${userInfo.username}|}"></a>
+				</td>
+                <td th:text="${userInfo.getGrade()}"></td> 
+                <td th:text="${userInfo.getStudentName()}"></td>
+                <td th:text="${userInfo.getPhoneNumber()}"></td>
+                <td th:text="${userInfo.getEmail()}"></td>
+                <td th:text="${userInfo.getMajor()}"></td>
+               	<td th:text="${userInfo.getAdminAut()}"></td>
+            </tr>
+		</tbody>
+	</table>
+</div>
+</html>
