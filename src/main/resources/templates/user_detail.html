@@ -16,23 +16,11 @@
         <div class="form-group" sec:authorize="hasRole('ADMIN')">
                 <label for="adminAut" style="display: inline-block">권한:</label>
                 <select th:field="*{adminAut}" required style="width:220px; display:inline-block;">
-					<option value="컴퓨터공학과">컴퓨터공학과</option>
-                    <option value="산업융합시스템공학부">산업융합시스템공학부</option>
-                    <option value="산업ICT기술공학과">산업ICT기술공학과</option>
-                    <option value="산업경영·빅데이터공학과">산업경영·빅데이터공학과</option>
-                    <option value="창의소프트웨어공학부">창의소프트웨어공학부</option>
-                    <option value="컴퓨터소프트웨어공학과">컴퓨터소프트웨어공학과</option>
-                    <option value="응용소프트웨어공학과">응용소프트웨어공학과</option>
-                    <option value="디지털콘텐츠학과">디지털콘텐츠학과</option>
-                    <option value="인공지능학과">인공지능학과</option>
-                    <option value="디자인공학부">디자인공학부</option>
-                    <option value="제품디자인공학과">제품디자인공학과</option>
-                    <option value="인간·시스템디자인공학">인간·시스템디자인공학과</option>
-                    <option value="기계자동차로봇부품공학부">기계자동차로봇부품공학부</option>
-                    <option value="로봇·자동화공학과">로봇·자동화공학과</option>
-                    <option value="자동차공학과">자동차공학과</option>
-                    <option value="기계공학과">기계공학과</option>
-                    <option value="조선해양공학과">조선해양공학과</option>
+					<option value="관리자">관리자</option>
+                    <option value="부원">부원</option>
+                    <option value="승인 대기">승인 대기</option>
+                    <option value="승인 거절">승인 거절</option>
+                    <option value="탈퇴">탈퇴</option>
                 </select>
         </div>
         <div class="mb-3" style="width: 25%;">
