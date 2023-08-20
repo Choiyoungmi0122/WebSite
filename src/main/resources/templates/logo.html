@@ -1,7 +1,7 @@
-<div th:fragment="logo">
-	<nav class="navbar navbar-expand-lg navbar-dark bg-black">
+
+<nav th:fragment="logo" class="navbar navbar-expand-lg navbar-dark bg-black">
     <div class="container-fluid">
-<a class="navbar-brand" href="/"><img class="bi me-2 mx-3" width="100" height="auto"src="/../picture/insight로고.png"></img></a>
+		<a class="navbar-brand" href="/"><img class="bi me-2 mx-3" width="100" height="auto"src="/../picture/insight로고.png"></img></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -42,6 +42,5 @@
 			  // 링크에 오늘 날짜를 추가
 			  calendarLink.href = "/calendar/" + year + "-" + month + "-" + day + "/main";
 			  calendarLink.id = calendarLink.getAttribute("href").replace("!", "");
-			</script>
+	</script>
  
-</div>

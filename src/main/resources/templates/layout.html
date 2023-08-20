@@ -217,7 +217,7 @@
 		main{
 		    
 		    height: auto;
-		    margin-top:3%;
+		    margin-top:4%;
 		    z-index: 1;
 		}
 		
@@ -234,6 +234,17 @@
 
 	<header>
 		<div th:replace="~{logo :: logo}"></div>
+		<script>
+			  // 현재 날짜를 가져오기
+			  let today = new Date();
+			  let year = today.getFullYear();
+			  let month = ('0' + (today.getMonth() + 1)).slice(-2);
+			  let day = ('0' + today.getDate()).slice(-2);
+			  let calendarLink = document.getElementById("calendarLink");
+			  // 링크에 오늘 날짜를 추가
+			  calendarLink.href = "/calendar/" + year + "-" + month + "-" + day + "/main";
+			  calendarLink.id = calendarLink.getAttribute("href").replace("!", "");
+	</script>
 	</header>
 
 <main>	
