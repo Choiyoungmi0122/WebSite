@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserCreateForm {
-	@Size(min = 8, max = 8)
+	/* @Size(min = 8, max = 8) */
 	@NotEmpty(message = "학번은 8자리여야 합니다.")
 	private String username;
 	

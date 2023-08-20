@@ -1,7 +1,7 @@
 <html lang="kr">
 	<head>
 		<title>
-		회원가입 
+		동아리 신청 
 		</title>
 	<meta charset="UTF-8">
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
@@ -121,6 +121,14 @@
          .form-group {
             margin-bottom: 20px;
         }
+        
+        .fielderror {
+        border-color: red ;
+    }
+    
+    	.error{
+			color: red;
+		}
     		
 		</style>
 	</head>
@@ -142,31 +150,39 @@
 		        </div>
 		    </div>
 		    <form th:action="@{/user/join}" th:object="${userCreateForm}" method="post">
-		        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+		        <!--<div th:replace="~{form_errors :: formErrorsFragment}"></div>-->
 		        
 		        <div class="mb-3" style="width: 25%;">
 		            <label for="username" class="form-label">학번ID</label>
-		            <input type="text" placeholder="ex)20212252"th:field="*{username}" class="form-control">
+		            <input type="text" placeholder="ex)20212252" th:field="*{username}" class="form-control" th:class="${#fields.hasErrors('username')}? 'form-control fieldError' : 'form-control'">
+		            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"th:class="${#fields.hasErrors('username')}? error">
+  					</p>
 		        </div>
 		        <div class="mb-3" style="width: 25%;">
 		            <label for="studentName" class="form-label">이름</label>
-		            <input type="text" th:field="*{studentName}" class="form-control">
+		            <input type="text" th:field="*{studentName}" class="form-control" th:class="${#fields.hasErrors('studentName')}? 'form-control fieldError' : 'form-control'">
+		            <p th:if="${#fields.hasErrors('studentName')}" th:errors="*{studentName}"th:class="${#fields.hasErrors('studentName')}? error">
+  					</p>
 		        </div>
 		        <div class="mb-3" style="width: 25%;">
 		            <label for="password1" class="form-label">비밀번호</label>
-		            <input type="password" th:field="*{password1}" class="form-control">
+		            <input type="password" th:field="*{password1}" class="form-control" th:class="${#fields.hasErrors('password1')}? 'form-control fieldError' : 'form-control'">
+		            <p th:if="${#fields.hasErrors('password1')}" th:errors="*{password1}" th:class="${#fields.hasErrors('password1')}? error"></p>
 		        </div>
 		        <div class="mb-3" style="width: 25%;">
 		            <label for="password2" class="form-label">비밀번호 확인</label>
-		            <input type="password" th:field="*{password2}" class="form-control">
+		            <input type="password" th:field="*{password2}" class="form-control" th:class="${#fields.hasErrors('password2')}? 'form-control fieldError' : 'form-control'">
+		        	<p th:if="${#fields.hasErrors('password2')}" th:errors="*{password2}" th:class="${#fields.hasErrors('password2')}? error"></p>
 		        </div>
 		        <div class="mb-3" style="width: 25%;">
 		            <label for="email" class="form-label">이메일</label>
-		            <input type="email" th:field="*{email}" class="form-control">
+		            <input type="email" th:field="*{email}" class="form-control" th:class="${#fields.hasErrors('email')}? 'form-control fieldError' : 'form-control'">
+		            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:class="${#fields.hasErrors('email')}? error"></p>
 		        </div>
 		        <div class="mb-3" style="width: 25%;">
 					<label for="phoneNumber" class="form-label">전화번호(-제외)</label>
-		            <input type="text" placeholder="ex)01012345678" th:field="*{phoneNumber}" class="form-control">
+		            <input type="text" placeholder="ex)01012345678" th:field="*{phoneNumber}" class="form-control" th:class="${#fields.hasErrors('phoneNumber')}? 'form-control fieldError' : 'form-control'">
+					<p  th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" th:class="${#fields.hasErrors('phoneNumber')}? error"></p>
 				</div>
 		        <div class="form-group">
 		                <label for="major" style="display: inline-block">전공:</label>
@@ -212,7 +228,8 @@
 		        </div>
 		        <div class="mb-3">
 					<label for="wantedAct" class="form-label">원하는 활동</label>
-		            <textarea type="text" placeholder="ex)웹사이트 제작" th:field="*{wantedAct}" class="form-control"></textarea>
+		            <textarea type="text" placeholder="ex)웹사이트 제작" th:field="*{wantedAct}" class="form-control" th:class="${#fields.hasErrors('wantedAct')}? 'form-control fieldError' : 'form-control'"></textarea>
+					<p  th:if="${#fields.hasErrors('wantedAct')}" th:errors="*{wantedAct}" th:class="${#fields.hasErrors('wantedAct')}? error"></p>
 				</div>
 				<div class="mb-3">
 					<label for="introduction" class="form-label">자기소개</label>
