@@ -92,11 +92,11 @@
 		
 		<div style="text-align: right;">
 			<a href="javascript:void(0);" th:data-uri="@{|/user/delete/${username}|}"
-	                class="delete btn btn-sm btn-outline-secondary" 
+	                class="btn" 
 	                th:text="탈퇴"></a>
-	        <button type="submit" class="btn btn-primary">수정</button>
-		    <a type="button" class="btn btn-primary my-2" th:href="@{|/user/detail/pwmodify/${username}|}">비밀번호 수정하기</a>
-	        <a type="button" class="btn btn-primary my-2" th:href="@{/}">취소</a>
+	        <button type="submit" class="btn">저장</button>
+		    <a type="button" class="btn" th:href="@{|/user/detail/pwmodify/${username}|}">비밀번호 수정하기</a>
+	        <a type="button" class="btn" th:href="@{/}">취소</a>
 		</div>
     </form>
     

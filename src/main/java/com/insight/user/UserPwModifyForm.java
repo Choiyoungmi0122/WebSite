@@ -8,6 +8,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserPwModifyForm {
+	private String username;
+	
     @Size(min = 8, max = 15)
 	@NotEmpty(message = "비밀번호 수정은 필수항목입니다.")
     private String password1;

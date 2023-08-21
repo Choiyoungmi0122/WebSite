@@ -129,7 +129,7 @@ public class UserController {
     }
     
     @GetMapping("/detail/pwmodify/{id}")
-    public String pwdetail(UserPwModifyForm userModifyForm, Model model, @PathVariable("id") String username, Principal principal) {
+    public String pwdetail(UserPwModifyForm userPwModifyForm, Model model, @PathVariable("id") String username, Principal principal) {
     	UserInfo userInfo = this.userService.getUser(username);
     	model.addAttribute("userInfo",userInfo);
     	
@@ -137,6 +137,7 @@ public class UserController {
     	if((!userInfo.getUsername().equals(principal.getName())) && (!adminAut.equals("관리자"))) {
     		return "redirect:/";
     	}
+        userPwModifyForm.setUsername(userInfo.getUsername());
     	return "password_modify";
     }
     
@@ -146,7 +147,12 @@ public class UserController {
             return "password_modify";
         }
     	UserInfo userInfo = this.userService.getUser(username);
-        
+
+        if (!userPwModifyForm.getPassword1().equals(userPwModifyForm.getPassword2())) {
+            bindingResult.rejectValue("password2", "passwordInCorrect", 
+                    "2개의 패스워드가 일치하지 않습니다.");
+            return "password_modify";
+        }
         try{
             userService.pwmodify(userInfo, userPwModifyForm.getPassword1());
         }catch(DataIntegrityViolationException e){
