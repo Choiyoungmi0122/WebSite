@@ -75,8 +75,9 @@ public class ImportantController {
 
 	@PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/modify/{id}")
-    public String importantModify(ImportantForm importantForm, @PathVariable("id") Integer impoId, Principal principal) {
+    public String importantModify(Model model, ImportantForm importantForm, @PathVariable("id") Integer impoId, Principal principal) {
         Important important = this.importantService.getImportant(impoId);
+        model.addAttribute("impoId", impoId);
         importantForm.setImpoTf(important.getImpoTf());
         importantForm.setImpoTitle(important.getImpoTitle());
         importantForm.setImpoText(important.getImpoText());

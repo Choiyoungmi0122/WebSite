@@ -96,19 +96,19 @@
 	                th:text="탈퇴"></a>
 	        <button type="submit" class="btn btn-primary">수정</button>
 		    <a type="button" class="btn btn-primary my-2" th:href="@{|/user/detail/pwmodify/${username}|}">비밀번호 수정하기</a>
-	        <a type="button" class="btn btn-primary my-2" th:href="@{/}">취소</a>
+	        <a type="button" class="btn btn-primary my-2" th:href="@{/user/list}">취소</a>
 		</div>
     </form>
     
 </div>
 <script layout:fragment="script" type='text/javascript'>
-const delete_elements = document.getElementsByClassName("delete");
-Array.from(delete_elements).forEach(function(element) {
-    element.addEventListener('click', function() {
-        if(confirm("정말로 탈퇴하시겠습니까?")) {
-            location.href = this.dataset.uri;
-        };
-    });
-});
+	const delete_elements = document.getElementsByClassName("delete");
+	Array.from(delete_elements).forEach(function(element) {
+	    element.addEventListener('click', function() {
+	        if(confirm("정말로 탈퇴하시겠습니까?")) {
+	            location.href = this.dataset.uri;
+	        };
+	    });
+	});
 </script>
 </html>
