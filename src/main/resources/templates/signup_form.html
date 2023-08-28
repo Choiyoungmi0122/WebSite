@@ -110,7 +110,7 @@
         textarea, select {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ccc;
+            border: 2px solid #ccc;
             border-radius: 4px;
             resize: vertical;
         }
@@ -130,6 +130,7 @@
     	.error{
 			color: red;
 		}
+		
     		
 		</style>
 	</head>
@@ -228,22 +229,22 @@
 		                    <option value="휴학">휴학</option>
 		                </select>
 		        </div>-->
-		        <div class="mb-4" style="margin-left:38% ;">
-					<label for="doing" class="form-label">현재 하고 있는 활동</label>
+		        <div class="mb-4" style="margin-left:33% ;">
+					<label for="doing" class="form-label" style="margin-left: 20%;">현재 하고 있는 활동</label>
 		            <textarea style="height: 12%; width: 460px;" type="text" placeholder="ex)학생회" th:field="*{doing}" class="form-control"></textarea>
 				</div>
-		        <div class="mb-4"  style="margin-left:38% ;">
-					<label for="wantedAct" class="form-label">원하는 활동</label>
+		        <div class="mb-4"  style="margin-left:33% ;">
+					<label for="wantedAct" class="form-label" style="margin-left: 24%;">원하는 활동</label>
 		            <textarea style="height: 12%; width: 460px;" type="text" placeholder="ex)웹사이트 제작" th:field="*{wantedAct}" class="form-control" th:class="${#fields.hasErrors('wantedAct')}? 'form-control fieldError' : 'form-control'"></textarea>
 					<p  th:if="${#fields.hasErrors('wantedAct')}" th:errors="*{wantedAct}" th:class="${#fields.hasErrors('wantedAct')}? error"></p>
 				</div>
-				<div class="mb-4"  style="margin-left:38% ;">
-					<label for="introduction" class="form-label">자기소개</label>
+				<div class="mb-4"  style="margin-left:33% ;">
+					<label for="introduction" class="form-label" style="margin-left: 25%;">자기소개</label>
 		            <textarea style="height: 12%; width: 460px;" type="text" th:field="*{introduction}" class="form-control"></textarea>
 				</div>
 				
-				<div style="text-align: center; margin-left: 15%;">
-			        <button style="width: 20%;" type="submit" class="mx-2 btn">동아리 신청</button>
+				<div style="text-align: center; margin-left: 3%; margin-top: 3%;">
+			        <button style="width: 23%;" type="submit" class="mx-2 btn">동아리 신청</button>
 			        <a style="width: 15%;" type="button" class="btn" th:href="@{/}">취소</a>
 		        </div>
 		    </form>
