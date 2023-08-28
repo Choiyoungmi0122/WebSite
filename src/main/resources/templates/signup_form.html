@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
  	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>	
  		<style>
 	
         
@@ -136,7 +137,7 @@
 <body>
 	<header>
      
-		 <a href="/" class="d-flex align-items-center" style="justify-content: center; margin-bottom:20px ; margin-top:108px;">
+		 <a href="/" class="d-flex align-items-center" style="justify-content: center; margin-bottom:60px ; margin-top:70px;">
 	       <img class="bi" src="/../picture/insight로고하얀색.png" ></img>
 	     </a>
     
@@ -145,48 +146,48 @@
 	<main>
 		<div layout:fragment="content" class="container my-3">
 		    <div class="my-3 border-bottom">
-		        <div>
+		        <div style="text-align: center; margin-bottom: 2%;">
 		            <h4>동아리 신청</h4>
 		        </div>
 		    </div>
 		    <form th:action="@{/user/join}" th:object="${userCreateForm}" method="post">
 		        <!--<div th:replace="~{form_errors :: formErrorsFragment}"></div>-->
 		        
-		        <div class="mb-3" style="width: 25%;">
+		        <div class="mb-4" style="width: 25%; margin-left:38% ;">
 		            <label for="username" class="form-label">학번ID</label>
 		            <input type="text" placeholder="ex)20212252" th:field="*{username}" class="form-control" th:class="${#fields.hasErrors('username')}? 'form-control fieldError' : 'form-control'">
 		            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"th:class="${#fields.hasErrors('username')}? error">
   					</p>
 		        </div>
-		        <div class="mb-3" style="width: 25%;">
+		        <div class="mb-4" style="width: 25%; margin-left:38% ;">
 		            <label for="studentName" class="form-label">이름</label>
 		            <input type="text" th:field="*{studentName}" class="form-control" th:class="${#fields.hasErrors('studentName')}? 'form-control fieldError' : 'form-control'">
 		            <p th:if="${#fields.hasErrors('studentName')}" th:errors="*{studentName}"th:class="${#fields.hasErrors('studentName')}? error">
   					</p>
 		        </div>
-		        <div class="mb-3" style="width: 25%;">
+		        <div class="mb-3" style="width: 25%; margin-left:38% ;">
 		            <label for="password1" class="form-label">비밀번호</label>
 		            <input type="password" th:field="*{password1}" class="form-control" th:class="${#fields.hasErrors('password1')}? 'form-control fieldError' : 'form-control'">
 		            <p th:if="${#fields.hasErrors('password1')}" th:errors="*{password1}" th:class="${#fields.hasErrors('password1')}? error"></p>
 		        </div>
-		        <div class="mb-3" style="width: 25%;">
+		        <div class="mb-4" style="width: 25%; margin-left:38% ;">
 		            <label for="password2" class="form-label">비밀번호 확인</label>
 		            <input type="password" th:field="*{password2}" class="form-control" th:class="${#fields.hasErrors('password2')}? 'form-control fieldError' : 'form-control'">
 		        	<p th:if="${#fields.hasErrors('password2')}" th:errors="*{password2}" th:class="${#fields.hasErrors('password2')}? error"></p>
 		        </div>
-		        <div class="mb-3" style="width: 25%;">
+		        <div class="mb-4" style="width: 25%; margin-left:38% ;">
 		            <label for="email" class="form-label">이메일</label>
 		            <input type="email" th:field="*{email}" class="form-control" th:class="${#fields.hasErrors('email')}? 'form-control fieldError' : 'form-control'">
 		            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:class="${#fields.hasErrors('email')}? error"></p>
 		        </div>
-		        <div class="mb-3" style="width: 25%;">
+		        <div class="mb-4" style="width: 25%; margin-left:38% ;">
 					<label for="phoneNumber" class="form-label">전화번호(-제외)</label>
 		            <input type="text" placeholder="ex)01012345678" th:field="*{phoneNumber}" class="form-control" th:class="${#fields.hasErrors('phoneNumber')}? 'form-control fieldError' : 'form-control'">
 					<p  th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" th:class="${#fields.hasErrors('phoneNumber')}? error"></p>
 				</div>
-		        <div class="form-group">
+		        <div class="form-group mb-4" style="margin-left:38% ;">
 		                <label for="major" style="display: inline-block">전공:</label>
-		                <select th:field="*{major}" required style="width:220px; display:inline-block;">
+		                <select th:field="*{major}" required style="width:265px; display:inline-block;">
 		                    <option value="컴퓨터공학과">컴퓨터공학과</option>
 		                    <option value="산업융합시스템공학부">산업융합시스템공학부</option>
 		                    <option value="산업ICT기술공학과">산업ICT기술공학과</option>
@@ -206,7 +207,7 @@
 		                    <option value="조선해양공학과">조선해양공학과</option>
 		                </select>
 		        </div>
-		        <div class="form-group">
+		        <div class="form-group mb-4" style="margin-left:38% ;">
 		                <label for="grade" style="display: inline-block">학년:</label>
 		                <select th:field="*{grade}" required style="width:100px; display:inline-block;">
 		                    <option value="1">1</option>
@@ -214,31 +215,36 @@
 		                    <option value="3">3</option>
 		                    <option value="4">4</option>
 		                </select>
-		        </div>
-		        <div class="mb-3">
-					<label for="doing" class="form-label">현재 하고 있는 활동</label>
-		            <textarea type="text" placeholder="ex)학생회" th:field="*{doing}" class="form-control"></textarea>
-				</div>
-				<div class="form-group">
-		                <label for="condition" style="display: inline-block">재적상태:</label>
+		                <label for="condition" style="display: inline-block; margin-left: 2%;">재적:</label>
 		                <select th:field="*{condition}" required style="width:100px; display:inline-block;">
 		                    <option value="재학">재학</option>
 		                    <option value="휴학">휴학</option>
 		                </select>
 		        </div>
-		        <div class="mb-3">
+		        <!--<div class="form-group mb-4">
+		                <label for="condition" style="display: inline-block; margin-left:38% ;">재적:</label>
+		                <select th:field="*{condition}" required style="width:100px; display:inline-block;">
+		                    <option value="재학">재학</option>
+		                    <option value="휴학">휴학</option>
+		                </select>
+		        </div>-->
+		        <div class="mb-4" style="margin-left:38% ;">
+					<label for="doing" class="form-label">현재 하고 있는 활동</label>
+		            <textarea style="height: 12%; width: 460px;" type="text" placeholder="ex)학생회" th:field="*{doing}" class="form-control"></textarea>
+				</div>
+		        <div class="mb-4"  style="margin-left:38% ;">
 					<label for="wantedAct" class="form-label">원하는 활동</label>
-		            <textarea type="text" placeholder="ex)웹사이트 제작" th:field="*{wantedAct}" class="form-control" th:class="${#fields.hasErrors('wantedAct')}? 'form-control fieldError' : 'form-control'"></textarea>
+		            <textarea style="height: 12%; width: 460px;" type="text" placeholder="ex)웹사이트 제작" th:field="*{wantedAct}" class="form-control" th:class="${#fields.hasErrors('wantedAct')}? 'form-control fieldError' : 'form-control'"></textarea>
 					<p  th:if="${#fields.hasErrors('wantedAct')}" th:errors="*{wantedAct}" th:class="${#fields.hasErrors('wantedAct')}? error"></p>
 				</div>
-				<div class="mb-3">
+				<div class="mb-4"  style="margin-left:38% ;">
 					<label for="introduction" class="form-label">자기소개</label>
-		            <textarea type="text" th:field="*{introduction}" class="form-control"></textarea>
+		            <textarea style="height: 12%; width: 460px;" type="text" th:field="*{introduction}" class="form-control"></textarea>
 				</div>
 				
-				<div style="text-align: right;">
-			        <button type="submit" class="mx-2 btn">동아리 신청</button>
-			        <a type="button" class="btn" th:href="@{/}">취소</a>
+				<div style="text-align: center; margin-left: 15%;">
+			        <button style="width: 20%;" type="submit" class="mx-2 btn">동아리 신청</button>
+			        <a style="width: 15%;" type="button" class="btn" th:href="@{/}">취소</a>
 		        </div>
 		    </form>
 		</div>
