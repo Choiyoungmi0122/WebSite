@@ -124,7 +124,7 @@ public class UserController {
             return "user_detail";
         }
 
-        return "redirect:/";
+        return "redirect:/user/list";
         
     }
     
