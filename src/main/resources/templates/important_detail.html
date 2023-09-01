@@ -6,24 +6,33 @@
 	</head>
 <div layout:fragment="content" class="container my-3">
     <!-- 질문 -->
-    <h2 class="border-bottom py-2" th:text="${important.impoTitle}"></h2>
+    <h1 class="border-bottom py-2" th:text="${important.impoTitle}"></h1>
+    
     <div class="card my-3">
-        <div class="card-body">
-            <div class="card-text" th:utext="${@commonUtil.markdown(important.impoText)}"></div>
-            
-            <div class="d-flex justify-impoText-end">
-				<div th:if="${important.impoModifyRegister != null}" class="badge bg-light text-dark p-2 text-start mx-3">
-                <div class="mb-2">수정 시간</div>
-                <div th:text="${#temporals.format(important.impoModifyRegister, 'yyyy-MM-dd HH:mm')}"></div>
-            </div>
-                <div class="badge bg-light text-dark p-2 text-start">
-					<div class="mb-2">
-                    	<span th:text="${important.impoAuthor.studentName}"></span>
-                	</div>
-                    <div th:text="${#temporals.format(important.impoRegister, 'yyyy-MM-dd HH:mm')}"></div>
+    <div class="card-body" style="border: 1px solid; display: flex;">
+        <div style="flex: 1;">
+            <pre style="margin: 0;">
+                <h5 class="card-text" th:utext="${@commonUtil.markdown(important.impoText)}"></h5>
+            </pre>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-end;">
+            <div class="d-flex justify-importantText-end">
+                <div class="badge bg-light text-dark text-start mx-2">
+                    <div class="mb-2">
+                        <p>작성자 :<span class="mx-1" th:text="${important.impoAuthor.studentName}"></span>
+	                    </p>
+                    </div>
                 </div>
             </div>
-            <div class="my-3">
+            <div class="d-flex justify-importantText-end my-3">
+                <div class="badge bg-light text-dark text-start mx-2">
+                    <p><span class="mb-2">작성시간</span>
+                    <span th:text="${#temporals.format(important.impoRegister, 'yyyy-MM-dd HH:mm')}"></span></p>
+                    <p th:if="${important.impoModifyRegister != null}"><span class="mb-2">수정시간</span>
+                    <span th:if="${important.impoModifyRegister != null}" th:text="${#temporals.format(important.impoModifyRegister, 'yyyy-MM-dd HH:mm')}"></span></p>
+                </div>
+            </div>
+            <div class="mb-3 mx-3">
 	            <a th:href="@{|/important/modify/${important.impoId}|}" class="btn btn-sm"
 	                sec:authorize="hasRole('ADMIN')"
 	                th:text="수정"></a>
@@ -33,6 +42,7 @@
 	        </div>
         </div>
     </div>
+</div>
     <div style="text-align: right;">
     	<a th:href="@{/important/main}" class="btn">목록</a>
 	</div>

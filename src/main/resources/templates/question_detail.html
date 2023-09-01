@@ -6,72 +6,85 @@
 	</head>
 <div layout:fragment="content" class="container my-3">
     <!-- 질문 -->
-    <h2 class="border-bottom py-2" th:text="${notice.noticeTitle}"></h2>
+    <h1 class="border-bottom py-2" th:text="${notice.noticeTitle}"></h1>
+    
     <div class="card my-3">
-        <div class="card-body" style="border: 1px solid;">
-            <pre><div class="card-text" th:utext="${@commonUtil.markdown(notice.noticeText)}"></div></pre>
-            
-            <div class="d-flex justify-noticeText-end" style="float: right; flex-direction: column;">
-				<div th:if="${notice.noticeModifyRegister != null}" class="badge bg-light text-dark p-2 text-start mx-3">
-	                <div class="mb-2">수정 시간</div>
-	                <div th:text="${#temporals.format(notice.noticeModifyRegister, 'yyyy-MM-dd HH:mm')}"></div>
-            	</div>
-                <div class="badge bg-light text-dark p-2 text-start my-3 mx-3">
-					<div class="mb-2">
-                    	<p>작성자 : <span th:if="${notice.noticeAuthor != null}" th:text="${notice.noticeAuthor.studentName}"></span></p>
-                	</div>
-                    <div th:text="${#temporals.format(notice.noticeRegister, 'yyyy-MM-dd HH:mm')}"></div>
+    <div class="card-body" style="border: 1px solid; display: flex;">
+        <div style="flex: 1;">
+            <pre style="margin: 0;">
+                <h5 class="card-text" th:utext="${@commonUtil.markdown(notice.noticeText)}"></h5>
+            </pre>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-end;">
+            <div class="d-flex justify-noticeText-end">
+                <div class="badge bg-light text-dark text-start mx-2">
+                    <div class="mb-2">
+                        <p>작성자: <span class="mx-1" th:if="${notice.noticeAuthor != null}" th:text="${notice.noticeAuthor.studentName}"></span></p>
+                    </div>
                 </div>
             </div>
-            <div class="my-3" style="text-align: right;">
-	            <a th:href="@{|/notice/modify/${notice.noticeId}|}" class="btn btn-sm"
-	                sec:authorize="hasRole('USER') || hasRole('ADMIN')"
-	                th:if="${#authentication.getPrincipal().getUsername() == notice.noticeAuthor.username || #authorization.expression('hasRole(''ROLE_ADMIN'')')}"
-	                th:text="수정"></a>
+            <div class="d-flex justify-noticeText-end my-3">
+                <div class="badge bg-light text-dark text-start mx-2">
+                    <p><span class="mb-2">작성시간</span>
+                    <span th:text="${#temporals.format(notice.noticeRegister, 'yyyy-MM-dd HH:mm')}"></span></p>
+                    <p th:if="${notice.noticeModifyRegister != null}"><span class="mb-2">수정시간</span>
+                    <span th:if="${notice.noticeModifyRegister != null}" th:text="${#temporals.format(notice.noticeModifyRegister, 'yyyy-MM-dd HH:mm')}"></span></p>
+                </div>
+            </div>
+            <div class="mb-3 mx-3">
+                <a th:href="@{|/notice/modify/${notice.noticeId}|}" class="btn btn-sm"
+                    sec:authorize="hasRole('USER') || hasRole('ADMIN')"
+                    th:if="${#authentication.getPrincipal().getUsername() == notice.noticeAuthor.username || #authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+                    th:text="수정"></a>
                 <a href="javascript:void(0);" th:data-uri="@{|/notice/delete/${notice.noticeId}|}"
-	                class="delete btn btn-sm" sec:authorize="hasRole('USER') || hasRole('ADMIN')"
-	                th:if="${#authentication.getPrincipal().getUsername() == notice.noticeAuthor.username || #authorization.expression('hasRole(''ROLE_ADMIN'')')}"
-	                th:text="삭제"></a>
-	        </div>
+                    class="delete btn btn-sm" sec:authorize="hasRole('USER') || hasRole('ADMIN')"
+                    th:if="${#authentication.getPrincipal().getUsername() == notice.noticeAuthor.username || #authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+                    th:text="삭제"></a>
+            </div>
         </div>
     </div>
+</div>
+
     <!-- 답변의 갯수 표시 -->
     <h5 class="border-bottom border-top py-2 mt-5 mb-3" 
         th:text="|댓글 ${#lists.size(notice.commentList)}|"></h5>
     <!-- 답변 반복 시작 -->
     <div class="card my-3" th:each="noticeComment : ${notice.commentList}">
-        <a th:id="|comment_${noticeComment.cmId}|"></a>
-        <!--댓글 박스-->
-        <div class="card-body">
-			<!--댓글 작성자-->
-			<div class="badge bg-light text-dark p-2 text-start">
-				<div class="mb-2">
-                	<p>작성자 : <span th:if="${noticeComment.cmAuthor != null}" th:text="${noticeComment.cmAuthor.studentName}"></span></p>
-            	</div>
-                <div th:text="${#temporals.format(noticeComment.cmRegister, 'yyyy-MM-dd HH:mm')}"></div>
+    <a th:id="|comment_${noticeComment.cmId}|"></a>
+    <!-- 댓글 박스 -->
+    <div class="card-body" style="display: flex;">
+        <div style="flex: 1;">
+            <pre style="margin: 0;" class="card-text" th:utext="${@commonUtil.markdown(noticeComment.cmText)}"></pre>
+        </div>
+        
+        <div style="display: flex; flex-direction: column; align-items: flex-end;">
+            <div class="badge bg-light text-dark text-start mx-3">
+                <div class="mb-2">
+                    <p>작성자: <span class="mx-1" th:if="${noticeComment.cmAuthor != null}" th:text="${noticeComment.cmAuthor.studentName}"></span></p>
+                </div>
             </div>
-			
-            <pre><div class="card-text" th:utext="${@commonUtil.markdown(noticeComment.cmText)}"></div></pre>
-            <div class="d-flex justify-noticeText-end">
-				
-			 <div th:if="${noticeComment.cmModifyRegister != null}" class="badge bg-light text-dark p-2 text-start mx-3">
-                <div class="mb-2">수정 시간</div>
-                <div th:text="${#temporals.format(noticeComment.cmModifyRegister, 'yyyy-MM-dd HH:mm')}"></div>
-             </div>
             
+            <div class="badge bg-light text-dark text-start mx-3 mt-2">
+                <p><span>작성시간</span>
+                <span th:text="${#temporals.format(noticeComment.cmRegister, 'yyyy-MM-dd HH:mm')}"></span></p>
+                <p th:if="${noticeComment.cmModifyRegister != null}"><span>수정시간</span>
+                <span th:text="${#temporals.format(noticeComment.cmModifyRegister, 'yyyy-MM-dd HH:mm')}"></span></p>
             </div>
-            <div class="my-3" style="text-align: right;">
-	            <a th:href="@{|/comment/modify/${noticeComment.cmId}|}" class="btn btn-sm"
-	                sec:authorize="hasRole('USER') || hasRole('ADMIN')"
-	                th:if="${#authentication.getPrincipal().getUsername() == noticeComment.cmAuthor.username || #authorization.expression('hasRole(''ROLE_ADMIN'')')}"
-	                th:text="수정"></a>
-                 <a href="javascript:void(0);" th:data-uri="@{|/comment/delete/${noticeComment.cmId}|}" class="delete btn btn-sm"
-                 	sec:authorize="hasRole('USER') || hasRole('ADMIN')"
-	                th:if="${#authentication.getPrincipal().getUsername() == noticeComment.cmAuthor.username || #authorization.expression('hasRole(''ROLE_ADMIN'')')}"
-	                th:text="삭제"></a>
-        	</div>
+            
+            <div class="my-2" style="display: flex; position: relative; float: right;">
+                <a th:href="@{|/comment/modify/${noticeComment.cmId}|}" class="btn btn-sm mx-1"
+                    sec:authorize="hasRole('USER') || hasRole('ADMIN')"
+                    th:if="${#authentication.getPrincipal().getUsername() == noticeComment.cmAuthor.username || #authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+                    th:text="수정"></a>
+                <a href="javascript:void(0);" th:data-uri="@{|/comment/delete/${noticeComment.cmId}|}" class="delete btn btn-sm"
+                    sec:authorize="hasRole('USER') || hasRole('ADMIN')"
+                    th:if="${#authentication.getPrincipal().getUsername() == noticeComment.cmAuthor.username || #authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+                    th:text="삭제"></a>
+            </div>
         </div>
     </div>
+</div>
+
     <!-- 답변 반복 끝  -->
     <!-- 답변 작성 -->
     <form th:action="@{|/comment/create/${notice.noticeId}|}" th:object="${noticeCommentForm}" method="post" class="my-3">
