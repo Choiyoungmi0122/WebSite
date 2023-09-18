@@ -15,8 +15,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.data.domain.Sort;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.ArrayList;
@@ -29,6 +32,7 @@ import lombok.RequiredArgsConstructor;
 public class NoticeService {
 
 	private final NoticeRepository noticeRepository;
+	private final NoticeFileRepositoty noticeFileRepository;
 	
 	private Specification<Notice> search(String kw, String ca){
 		return new Specification<>() {
@@ -48,11 +52,8 @@ public class NoticeService {
         		predicate = cb.and(
                         predicate,
                         cb.like(q.get("noticeCategory"), "%" + ca + "%") // 카테고리 필터링
-                    );
-        		return predicate;
-
-                        
-           
+        				);
+        		return predicate;    
             }
         };
 	}
@@ -71,15 +72,39 @@ public class NoticeService {
             throw new DataNotFoundException("notice not found");
         }
     }
-// 쿼리문 사용으로 인해 사용 x
-//	public Page<Notice> getCategory(String noticeCategory, int page, String kw){
-//		List<Sort.Order> sorts = new ArrayList<>();
-//		sorts.add(Sort.Order.desc("noticeRegister"));
-//		Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
-//		//Specification<Notice> spec = search(kw);
-//		return this.noticeRepository.findByNoticeCategory( noticeCategory, pageable);
-//	}
-	
+
+	public void create(NoticeDTO noticeDTO, UserInfo userInfo) throws IOException{
+		if(noticeDTO.getNoticeFile().isEmpty()) {
+			Notice notice = Notice.toSaveEntity(noticeDTO, userInfo);
+			noticeRepository.save(notice);
+		}else {
+			// 첨부 파일 있음.
+            /*
+                1. DTO에 담긴 파일을 꺼냄
+                2. 파일의 이름 가져옴
+                3. 서버 저장용 이름을 만듦
+                // 내사진.jpg => 839798375892_내사진.jpg
+                4. 저장 경로 설정
+                5. 해당 경로에 파일 저장
+                6. board_table에 해당 데이터 save 처리
+                7. board_file_table에 해당 데이터 save 처리
+             */
+			MultipartFile noticeFile = noticeDTO.getNoticeFile();
+			String originalFileName = noticeFile.getOriginalFilename();
+			String storedFileName = System.currentTimeMillis() + "_" + originalFileName;
+			String savePath = "C:\\Users\\kimbo\\Downloads" + storedFileName;
+			noticeFile.transferTo(new File(savePath));
+			
+			Notice notice = Notice.toSaveFileEntity(noticeDTO, userInfo);
+			Integer saveId = noticeRepository.save(notice).getNoticeId();
+			Notice noticeEntity = noticeRepository.findById(saveId).get();
+			
+			NoticeFileEntity noticeFileEntity = NoticeFileEntity.toNoticeFileEntity(noticeEntity, originalFileName, storedFileName);
+			noticeFileRepository.save(noticeFileEntity);
+			
+		}
+	}
+	/*
 	public void create(String noticeTitle, String noticeText, UserInfo user, String noticeCategory) {
 		Notice q = new Notice();
         q.setNoticeTitle(noticeTitle);
@@ -89,13 +114,19 @@ public class NoticeService {
         q.setNoticeCategory(noticeCategory);
         this.noticeRepository.save(q);
     }
+	*/
 	
-	/* 테스트 용
-	 * public void test(String noticeTitle, String noticeText, String
-	 * noticeCategory) { Notice q = new Notice(); q.setNoticeTitle(noticeTitle);
-	 * q.setNoticeText(noticeText); q.setNoticeRegister(LocalDateTime.now());
-	 * q.setNoticeCategory(noticeCategory); this.noticeRepository.save(q); }
-	 */
+	public NoticeDTO findById(Integer id) {
+		Optional<Notice> optionalNotice = noticeRepository.findById(id);
+		if(optionalNotice.isPresent()) {
+			Notice notice = optionalNotice.get();
+			NoticeDTO noticeDTO = NoticeDTO.toNoticeDTO(notice);
+			return noticeDTO;
+		}else {
+			return null;
+		}
+	}
+
 	
 	public Page<Notice> getList(int page, String kw, String ca) {
 		List<Sort.Order> sorts = new ArrayList<>();

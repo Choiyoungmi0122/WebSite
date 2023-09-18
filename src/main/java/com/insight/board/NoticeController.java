@@ -1,5 +1,6 @@
 package com.insight.board;
 
+import java.io.IOException;
 import java.security.Principal;
 
 import com.insight.user.UserInfo;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -84,10 +86,19 @@ public class NoticeController {
 	
 	@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
 	@GetMapping("/create")
-    public String noticeCreate(NoticeForm noticeForm) {
+    public String noticeCreate() {
         return "question_form";
     }
-	
+
+	@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
+	@PostMapping("/create")
+    public String noticeCreate(@ModelAttribute NoticeDTO noticeDTO, Principal principal) throws IOException {
+		UserInfo userInfo = this.userService.getUser(principal.getName());
+		noticeService.create(noticeDTO, userInfo);
+		return "redirect:/notice/main/all";
+    }
+
+	/*
 	@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
 	@PostMapping("/create")
     public String noticeCreate(@Valid NoticeForm noticeForm, BindingResult bindingResult, Principal principal) {
@@ -98,7 +109,7 @@ public class NoticeController {
 		this.noticeService.create(noticeForm.getNoticeTitle(), noticeForm.getNoticeText(), userInfo, noticeForm.getNoticeCategory());
 		return "redirect:/notice/main/all";
     }
-
+	*/
 	@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @GetMapping("/modify/{id}")
     public String noticeModify(Model model, NoticeForm noticeForm, @PathVariable("id") Integer noticeId, Principal principal) {
