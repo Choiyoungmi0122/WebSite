@@ -49,6 +49,7 @@ public class NoticeDTO {
 		noticeDTO.setNoticeTitle(notice.getNoticeTitle());
 		noticeDTO.setNoticeText(notice.getNoticeText());
 		noticeDTO.setNoticeCategory(notice.getNoticeCategory());
+		noticeDTO.setNoticeAuthor(notice.getNoticeAuthor());
 		noticeDTO.setNoticeRegister(notice.getNoticeRegister());
 		noticeDTO.setNoticeModifyRegister(notice.getNoticeModifyRegister());
 		if(notice.getFileAttached()==0) {

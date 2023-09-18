@@ -58,7 +58,7 @@ public class Notice {
     	notice.setNoticeText(noticeDTO.getNoticeText());
     	notice.setNoticeCategory(noticeDTO.getNoticeCategory());
     	notice.setNoticeAuthor(userInfo);
-    	notice.setNoticeRegister(noticeDTO.getNoticeRegister());
+    	notice.setNoticeRegister(LocalDateTime.now());
     	notice.setFileAttached(0); // 파일 첨부 없음
     	return notice;
     }
@@ -79,7 +79,7 @@ public class Notice {
     	notice.setNoticeText(noticeDTO.getNoticeText());
     	notice.setNoticeCategory(noticeDTO.getNoticeCategory());
     	notice.setNoticeAuthor(userInfo);
-    	notice.setNoticeRegister(noticeDTO.getNoticeRegister());
+    	notice.setNoticeRegister(LocalDateTime.now());
     	notice.setFileAttached(1); // 파일 첨부 있음
     	return notice;
     }

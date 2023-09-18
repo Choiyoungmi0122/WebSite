@@ -15,17 +15,12 @@
                 <h5 class="card-text" th:utext="${@commonUtil.markdown(notice.noticeText)}"></h5>
             </pre>
         </div>
-        <div>
-			<tr th:if="${notice.fileAttached == 1}">
-		        <th>image</th>
-		        <td><img th:src="@{|/upload/${notice.storedFileName}|}" alt=""></td>
-	    	</tr>
-		</div>
+        
         <div style="display: flex; flex-direction: column; align-items: flex-end;">
             <div class="d-flex justify-noticeText-end">
                 <div class="badge bg-light text-dark text-start mx-2">
                     <div class="mb-2">
-                        <p>작성자: <span class="mx-1" th:if="${notice.noticeAuthor != null}" th:text="${notice.noticeAuthor.studentName}"></span></p>
+                        <p>작성자: <span class="mx-1" th:if="${notice.noticeAuthor != null}" th:text="${notice.noticeAuthor.getStudentName}"></span></p>
                     </div>
                 </div>
             </div>
@@ -37,7 +32,6 @@
                     <span th:if="${notice.noticeModifyRegister != null}" th:text="${#temporals.format(notice.noticeModifyRegister, 'yyyy-MM-dd HH:mm')}"></span></p>
                 </div>
             </div>
-			
             <div class="mb-3 mx-3">
                 <a th:href="@{|/notice/modify/${notice.noticeId}|}" class="btn btn-sm"
                     sec:authorize="hasRole('USER') || hasRole('ADMIN')"
@@ -50,6 +44,12 @@
             </div>
         </div>
     </div>
+</div>
+<div>
+	<tr th:if="${notice.fileAttached == 1}">
+        <th>image</th>
+        <td><img th:src="@{|/upload/${notice.storedFileName}|}" alt=""></td>
+	</tr>
 </div>
 <!--
      답변의 갯수 표시 
@@ -112,6 +112,6 @@ Array.from(delete_elements).forEach(function(element) {
         };
     });
 });
--->
 </script>
+-->
 </html>

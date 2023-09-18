@@ -92,7 +92,7 @@ public class NoticeService {
 			MultipartFile noticeFile = noticeDTO.getNoticeFile();
 			String originalFileName = noticeFile.getOriginalFilename();
 			String storedFileName = System.currentTimeMillis() + "_" + originalFileName;
-			String savePath = "C:\\Users\\kimbo\\Downloads" + storedFileName;
+			String savePath = "C:\\Users\\kimbo\\image\\" + storedFileName;
 			noticeFile.transferTo(new File(savePath));
 			
 			Notice notice = Notice.toSaveFileEntity(noticeDTO, userInfo);
