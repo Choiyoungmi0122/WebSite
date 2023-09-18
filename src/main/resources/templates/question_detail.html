@@ -15,6 +15,12 @@
                 <h5 class="card-text" th:utext="${@commonUtil.markdown(notice.noticeText)}"></h5>
             </pre>
         </div>
+        <div>
+			<tr th:if="${notice.fileAttached == 1}">
+		        <th>image</th>
+		        <td><img th:src="@{|/upload/${notice.storedFileName}|}" alt=""></td>
+	    	</tr>
+		</div>
         <div style="display: flex; flex-direction: column; align-items: flex-end;">
             <div class="d-flex justify-noticeText-end">
                 <div class="badge bg-light text-dark text-start mx-2">
@@ -31,27 +37,28 @@
                     <span th:if="${notice.noticeModifyRegister != null}" th:text="${#temporals.format(notice.noticeModifyRegister, 'yyyy-MM-dd HH:mm')}"></span></p>
                 </div>
             </div>
+			
             <div class="mb-3 mx-3">
                 <a th:href="@{|/notice/modify/${notice.noticeId}|}" class="btn btn-sm"
                     sec:authorize="hasRole('USER') || hasRole('ADMIN')"
-                    th:if="${#authentication.getPrincipal().getUsername() == notice.noticeAuthor.username || #authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+                    th:if="${#authentication.getPrincipal().getUsername() == notice.noticeAuthor || #authorization.expression('hasRole(''ROLE_ADMIN'')')}"
                     th:text="수정"></a>
                 <a href="javascript:void(0);" th:data-uri="@{|/notice/delete/${notice.noticeId}|}"
                     class="delete btn btn-sm" sec:authorize="hasRole('USER') || hasRole('ADMIN')"
-                    th:if="${#authentication.getPrincipal().getUsername() == notice.noticeAuthor.username || #authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+                    th:if="${#authentication.getPrincipal().getUsername() == notice.noticeAuthor || #authorization.expression('hasRole(''ROLE_ADMIN'')')}"
                     th:text="삭제"></a>
             </div>
         </div>
     </div>
 </div>
-
-    <!-- 답변의 갯수 표시 -->
+<!--
+     답변의 갯수 표시 
     <h5 class="border-bottom border-top py-2 mt-5 mb-3" 
         th:text="|댓글 ${#lists.size(notice.commentList)}|"></h5>
-    <!-- 답변 반복 시작 -->
+     답변 반복 시작 
     <div class="card my-3" th:each="noticeComment : ${notice.commentList}">
     <a th:id="|comment_${noticeComment.cmId}|"></a>
-    <!-- 댓글 박스 -->
+     댓글 박스 
     <div class="card-body" style="display: flex;">
         <div style="flex: 1;">
             <pre style="margin: 0;" class="card-text" th:utext="${@commonUtil.markdown(noticeComment.cmText)}"></pre>
@@ -85,8 +92,8 @@
     </div>
 </div>
 
-    <!-- 답변 반복 끝  -->
-    <!-- 답변 작성 -->
+     답변 반복 끝  
+     답변 작성 
     <form th:action="@{|/comment/create/${notice.noticeId}|}" th:object="${noticeCommentForm}" method="post" class="my-3">
 		<div th:replace="~{form_errors :: formErrorsFragment}"></div>
         <textarea sec:authorize="hasRole('ADMIN') || hasRole('USER')" th:field="*{cmText}" class="form-control" rows="10"></textarea>
@@ -105,5 +112,6 @@ Array.from(delete_elements).forEach(function(element) {
         };
     });
 });
+-->
 </script>
 </html>

@@ -79,20 +79,22 @@ public class NoticeController {
 	
 	@GetMapping(value = "/detail/{id}")
     public String detail(Model model, @PathVariable("id") Integer noticeId, NoticeCommentForm noticeCommentForm) {
-		Notice notice = this.noticeService.getNotice(noticeId);
-		model.addAttribute("notice", notice);
+		NoticeDTO noticeDTO = noticeService.findById(noticeId);
+		model.addAttribute("notice", noticeDTO);
         return "question_detail";
     }
 	
 	@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
 	@GetMapping("/create")
-    public String noticeCreate() {
+    public String noticeCreate(@ModelAttribute NoticeDTO noticeDTO) {
+		System.out.println("create");
         return "question_form";
     }
 
 	@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
 	@PostMapping("/create")
     public String noticeCreate(@ModelAttribute NoticeDTO noticeDTO, Principal principal) throws IOException {
+		System.out.println("noticeDTO");
 		UserInfo userInfo = this.userService.getUser(principal.getName());
 		noticeService.create(noticeDTO, userInfo);
 		return "redirect:/notice/main/all";

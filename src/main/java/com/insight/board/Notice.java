@@ -47,9 +47,7 @@ public class Notice {
     @Column(columnDefinition = "integer default 0", nullable = false)	// 조회수의 기본 값을 0으로 지정, null 불가 처리
 	private int noticeView;
     
-    private Integer noticeHits;
-    
-    private Integer fileAttached;
+    private Integer fileAttached; // 파일 첨부 여부 판단
     
     @OneToMany(mappedBy = "notice", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<NoticeFileEntity> noticeFileEntityList = new ArrayList<>();
@@ -61,8 +59,7 @@ public class Notice {
     	notice.setNoticeCategory(noticeDTO.getNoticeCategory());
     	notice.setNoticeAuthor(userInfo);
     	notice.setNoticeRegister(noticeDTO.getNoticeRegister());
-    	notice.setNoticeHits(0);
-    	notice.setFileAttached(0);
+    	notice.setFileAttached(0); // 파일 첨부 없음
     	return notice;
     }
     
@@ -72,8 +69,7 @@ public class Notice {
     	notice.setNoticeTitle(noticeDTO.getNoticeTitle());
     	notice.setNoticeText(noticeDTO.getNoticeText());
     	notice.setNoticeCategory(noticeDTO.getNoticeCategory());
-    	notice.setNoticeModifyRegister(noticeDTO.getNoticeModifyRegister());
-    	notice.setNoticeHits(noticeDTO.getNoticeHits());
+    	notice.setNoticeModifyRegister(LocalDateTime.now());
     	return notice;
     }
     
@@ -84,8 +80,7 @@ public class Notice {
     	notice.setNoticeCategory(noticeDTO.getNoticeCategory());
     	notice.setNoticeAuthor(userInfo);
     	notice.setNoticeRegister(noticeDTO.getNoticeRegister());
-    	notice.setNoticeHits(0);
-    	notice.setFileAttached(1);
+    	notice.setFileAttached(1); // 파일 첨부 있음
     	return notice;
     }
 }

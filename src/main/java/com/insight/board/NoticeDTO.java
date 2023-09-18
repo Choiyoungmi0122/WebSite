@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.insight.user.UserInfo;
+
 import groovy.transform.ToString;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,8 +22,7 @@ public class NoticeDTO {
 	private String noticeTitle;
 	private String noticeText;
 	private String noticeCategory;
-	private String noticeNumber;
-	private Integer noticeHits;
+	private UserInfo noticeAuthor;
 	private LocalDateTime noticeRegister;
 	private LocalDateTime noticeModifyRegister;
 	
@@ -31,13 +32,15 @@ public class NoticeDTO {
 	private Integer fileAttached;
 	
 	public NoticeDTO(Integer noticeId, String noticeTitle, String noticeText,
-			String noticeCategory, Integer noticeHits, LocalDateTime noticeRegister) {
+			String noticeCategory, UserInfo userInfo, LocalDateTime noticeRegister,
+			LocalDateTime noticeModifyRegister) {
 		this.noticeId = noticeId;
 		this.noticeTitle = noticeTitle;
 		this.noticeText = noticeText;
 		this.noticeCategory = noticeCategory;
-		this.noticeHits = noticeHits;
+		this.noticeAuthor = userInfo;
 		this.noticeRegister = noticeRegister;
+		this.noticeModifyRegister = noticeModifyRegister;
 	}
 	
 	public static NoticeDTO toNoticeDTO(Notice notice) {
@@ -46,7 +49,6 @@ public class NoticeDTO {
 		noticeDTO.setNoticeTitle(notice.getNoticeTitle());
 		noticeDTO.setNoticeText(notice.getNoticeText());
 		noticeDTO.setNoticeCategory(notice.getNoticeCategory());
-		noticeDTO.setNoticeHits(notice.getNoticeHits());
 		noticeDTO.setNoticeRegister(notice.getNoticeRegister());
 		noticeDTO.setNoticeModifyRegister(notice.getNoticeModifyRegister());
 		if(notice.getFileAttached()==0) {

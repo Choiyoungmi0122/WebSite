@@ -6,10 +6,11 @@
 	</head>
 <div layout:fragment="content" class="container">
     <h5 class="my-3 border-bottom pb-2">글등록</h5>
-    <form action="/notice/create" method="post" enctype="multipart/form-data">
+    <form th:object="${noticeDTO}" method="post" enctype="multipart/form-data">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <div class="form-group">
             <label for="category" style="display: inline-block">카테고리:</label>
-            <select name="noticeCategory" required style="width:12%; display:inline-block;">
+            <select th:field="*{noticeCategory}" required style="width:12%; display:inline-block;">
                 <option value="free">자유</option>
                 <option value="coding">코딩</option>
                 <option value="gallery">갤러리</option>
@@ -18,19 +19,21 @@
         </div>
         <div class="mb-3">
             <label for="subject" class="form-label">제목</label>
-            <input type="text" name="noticeTitle" class="form-control">
+            <input type="text" th:field="*{noticeTitle}" class="form-control">
         </div>
         <div class="mb-3">
             <label for="content" class="form-label">내용</label>
-            <textarea name="noticeText" class="form-control" rows="10"></textarea>
+            <textarea th:field="*{noticeText}" class="form-control" rows="10"></textarea>
         </div>
         <div>
-			<input type="file" value="파일 선택" name="noticeFile"/>
+			<input type="file" value="파일 선택" th:field="*{noticeFile}"/>
 		</div>
+
         <div style="text-align: right;">
 	        <input type="submit" value="저장" class="btn my-2">
 	        <!--a th:href="@{|/notice/detail/${notice.noticeId}|}" class="btn">취소</a-->
         </div>
+        
     </form>
 </div>
 </html>
